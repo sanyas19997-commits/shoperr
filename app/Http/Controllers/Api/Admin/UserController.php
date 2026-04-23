@@ -38,6 +38,14 @@ class UserController extends Controller
             'phone' => ['nullable', 'string', 'max:32'],
             'role' => ['sometimes', Rule::in(['admin', 'user'])],
         ]);
+        if (array_key_exists('role', $data) && $data['role'] !== 'admin' && $user->isAdmin()) {
+            $remainingAdmins = User::where('role', 'admin')->where('id', '!=', $user->id)->count();
+            if ($remainingAdmins === 0) {
+                return response()->json([
+                    'message' => 'Нельзя убрать роль у последнего администратора',
+                ], 422);
+            }
+        }
         $user->update($data);
         return new UserResource($user);
     }
