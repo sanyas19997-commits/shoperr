@@ -167,10 +167,11 @@ a { transition: color 0.15s ease; }
 .brand-logo:hover { color: #222; }
 
 .search-megabar {
-    flex: 1;
-    max-width: 720px;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
 }
-.search-megabar .input-group { border: 2px solid $primary; border-radius: $border-radius; overflow: hidden; background: #fff; }
+.search-megabar .input-group { border: 2px solid $primary; border-radius: $border-radius; overflow: hidden; background: #fff; flex-wrap: nowrap; }
 .search-megabar .form-control,
 .search-megabar .form-select {
     border: none;
@@ -178,40 +179,57 @@ a { transition: color 0.15s ease; }
     background: #fff;
 }
 .search-megabar .form-select {
-    max-width: 180px;
+    flex: 0 0 auto;
+    width: 160px;
     border-right: 1px solid var(--mf-border);
     border-radius: 0;
     color: var(--mf-text-muted);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    background-position: right 0.5rem center;
 }
-.search-megabar .form-control { border-radius: 0; }
+.search-megabar .form-control { border-radius: 0; min-width: 0; }
 .search-megabar .btn {
     border-radius: 0;
-    padding: 0 1.25rem;
+    padding: 0 1.1rem;
     background: $primary;
     border-color: $primary;
     color: #222;
+    flex-shrink: 0;
 }
 .search-megabar .btn:hover { background: $primary-dark; }
 
-.nav-actions { display: flex; align-items: center; gap: 1.25rem; }
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
 .nav-action {
-    display: inline-flex; align-items: center; gap: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: #222;
     position: relative;
     font-size: 0.9rem;
     font-weight: 500;
+    max-width: 160px;
 }
 .nav-action:hover { color: $primary-dark; }
+.nav-action.dropdown-toggle::after { margin-left: 0.15rem; }
+.nav-action.icon-only { padding: 0; }
+.nav-action.icon-only > .icon-wrap { margin: 0; }
 .nav-action .icon-wrap {
     width: 36px; height: 36px;
     display: inline-flex; align-items: center; justify-content: center;
     border-radius: 50%;
     background: var(--mf-bg-soft);
     border: 1px solid var(--mf-border);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     position: relative;
+    flex-shrink: 0;
 }
+.nav-action:hover .icon-wrap { border-color: $primary; background: #fff7e0; }
 .nav-action .count-badge {
     position: absolute;
     top: -4px; right: -4px;
@@ -223,12 +241,26 @@ a { transition: color 0.15s ease; }
     font-weight: 700;
     display: inline-flex; align-items: center; justify-content: center;
     padding: 0 4px;
+    box-shadow: 0 0 0 2px #fff;
 }
 .nav-action-label { display: none; }
-@media (min-width: 992px) {
-    .nav-action-label { display: inline-flex; flex-direction: column; line-height: 1.15; }
+@media (min-width: 1200px) {
+    .nav-action-label {
+        display: inline-flex;
+        flex-direction: column;
+        line-height: 1.15;
+        min-width: 0;
+        max-width: 110px;
+    }
     .nav-action-label .t { font-size: 0.72rem; color: var(--mf-text-muted); }
-    .nav-action-label .s { font-weight: 700; font-size: 0.88rem; }
+    .nav-action-label .s {
+        font-weight: 700;
+        font-size: 0.85rem;
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
 
 // Categories row (just under main bar)
@@ -256,6 +288,20 @@ a { transition: color 0.15s ease; }
     text-transform: uppercase;
 }
 .categories-bar .all-cats:hover { color: $primary; }
+
+.categories-bar .cat-help {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 0;
+    color: #222;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+.categories-bar .cat-help:hover { color: $primary-dark; }
+.categories-bar .cat-help .cat-help-label { display: inline-flex; flex-direction: column; line-height: 1.15; }
+.categories-bar .cat-help .cat-help-label .t { font-size: 0.72rem; color: var(--mf-text-muted); }
+.categories-bar .cat-help .cat-help-label .s { font-weight: 700; font-size: 0.95rem; }
+.categories-bar .cat-help .bi { font-size: 1.5rem; color: $primary-dark; }
 
 // Dropdowns keep above everything
 .dropdown-menu {

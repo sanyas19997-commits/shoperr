@@ -23,14 +23,14 @@
         <!-- Main bar (logo + search + actions) -->
         <div class="main-bar">
             <div class="container">
-                <div class="row g-3 align-items-center">
-                    <div class="col-6 col-lg-3">
+                <div class="row g-3 align-items-center flex-nowrap">
+                    <div class="col-auto">
                         <router-link class="brand-logo" :to="{ name: 'home' }">
                             <i class="bi bi-bag-heart-fill dot"></i>
                             <span>Shop<span class="dot">Hub</span></span>
                         </router-link>
                     </div>
-                    <div class="col-12 col-lg-6 order-3 order-lg-2">
+                    <div class="col d-none d-lg-block">
                         <form class="search-megabar" @submit.prevent="submitSearch">
                             <div class="input-group">
                                 <select v-model="searchCat" class="form-select" aria-label="Категория">
@@ -42,23 +42,28 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-6 col-lg-3 order-2 order-lg-3">
-                        <div class="nav-actions justify-content-end">
-                            <router-link v-if="auth.isAuthenticated" :to="{ name: 'favorites' }" class="nav-action" aria-label="Избранное">
+                    <div class="col-auto ms-auto">
+                        <div class="nav-actions">
+                            <router-link v-if="auth.isAuthenticated" :to="{ name: 'favorites' }" class="nav-action icon-only" aria-label="Избранное" title="Избранное">
                                 <span class="icon-wrap"><i class="bi bi-heart"></i></span>
-                                <span class="nav-action-label"><span class="t">Список</span><span class="s">Избранное</span></span>
                             </router-link>
                             <router-link :to="{ name: 'cart' }" class="nav-action" aria-label="Корзина">
                                 <span class="icon-wrap">
                                     <i class="bi bi-cart3"></i>
                                     <span v-if="cart.itemCount" class="count-badge">{{ cart.itemCount }}</span>
                                 </span>
-                                <span class="nav-action-label"><span class="t">Корзина</span><span class="s">{{ formatPrice(cart.total || 0) }} ₽</span></span>
+                                <span class="nav-action-label">
+                                    <span class="t">Корзина</span>
+                                    <span class="s">{{ formatPrice(cart.total || 0) }} ₽</span>
+                                </span>
                             </router-link>
                             <div v-if="auth.isAuthenticated" class="dropdown">
                                 <a class="nav-action dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="icon-wrap"><i class="bi bi-person"></i></span>
-                                    <span class="nav-action-label"><span class="t">Привет,</span><span class="s">{{ auth.user.name?.split(' ')[0] || 'Гость' }}</span></span>
+                                    <span class="nav-action-label">
+                                        <span class="t">Привет,</span>
+                                        <span class="s text-truncate" :title="firstName">{{ firstName }}</span>
+                                    </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end mega-menu">
                                     <li><router-link class="dropdown-item" :to="{ name: 'profile' }"><i class="bi bi-person me-2"></i>Профиль</router-link></li>
@@ -72,9 +77,23 @@
                             </div>
                             <router-link v-else :to="{ name: 'login' }" class="nav-action" aria-label="Войти">
                                 <span class="icon-wrap"><i class="bi bi-person"></i></span>
-                                <span class="nav-action-label"><span class="t">Аккаунт</span><span class="s">Войти</span></span>
+                                <span class="nav-action-label">
+                                    <span class="t">Аккаунт</span>
+                                    <span class="s">Войти</span>
+                                </span>
                             </router-link>
                         </div>
+                    </div>
+                </div>
+                <!-- Mobile / tablet search -->
+                <div class="row d-lg-none mt-2">
+                    <div class="col-12">
+                        <form class="search-megabar" @submit.prevent="submitSearch">
+                            <div class="input-group">
+                                <input v-model="searchQuery" type="search" class="form-control" placeholder="Искать товар..." />
+                                <button class="btn" type="submit"><i class="bi bi-search"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -101,9 +120,13 @@
                     <router-link :to="{ name: 'catalog', query: { sort: 'popular' } }" class="cat-pill">Хиты продаж</router-link>
                     <router-link :to="{ name: 'catalog', query: { sort: 'price_desc' } }" class="cat-pill">Премиум</router-link>
                     <router-link :to="{ name: 'delivery' }" class="cat-pill">Доставка</router-link>
-                    <router-link :to="{ name: 'contacts' }" class="cat-pill ms-auto">
-                        <i class="bi bi-tag-fill me-2 text-warning"></i>Нужна помощь?
-                    </router-link>
+                    <a href="tel:+78000000000" class="cat-help ms-auto">
+                        <i class="bi bi-headset me-2"></i>
+                        <span class="cat-help-label">
+                            <span class="t">Нужна помощь?</span>
+                            <span class="s">+7 (800) 000-00-00</span>
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -111,7 +134,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import api from '../api';
 import { useAuthStore } from '../stores/auth';
@@ -126,6 +149,12 @@ const route = useRoute();
 const searchQuery = ref(route.query.q || '');
 const searchCat = ref(route.query.category || '');
 const categories = ref([]);
+
+const firstName = computed(() => {
+    const full = auth.user?.name || 'Гость';
+    const first = full.split(' ')[0] || full;
+    return first.length > 12 ? first.slice(0, 11) + '…' : first;
+});
 
 onMounted(async () => {
     try {
