@@ -50,20 +50,27 @@ class BannerController extends Controller
 
     protected function validateData(Request $request, bool $creating): array
     {
-        return $request->validate([
+        // NOTE: we intentionally do NOT mark `image` as `nullable` on create.
+        // Laravel short-circuits the rest of the rules (including
+        // required_without) when a nullable field is null, which would let a
+        // banner be inserted without any image and hit the NOT NULL column in
+        // `banners.image`. On update the field is omitted from the rules
+        // entirely via the `sometimes` gate below.
+        $rules = [
             'title' => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:500'],
-            // On create we require either an image URL or a file upload. On
-            // update the banner already has an image, so both fields are
-            // optional and the caller may patch only title / sort_order etc.
-            'image' => array_filter([
-                $creating ? 'required_without:image_file' : null,
-                'nullable', 'string', 'max:2000',
-            ]),
             'image_file' => ['nullable', 'file', 'image', 'max:5120'],
             'url' => ['nullable', 'string', 'max:500'],
             'sort_order' => ['nullable', 'integer'],
             'is_active' => ['nullable', 'boolean'],
-        ]);
+        ];
+        if ($creating) {
+            $rules['image'] = ['required_without:image_file', 'string', 'max:2000'];
+        } else {
+            // Only validate `image` when the client actually sent it. This
+            // keeps partial updates like `{sort_order: 3}` valid.
+            $rules['image'] = ['sometimes', 'string', 'max:2000'];
+        }
+        return $request->validate($rules);
     }
 }

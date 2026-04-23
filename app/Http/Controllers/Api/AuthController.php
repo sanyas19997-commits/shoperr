@@ -118,14 +118,23 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', PasswordRule::min(6)],
         ]);
 
+        // Use a single generic error for any failure mode (missing row,
+        // expired token, bad hash) so an attacker can't use response
+        // differences to tell "this token was once valid" from "this token
+        // never existed". Expired rows are still garbage-collected below.
+        $genericError = response()->json(['message' => 'Неверный или истёкший токен'], 422);
+
         $row = \DB::table('password_reset_tokens')->where('email', $data['email'])->first();
-        if (!$row || !Hash::check($data['token'], $row->token)) {
-            return response()->json(['message' => 'Неверный токен'], 422);
+        if (!$row) {
+            return $genericError;
         }
         $expireMinutes = (int) config('auth.passwords.users.expire', 60);
         if ($row->created_at && \Carbon\Carbon::parse($row->created_at)->addMinutes($expireMinutes)->isPast()) {
             \DB::table('password_reset_tokens')->where('email', $data['email'])->delete();
-            return response()->json(['message' => 'Токен истёк'], 422);
+            return $genericError;
+        }
+        if (!Hash::check($data['token'], $row->token)) {
+            return $genericError;
         }
 
         $user = User::where('email', $data['email'])->firstOrFail();
