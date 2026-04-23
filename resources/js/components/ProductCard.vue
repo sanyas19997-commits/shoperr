@@ -1,44 +1,43 @@
 <template>
-    <div class="card product-card">
+    <div class="product-card">
         <router-link :to="{ name: 'product', params: { slug: product.slug } }" class="d-block">
             <div class="product-image-wrap">
                 <img :src="imageUrl" :alt="product.name" class="product-image" loading="lazy" />
-                <div class="product-badges">
-                    <span v-if="product.discount_percent" class="discount-badge">-{{ product.discount_percent }}%</span>
-                    <span v-if="isNew" class="badge-new">Новинка</span>
-                    <span v-if="isHit" class="badge-hit">Хит</span>
+                <div class="ribbons">
+                    <span v-if="isHit" class="ribbon ribbon-hot">Hot</span>
+                    <span v-if="product.discount_percent" class="ribbon ribbon-save">-{{ product.discount_percent }}%</span>
+                    <span v-if="isNew" class="ribbon ribbon-new">New</span>
                 </div>
-                <div class="product-actions" @click.stop.prevent>
-                    <button type="button"
-                            class="fav-btn"
-                            :class="{ active: isFav }"
-                            :aria-label="isFav ? 'Убрать из избранного' : 'В избранное'"
-                            @click.prevent="toggleFavorite">
-                        <i :class="isFav ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
-                    </button>
-                </div>
+                <button type="button"
+                        class="fav-btn"
+                        :class="{ active: isFav }"
+                        :aria-label="isFav ? 'Убрать из избранного' : 'В избранное'"
+                        @click.prevent.stop="toggleFavorite">
+                    <i :class="isFav ? 'bi bi-heart-fill' : 'bi bi-heart'"></i>
+                </button>
                 <div v-if="!product.in_stock" class="oos-overlay">Нет в наличии</div>
             </div>
         </router-link>
-        <div class="card-body d-flex flex-column">
-            <div class="mb-1 small text-muted text-truncate" v-if="product.category?.name">{{ product.category.name }}</div>
-            <router-link :to="{ name: 'product', params: { slug: product.slug } }" class="text-dark product-title mb-2">
+        <div class="card-body">
+            <div class="vendor text-truncate">{{ vendorName }}</div>
+            <router-link :to="{ name: 'product', params: { slug: product.slug } }" class="product-title">
                 {{ product.name }}
             </router-link>
-            <div class="mb-2">
+            <div class="rating">
                 <RatingStars :value="product.rating" :reviews="product.reviews_count" />
             </div>
-            <div class="mt-auto">
-                <div class="d-flex align-items-baseline gap-2 mb-2">
-                    <span class="current-price">{{ formatPrice(product.price) }} ₽</span>
-                    <span v-if="product.old_price" class="old-price">{{ formatPrice(product.old_price) }} ₽</span>
-                </div>
-                <button class="btn btn-primary w-100 btn-sm" :disabled="!product.in_stock || adding" @click="addToCart">
-                    <span v-if="adding"><span class="spinner-border spinner-border-sm"></span></span>
-                    <template v-else-if="product.in_stock"><i class="bi bi-cart-plus me-1"></i>В корзину</template>
-                    <template v-else>Нет в наличии</template>
-                </button>
+            <div class="prices">
+                <span class="price">{{ formatPrice(product.price) }} ₽</span>
+                <span v-if="product.old_price" class="price-old">{{ formatPrice(product.old_price) }} ₽</span>
             </div>
+            <div v-if="product.category?.name" class="sold-by text-truncate">
+                В категории: {{ product.category.name }}
+            </div>
+            <button class="add-to-cart" :disabled="!product.in_stock || adding" @click="addToCart">
+                <span v-if="adding"><span class="spinner-border spinner-border-sm"></span></span>
+                <template v-else-if="product.in_stock"><i class="bi bi-cart-plus me-1"></i>В корзину</template>
+                <template v-else>Нет в наличии</template>
+            </button>
         </div>
     </div>
 </template>
@@ -65,7 +64,7 @@ const adding = ref(false);
 const imageUrl = computed(() => {
     return props.product.primary_image_url
         || props.product.images?.[0]?.url
-        || 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23eef0f5%22 width=%22400%22 height=%22400%22/><text x=%22200%22 y=%22210%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%23aab1be%22>Нет изображения</text></svg>';
+        || 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22400%22><rect fill=%22%23f5f5f5%22 width=%22400%22 height=%22400%22/><text x=%22200%22 y=%22210%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2218%22 fill=%22%23bcbcbc%22>Нет изображения</text></svg>';
 });
 
 const isFav = computed(() => favorites.has(props.product.id));
@@ -75,7 +74,13 @@ const isNew = computed(() => {
     const created = new Date(props.product.created_at).getTime();
     return created && (Date.now() - created) < 1000 * 60 * 60 * 24 * 30;
 });
-const isHit = computed(() => (props.product.orders_count || 0) > 10);
+const isHit = computed(() => (props.product.orders_count || 0) > 10 || props.product.is_featured);
+
+const vendorName = computed(() => {
+    return (props.product.vendor && props.product.vendor.name)
+        || props.product.brand
+        || 'SHOPHUB';
+});
 
 async function addToCart() {
     adding.value = true;
@@ -99,18 +104,3 @@ async function toggleFavorite() {
     } catch (_) {}
 }
 </script>
-
-<style scoped>
-.oos-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.75);
-    color: #475569;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    backdrop-filter: blur(2px);
-}
-</style>
