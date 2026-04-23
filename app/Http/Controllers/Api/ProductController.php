@@ -65,7 +65,11 @@ class ProductController extends Controller
                     // `{"color":"red"}` stripped of the braces gives the kv pair
                     // that appears verbatim in the stored JSON blob.
                     $kv = trim($needle, '{}');
-                    $q->orWhere('attributes', 'like', '%' . $kv . '%');
+                    // Escape LIKE meta-characters (%, _, \) in the user-supplied
+                    // fragment so values like `?attrs[color]=%` don't match every
+                    // product that has a color attribute.
+                    $escaped = addcslashes($kv, '\\%_');
+                    $q->orWhere('attributes', 'like', '%' . $escaped . '%');
                 }
             });
         }

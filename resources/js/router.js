@@ -57,12 +57,17 @@ const router = createRouter({
     },
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     const auth = useAuthStore();
     // Show the global progress bar while the target route's lazy chunk and
     // any in-flight guards resolve. Any stops from axios responses during
     // navigation are counter-balanced by the `afterEach` below.
     try { useLoaderStore().start(); } catch (_) {}
+
+    // Auth is hydrated from localStorage synchronously at store creation, so
+    // `isAuthenticated` is already trustworthy for the first navigation. The
+    // `/me` request that confirms the session runs in parallel from app.js;
+    // it will correct the state (and localStorage) if the cookie expired.
     if (to.meta.requiresAuth && !auth.isAuthenticated) {
         return next({ name: 'login', query: { redirect: to.fullPath } });
     }
@@ -70,6 +75,12 @@ router.beforeEach((to, from, next) => {
         return next({ name: 'home' });
     }
     if (to.meta.guestOnly && auth.isAuthenticated) {
+        // Honour `?redirect=…` from an earlier forced-login bounce so the user
+        // lands on the page they actually wanted, not the homepage.
+        const redirect = to.query.redirect;
+        if (typeof redirect === 'string' && redirect.startsWith('/') && !redirect.startsWith('//')) {
+            return next(redirect);
+        }
         return next({ name: 'home' });
     }
     next();

@@ -20,18 +20,14 @@ async function bootstrap() {
     const auth = useAuthStore();
     const cart = useCartStore();
 
-    try {
-        await auth.fetchUser();
-    } catch (_) {
-        // ignore
-    }
-    try {
-        await cart.fetchCart();
-    } catch (_) {
-        // ignore
-    }
-
+    // Mount immediately — the auth store was hydrated synchronously from
+    // localStorage at creation, so the router guard can already decide. Keep
+    // `/me` and cart fetches in the background so page reloads on /profile
+    // don't redirect to /login while waiting on the server.
     app.mount('#app');
+
+    auth.fetchUser().catch(() => {});
+    cart.fetchCart().catch(() => {});
 }
 
 bootstrap();
