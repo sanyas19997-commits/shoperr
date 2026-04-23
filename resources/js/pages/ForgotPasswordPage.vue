@@ -4,13 +4,16 @@
             <div class="col-md-5">
                 <div class="card p-4">
                     <h4 class="fw-bold text-center mb-4">Восстановление пароля</h4>
-                    <form v-if="!token" @submit.prevent="request">
+                    <form v-if="!token && !emailSent" @submit.prevent="request">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input v-model="email" required type="email" class="form-control" />
                         </div>
                         <button class="btn btn-primary w-100">Получить токен</button>
                     </form>
+                    <div v-else-if="!token" class="alert alert-info small">
+                        Если такой email зарегистрирован, инструкции по сбросу пароля отправлены письмом. Проверьте почту.
+                    </div>
                     <div v-else>
                         <div class="alert alert-info small">
                             Для демо: ваш токен — <code>{{ token }}</code>. В реальном проекте он приходит на email.
@@ -45,12 +48,14 @@ const password = ref('');
 const password_confirmation = ref('');
 const error = ref('');
 const success = ref('');
+const emailSent = ref(false);
 
 async function request() {
     error.value = '';
     try {
         const { data } = await api.post('/forgot-password', { email: email.value });
         token.value = data.reset_token || '';
+        emailSent.value = true;
     } catch (e) {
         error.value = e.response?.data?.message || 'Ошибка';
     }

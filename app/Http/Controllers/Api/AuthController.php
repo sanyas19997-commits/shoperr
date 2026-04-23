@@ -83,6 +83,7 @@ class AuthController extends Controller
     {
         $request->validate(['email' => ['required', 'email']]);
 
+        $token = null;
         $user = User::where('email', $request->email)->first();
         if ($user) {
             $token = Str::random(40);
@@ -90,13 +91,23 @@ class AuthController extends Controller
                 ['email' => $user->email],
                 ['email' => $user->email, 'token' => Hash::make($token), 'created_at' => now()]
             );
-            // TODO: dispatch a mailable with the reset link instead of relying on logs.
-            logger()->info('password.reset.token', ['email' => $user->email, 'token' => $token]);
+            // Dev convenience: surface the token through logs only outside production.
+            // In production, wire up a Mailable that sends the reset link via email.
+            if (app()->environment('local', 'testing')) {
+                logger()->info('password.reset.token', ['email' => $user->email, 'token' => $token]);
+            }
         }
 
-        return response()->json([
+        $payload = [
             'message' => 'Если email зарегистрирован — инструкции отправлены',
-        ]);
+        ];
+        // Only expose the token to the SPA in non-production environments so the
+        // demo reset form still works; in production the client is told to check email.
+        if ($token !== null && app()->environment('local', 'testing')) {
+            $payload['reset_token'] = $token;
+        }
+
+        return response()->json($payload);
     }
 
     public function resetPassword(Request $request): JsonResponse

@@ -176,7 +176,9 @@ const isFav = computed(() => product.value ? favorites.has(product.value.id) : f
 async function load() {
     const { data } = await api.get(`/products/${route.params.slug}`);
     product.value = data.data;
-    similar.value = data.similar?.data || [];
+    // ProductController::show embeds `ProductResource::collection(...)` inline, which
+    // serializes as a flat array (no outer `data` wrapper), so use `data.similar` directly.
+    similar.value = Array.isArray(data.similar) ? data.similar : (data.similar?.data || []);
     selectedImage.value = null;
     await loadReviews();
 }
