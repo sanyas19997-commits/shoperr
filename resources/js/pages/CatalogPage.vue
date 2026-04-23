@@ -124,6 +124,28 @@ watch(() => route.params.slug, (slug) => {
     loadProducts(1);
 });
 watch(() => route.query.q, () => loadProducts(1));
+// Navbar links like /catalog?sort=newest only mutate the URL — without
+// watching the sort query, the page keeps showing the previous order.
+watch(() => route.query.sort, (next) => {
+    const nextSort = next || 'newest';
+    if (nextSort !== sort.value) {
+        sort.value = nextSort;
+    }
+    loadProducts(1);
+});
+// Same for other filter query params so the catalog stays in sync with URL.
+watch(() => route.query.category, (next) => {
+    if (!route.params.slug) {
+        filters.value.category = next || '';
+        loadProducts(1);
+    }
+});
+watch(() => [route.query.price_min, route.query.price_max, route.query.in_stock], () => {
+    filters.value.price_min = route.query.price_min || null;
+    filters.value.price_max = route.query.price_max || null;
+    filters.value.in_stock = route.query.in_stock === '1';
+    loadProducts(1);
+});
 
 onMounted(async () => {
     await loadCategories();

@@ -41,13 +41,19 @@ class SupportController extends Controller
 
     public function show(Request $request, SupportTicket $ticket)
     {
-        if ($ticket->admin_unread > 0) {
-            $ticket->messages()
-                ->where('is_admin', false)
-                ->whereNull('read_at')
-                ->update(['read_at' => now()]);
-            $ticket->admin_unread = 0;
-            $ticket->save();
+        // Atomic decrement-by-count pattern: reset only the unread items that
+        // actually existed at mark time. If a user sends a message between
+        // our mark and our counter write, their atomic `admin_unread + 1`
+        // stays — we only subtract what we handled.
+        $marked = $ticket->messages()
+            ->where('is_admin', false)
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
+        if ($marked > 0) {
+            SupportTicket::where('id', $ticket->id)->update([
+                'admin_unread' => DB::raw("CASE WHEN admin_unread >= {$marked} THEN admin_unread - {$marked} ELSE 0 END"),
+            ]);
+            $ticket->refresh();
         }
         $ticket->load(['user', 'messages.author']);
         return new SupportTicketResource($ticket);

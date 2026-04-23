@@ -59,13 +59,18 @@ class SupportController extends Controller
     {
         $this->authorizeOwnership($request, $ticket);
         // Mark admin -> user messages as read when the user opens the thread.
-        if ($ticket->user_unread > 0) {
-            $ticket->messages()
-                ->where('is_admin', true)
-                ->whereNull('read_at')
-                ->update(['read_at' => now()]);
-            $ticket->user_unread = 0;
-            $ticket->save();
+        // Decrement the counter by exactly what we marked (not reset to 0) —
+        // otherwise a concurrent admin reply's atomic `user_unread + 1` would
+        // be silently overwritten by a blanket `= 0`.
+        $marked = $ticket->messages()
+            ->where('is_admin', true)
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
+        if ($marked > 0) {
+            SupportTicket::where('id', $ticket->id)->update([
+                'user_unread' => DB::raw("CASE WHEN user_unread >= {$marked} THEN user_unread - {$marked} ELSE 0 END"),
+            ]);
+            $ticket->refresh();
         }
         $ticket->load(['messages.author']);
         return new SupportTicketResource($ticket);

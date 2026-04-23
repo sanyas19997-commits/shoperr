@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '../../api';
 import { useAuthStore } from '../../stores/auth';
@@ -41,6 +41,7 @@ const auth = useAuthStore();
 const router = useRouter();
 const newFeedback = ref(0);
 const supportUnread = ref(0);
+let pollTimer = null;
 
 async function loadStats() {
     try {
@@ -57,7 +58,17 @@ onMounted(() => {
     loadStats();
     // Refresh every 30s so newly submitted feedback / support messages
     // show up in the sidebar without a manual refresh.
-    window.setInterval(loadStats, 30000);
+    pollTimer = window.setInterval(loadStats, 30000);
+});
+
+onBeforeUnmount(() => {
+    // Prevent the timer from firing after the admin navigates away or logs
+    // out — otherwise it keeps hitting /admin/*/stats forever and logs 403s
+    // post-logout.
+    if (pollTimer) {
+        clearInterval(pollTimer);
+        pollTimer = null;
+    }
 });
 
 async function logout() {

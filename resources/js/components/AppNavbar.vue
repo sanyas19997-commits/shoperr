@@ -115,10 +115,22 @@
                             </li>
                         </ul>
                     </div>
-                    <router-link :to="{ name: 'catalog' }" class="cat-pill"><i class="bi bi-grid me-2"></i>Каталог</router-link>
-                    <router-link :to="{ name: 'catalog', query: { sort: 'newest' } }" class="cat-pill">Новинки</router-link>
-                    <router-link :to="{ name: 'catalog', query: { sort: 'popular' } }" class="cat-pill">Хиты продаж</router-link>
-                    <router-link :to="{ name: 'catalog', query: { sort: 'price_desc' } }" class="cat-pill">Премиум</router-link>
+                    <router-link :to="{ name: 'catalog' }"
+                                 :class="['cat-pill', { active: isCatalogTab(null) }]"
+                                 active-class=""
+                                 exact-active-class=""><i class="bi bi-grid me-2"></i>Каталог</router-link>
+                    <router-link :to="{ name: 'catalog', query: { sort: 'newest' } }"
+                                 :class="['cat-pill', { active: isCatalogTab('newest') }]"
+                                 active-class=""
+                                 exact-active-class="">Новинки</router-link>
+                    <router-link :to="{ name: 'catalog', query: { sort: 'popular' } }"
+                                 :class="['cat-pill', { active: isCatalogTab('popular') }]"
+                                 active-class=""
+                                 exact-active-class="">Хиты продаж</router-link>
+                    <router-link :to="{ name: 'catalog', query: { sort: 'price_desc' } }"
+                                 :class="['cat-pill', { active: isCatalogTab('price_desc') }]"
+                                 active-class=""
+                                 exact-active-class="">Премиум</router-link>
                     <router-link :to="{ name: 'delivery' }" class="cat-pill">Доставка</router-link>
                     <a href="tel:+78000000000" class="cat-help ms-auto">
                         <i class="bi bi-headset me-2"></i>
@@ -155,6 +167,15 @@ const firstName = computed(() => {
     const first = full.split(' ')[0] || full;
     return first.length > 12 ? first.slice(0, 11) + '…' : first;
 });
+
+// Router's built-in `router-link-active` matches by path only, so every
+// /catalog?sort=… link lights up on the catalog page. Compare both the
+// route name AND the current `sort` query to pick exactly one pill.
+function isCatalogTab(sortKey) {
+    if (route.name !== 'catalog' && route.name !== 'category') return false;
+    const current = route.query?.sort || null;
+    return current === sortKey;
+}
 
 onMounted(async () => {
     try {
