@@ -39,7 +39,11 @@ class ReviewController extends Controller
 
     public function destroy(Request $request, Review $review)
     {
-        if ($review->user_id !== $request->user()->id && !$request->user()->isAdmin()) {
+        // Explicit int cast on both sides: some DB drivers (pgsql, certain
+        // MariaDB bigint configurations) return the foreign key as a string,
+        // which would make `!==` always true and let admins delete anyone's
+        // review but forbid users from deleting their own.
+        if ((int) $review->user_id !== (int) $request->user()->id && !$request->user()->isAdmin()) {
             return response()->json(['message' => 'Forbidden'], 403);
         }
         $productId = $review->product_id;

@@ -101,14 +101,21 @@ class ProductController extends Controller
 
     protected function collectDescendantIds(Category $category): array
     {
+        // Iterative BFS. We track visited ids so a corrupted categories.parent_id
+        // cycle (A -> B -> A) can't send this loop — and thus the public
+        // catalog endpoint — into an unbounded memory/CPU spin.
+        $visited = [$category->id => true];
         $ids = [$category->id];
         $stack = [$category->id];
         while (!empty($stack)) {
             $current = array_pop($stack);
             $childIds = Category::where('parent_id', $current)->pluck('id')->all();
             foreach ($childIds as $childId) {
-                $ids[] = $childId;
-                $stack[] = $childId;
+                if (!isset($visited[$childId])) {
+                    $visited[$childId] = true;
+                    $ids[] = $childId;
+                    $stack[] = $childId;
+                }
             }
         }
         return $ids;
