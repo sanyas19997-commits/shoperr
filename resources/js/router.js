@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from './stores/auth';
+import { useLoaderStore } from './stores/loader';
 
 const routes = [
     { path: '/', name: 'home', component: () => import('./pages/HomePage.vue') },
@@ -56,6 +57,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const auth = useAuthStore();
+    // Show the global progress bar while the target route's lazy chunk and
+    // any in-flight guards resolve. Any stops from axios responses during
+    // navigation are counter-balanced by the `afterEach` below.
+    try { useLoaderStore().start(); } catch (_) {}
     if (to.meta.requiresAuth && !auth.isAuthenticated) {
         return next({ name: 'login', query: { redirect: to.fullPath } });
     }
@@ -66,6 +71,14 @@ router.beforeEach((to, from, next) => {
         return next({ name: 'home' });
     }
     next();
+});
+
+router.afterEach(() => {
+    try { useLoaderStore().stop(); } catch (_) {}
+});
+
+router.onError(() => {
+    try { useLoaderStore().stop(); } catch (_) {}
 });
 
 export default router;
