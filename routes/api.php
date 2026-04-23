@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Api\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Api\Admin\SupportController as AdminSupportController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BannerController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\SupportController;
 use Illuminate\Support\Facades\Route;
 
 // Auth
@@ -60,6 +62,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/favorites', [FavoriteController::class, 'index']);
     Route::post('/favorites/{product}/toggle', [FavoriteController::class, 'toggle']);
+
+    Route::get('/support/tickets', [SupportController::class, 'index']);
+    Route::post('/support/tickets', [SupportController::class, 'store']);
+    Route::get('/support/tickets/{ticket}', [SupportController::class, 'show']);
+    Route::post('/support/tickets/{ticket}/reply', [SupportController::class, 'reply']);
+    Route::post('/support/tickets/{ticket}/close', [SupportController::class, 'close']);
 });
 
 // Admin
@@ -82,4 +90,11 @@ Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function ()
     Route::get('/feedback/{feedback}', [AdminFeedbackController::class, 'show']);
     Route::put('/feedback/{feedback}', [AdminFeedbackController::class, 'update']);
     Route::delete('/feedback/{feedback}', [AdminFeedbackController::class, 'destroy']);
+
+    Route::get('/support/stats', [AdminSupportController::class, 'stats']);
+    Route::get('/support/tickets', [AdminSupportController::class, 'index']);
+    Route::get('/support/tickets/{ticket}', [AdminSupportController::class, 'show']);
+    Route::post('/support/tickets/{ticket}/reply', [AdminSupportController::class, 'reply']);
+    Route::put('/support/tickets/{ticket}/status', [AdminSupportController::class, 'updateStatus']);
+    Route::delete('/support/tickets/{ticket}', [AdminSupportController::class, 'destroy']);
 });

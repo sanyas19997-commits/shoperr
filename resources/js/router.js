@@ -41,6 +41,8 @@ const routes = [
             { path: 'banners', name: 'admin.banners', component: () => import('./pages/admin/Banners.vue') },
             { path: 'feedback', name: 'admin.feedback', component: () => import('./pages/admin/Feedback.vue') },
             { path: 'feedback/:id', name: 'admin.feedback.show', component: () => import('./pages/admin/FeedbackDetail.vue') },
+            { path: 'support', name: 'admin.support', component: () => import('./pages/admin/Support.vue') },
+            { path: 'support/:id', name: 'admin.support.show', component: () => import('./pages/admin/SupportDetail.vue') },
         ],
     },
 

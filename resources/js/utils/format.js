@@ -12,6 +12,11 @@ export function formatDate(iso) {
     }
 }
 
+// Alias kept for clarity when a caller specifically wants date + time.
+// (formatDate already includes both — formatDateTime makes intent explicit
+// at call sites in chat/support views.)
+export const formatDateTime = formatDate;
+
 export function statusLabel(status) {
     const map = {
         new: 'Новый',

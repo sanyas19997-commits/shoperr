@@ -13,7 +13,7 @@ class CartResource extends JsonResource
             'id' => $this->id,
             'items' => CartItemResource::collection($this->whenLoaded('items')),
             'total' => $this->relationLoaded('items') ? $this->total() : 0,
-            'count' => $this->relationLoaded('items') ? $this->count() : 0,
+            'count' => $this->relationLoaded('items') ? $this->itemCount() : 0,
         ];
     }
 }

@@ -100,29 +100,33 @@ class ProductController extends Controller
             }
         }
 
-        $primaryIndex = (int) $request->input('primary_image_index', 0);
+        if (empty($uploaded)) {
+            return;
+        }
 
-        if (!empty($uploaded)) {
-            if ($product->images()->count() === 0) {
-                foreach ($uploaded as $i => $row) {
-                    ProductImage::create([
-                        'product_id' => $product->id,
-                        'path' => $row['path'],
-                        'sort_order' => $i,
-                        'is_primary' => $i === $primaryIndex,
-                    ]);
-                }
-            } else {
-                $offset = $product->images()->count();
-                foreach ($uploaded as $i => $row) {
-                    ProductImage::create([
-                        'product_id' => $product->id,
-                        'path' => $row['path'],
-                        'sort_order' => $offset + $i,
-                        'is_primary' => false,
-                    ]);
-                }
-            }
+        $existingCount = $product->images()->count();
+        // primary_image_index is expressed as an offset into the *newly*
+        // uploaded batch; only honour it when the caller actually sent it,
+        // otherwise leave the existing primary flag alone.
+        $hasPrimaryHint = $request->has('primary_image_index');
+        $primaryIndex = $hasPrimaryHint ? (int) $request->input('primary_image_index', 0) : null;
+
+        // If the admin explicitly chose a primary image from this batch and
+        // the product already had images, demote the old primary so we
+        // don't end up with two rows flagged is_primary=true.
+        if ($hasPrimaryHint && $existingCount > 0) {
+            $product->images()->update(['is_primary' => false]);
+        }
+
+        foreach ($uploaded as $i => $row) {
+            ProductImage::create([
+                'product_id' => $product->id,
+                'path' => $row['path'],
+                'sort_order' => $existingCount + $i,
+                'is_primary' => $hasPrimaryHint
+                    ? ($i === $primaryIndex)
+                    : ($existingCount === 0 && $i === 0),
+            ]);
         }
     }
 }

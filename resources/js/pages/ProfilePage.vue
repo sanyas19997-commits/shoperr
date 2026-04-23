@@ -136,6 +136,12 @@
                     </div>
                 </div>
 
+                <div v-else-if="activeTab === 'support'" class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <SupportPanel />
+                    </div>
+                </div>
+
                 <div v-else-if="activeTab === 'password'" class="card border-0 shadow-sm">
                     <div class="card-body">
                         <h5 class="mb-3">Смена пароля</h5>
@@ -202,6 +208,7 @@ import { computed, onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '../api';
 import { useAuthStore } from '../stores/auth';
+import SupportPanel from '../components/SupportPanel.vue';
 
 const auth = useAuthStore();
 const router = useRouter();
@@ -215,10 +222,12 @@ const passMessage = ref(null);
 const orders = ref([]);
 const ordersLoading = ref(true);
 
+const supportUnread = ref(0);
 const tabs = computed(() => [
     { id: 'overview', label: 'Обзор', icon: 'bi-grid' },
     { id: 'profile', label: 'Профиль', icon: 'bi-person' },
     { id: 'delivery', label: 'Адрес доставки', icon: 'bi-geo-alt' },
+    { id: 'support', label: 'Поддержка', icon: 'bi-headset', badge: supportUnread.value || null },
     { id: 'password', label: 'Пароль', icon: 'bi-shield-lock' },
 ]);
 
@@ -268,6 +277,10 @@ onMounted(async () => {
     } finally {
         ordersLoading.value = false;
     }
+    try {
+        const { data } = await api.get('/support/tickets', { silent: true });
+        supportUnread.value = (data.data || []).reduce((s, t) => s + (t.unread || 0), 0);
+    } catch (_) {}
 });
 
 async function saveProfile() {

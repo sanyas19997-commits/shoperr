@@ -16,6 +16,10 @@
                     <span><i class="bi bi-chat-dots me-2"></i>Обратная связь</span>
                     <span v-if="newFeedback" class="badge bg-danger rounded-pill">{{ newFeedback }}</span>
                 </router-link>
+                <router-link :to="{ name: 'admin.support' }" class="d-flex align-items-center justify-content-between">
+                    <span><i class="bi bi-headset me-2"></i>Поддержка</span>
+                    <span v-if="supportUnread" class="badge bg-danger rounded-pill">{{ supportUnread }}</span>
+                </router-link>
                 <hr class="border-secondary" />
                 <router-link to="/"><i class="bi bi-arrow-left me-2"></i>На сайт</router-link>
                 <a href="#" @click.prevent="logout"><i class="bi bi-box-arrow-right me-2"></i>Выйти</a>
@@ -36,18 +40,24 @@ import { useAuthStore } from '../../stores/auth';
 const auth = useAuthStore();
 const router = useRouter();
 const newFeedback = ref(0);
+const supportUnread = ref(0);
 
 async function loadStats() {
     try {
         const { data } = await api.get('/admin/feedback/stats', { silent: true });
         newFeedback.value = data.new || 0;
     } catch (_) {}
+    try {
+        const { data } = await api.get('/admin/support/stats', { silent: true });
+        supportUnread.value = data.unread || 0;
+    } catch (_) {}
 }
 
 onMounted(() => {
     loadStats();
-    // Refresh every 60s so newly submitted feedback shows up without manual refresh.
-    window.setInterval(loadStats, 60000);
+    // Refresh every 30s so newly submitted feedback / support messages
+    // show up in the sidebar without a manual refresh.
+    window.setInterval(loadStats, 30000);
 });
 
 async function logout() {

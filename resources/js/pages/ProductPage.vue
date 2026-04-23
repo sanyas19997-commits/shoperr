@@ -84,44 +84,74 @@
         </div>
 
         <section class="mt-5">
-            <h3 class="h5 fw-bold mb-3">Отзывы</h3>
-            <div v-if="auth.isAuthenticated" class="card p-3 mb-3">
-                <h6 class="fw-semibold">Оставить отзыв</h6>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h3 class="h5 fw-bold mb-0">Отзывы <span class="text-muted fw-normal">({{ reviewsTotal }})</span></h3>
+                <div v-if="reviewsTotal > 0" class="small text-muted">
+                    <RatingStars :value="product.rating" /> <span class="ms-1">{{ formatRating(product.rating) }} / 5</span>
+                </div>
+            </div>
+
+            <div v-if="auth.isAuthenticated" class="card border-0 shadow-sm p-3 mb-3">
+                <h6 class="fw-semibold mb-2">
+                    {{ myReview ? 'Ваш отзыв' : 'Оставить отзыв' }}
+                </h6>
                 <div class="mb-2">
-                    <label class="small">Оценка:</label>
+                    <label class="small d-block">Оценка:</label>
                     <div>
-                        <i
-                            v-for="i in 5"
-                            :key="i"
-                            class="bi fs-4"
-                            :class="[i <= reviewForm.rating ? 'bi-star-fill rating-star' : 'bi-star rating-star empty']"
-                            style="cursor: pointer"
-                            @click="reviewForm.rating = i"
-                        ></i>
+                        <i v-for="i in 5" :key="i"
+                           class="bi fs-4"
+                           :class="[i <= reviewForm.rating ? 'bi-star-fill rating-star' : 'bi-star rating-star empty']"
+                           style="cursor: pointer"
+                           @click="reviewForm.rating = i"></i>
+                        <span v-if="reviewForm.rating" class="ms-2 small text-muted">{{ reviewForm.rating }} / 5</span>
                     </div>
                 </div>
-                <textarea v-model="reviewForm.body" class="form-control mb-2" rows="3" placeholder="Ваш отзыв..."></textarea>
-                <div>
-                    <button class="btn btn-primary btn-sm" @click="submitReview" :disabled="!reviewForm.rating">Отправить</button>
+                <textarea v-model="reviewForm.body"
+                          class="form-control mb-2"
+                          rows="3"
+                          maxlength="2000"
+                          placeholder="Расскажите и понравившемся, и о недостатках..."></textarea>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary btn-sm" @click="submitReview" :disabled="!reviewForm.rating || submittingReview">
+                        <span v-if="submittingReview" class="spinner-border spinner-border-sm me-1"></span>
+                        {{ myReview ? 'Обновить' : 'Отправить' }}
+                    </button>
+                    <button v-if="myReview"
+                            class="btn btn-outline-danger btn-sm"
+                            :disabled="deletingReview"
+                            @click="deleteMyReview">
+                        <i class="bi bi-trash me-1"></i>Удалить отзыв
+                    </button>
                 </div>
             </div>
             <div v-else class="alert alert-info">
                 <router-link :to="{ name: 'login' }">Войдите</router-link>, чтобы оставить отзыв.
             </div>
 
-            <div v-if="reviews.length">
-                <div v-for="r in reviews" :key="r.id" class="card p-3 mb-2">
-                    <div class="d-flex justify-content-between">
+            <div v-if="reviewsLoading" class="text-center text-muted py-3">
+                <span class="spinner-border spinner-border-sm me-2"></span>Загрузка отзывов…
+            </div>
+            <div v-else-if="reviews.length">
+                <div v-for="r in reviews" :key="r.id"
+                     class="card border-0 shadow-sm p-3 mb-2"
+                     :class="{ 'border-primary border-2': isMine(r) }">
+                    <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <strong>{{ r.user_name || 'Пользователь' }}</strong>
-                            <RatingStars :value="r.rating" class="ms-2" />
+                            <span v-if="isMine(r)" class="badge bg-primary ms-2">Ваш отзыв</span>
+                            <div class="mt-1">
+                                <RatingStars :value="r.rating" />
+                                <span class="ms-1 small text-muted">{{ r.rating }} / 5</span>
+                            </div>
                         </div>
-                        <small class="text-muted">{{ formatDate(r.created_at) }}</small>
+                        <div class="text-end">
+                            <small class="text-muted d-block">{{ formatDate(r.created_at) }}</small>
+                        </div>
                     </div>
-                    <div v-if="r.body" class="mt-2">{{ r.body }}</div>
+                    <div v-if="r.body" class="mt-2 review-body">{{ r.body }}</div>
                 </div>
             </div>
-            <div v-else class="text-muted small">Отзывов пока нет.</div>
+            <div v-else class="text-muted small">Пока нет отзывов. Будьте первым!</div>
         </section>
 
         <section v-if="similar.length" class="mt-5">
@@ -141,6 +171,7 @@ import api from '../api';
 import { useAuthStore } from '../stores/auth';
 import { useCartStore } from '../stores/cart';
 import { useFavoritesStore } from '../stores/favorites';
+import { useConfirmStore } from '../stores/confirm';
 import ProductList from '../components/ProductList.vue';
 import RatingStars from '../components/RatingStars.vue';
 import { formatPrice, formatDate } from '../utils/format';
@@ -149,14 +180,32 @@ const route = useRoute();
 const auth = useAuthStore();
 const cart = useCartStore();
 const favorites = useFavoritesStore();
+const confirm = useConfirmStore();
 
 const product = ref(null);
 const similar = ref([]);
 const reviews = ref([]);
+const reviewsLoading = ref(false);
+const reviewsTotal = ref(0);
+const submittingReview = ref(false);
+const deletingReview = ref(false);
 const qty = ref(1);
 const adding = ref(false);
 const selectedImage = ref(null);
 const reviewForm = reactive({ rating: 0, body: '' });
+
+const myReview = computed(() => {
+    const uid = auth.user?.id;
+    if (!uid) return null;
+    return reviews.value.find((r) => Number(r.user_id) === Number(uid)) || null;
+});
+function isMine(r) {
+    return !!auth.user?.id && Number(r.user_id) === Number(auth.user.id);
+}
+function formatRating(v) {
+    const n = Number(v || 0);
+    return Number.isInteger(n) ? n.toFixed(0) : n.toFixed(1);
+}
 
 const currentImage = computed(() => {
     if (selectedImage.value) return selectedImage.value;
@@ -184,8 +233,21 @@ async function load() {
 }
 
 async function loadReviews() {
-    const { data } = await api.get(`/products/${product.value.id}/reviews`);
-    reviews.value = data.data;
+    reviewsLoading.value = true;
+    try {
+        const { data } = await api.get(`/products/${product.value.id}/reviews`, { silent: true });
+        reviews.value = data.data || [];
+        reviewsTotal.value = data.meta?.total ?? reviews.value.length;
+        // Prefill the form with the user's own review so the submit button
+        // acts as «edit» instead of silently creating a duplicate
+        // (the backend does updateOrCreate, but the form should reflect it).
+        if (myReview.value) {
+            reviewForm.rating = myReview.value.rating || 0;
+            reviewForm.body = myReview.value.body || '';
+        }
+    } finally {
+        reviewsLoading.value = false;
+    }
 }
 
 async function addToCart() {
@@ -202,14 +264,39 @@ async function toggleFav() {
 }
 
 async function submitReview() {
-    await api.post(`/products/${product.value.id}/reviews`, {
-        rating: reviewForm.rating,
-        body: reviewForm.body,
+    if (!reviewForm.rating) return;
+    submittingReview.value = true;
+    try {
+        await api.post(`/products/${product.value.id}/reviews`, {
+            rating: reviewForm.rating,
+            body: reviewForm.body,
+        });
+        await loadReviews();
+        await load();
+    } finally {
+        submittingReview.value = false;
+    }
+}
+
+async function deleteMyReview() {
+    if (!myReview.value) return;
+    const ok = await confirm.ask({
+        title: 'Удалить отзыв?',
+        message: 'Ваш отзыв об этом товаре будет удалён безвозвратно.',
+        confirmLabel: 'Удалить',
+        variant: 'danger',
     });
-    reviewForm.rating = 0;
-    reviewForm.body = '';
-    await loadReviews();
-    await load();
+    if (!ok) return;
+    deletingReview.value = true;
+    try {
+        await api.delete(`/reviews/${myReview.value.id}`);
+        reviewForm.rating = 0;
+        reviewForm.body = '';
+        await loadReviews();
+        await load();
+    } finally {
+        deletingReview.value = false;
+    }
 }
 
 onMounted(load);

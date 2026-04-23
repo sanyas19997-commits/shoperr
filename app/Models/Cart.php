@@ -31,7 +31,16 @@ class Cart extends Model
         return (float) $this->items->sum(fn ($i) => $i->price * $i->quantity);
     }
 
-    public function count(): int
+    /**
+     * Total quantity of items in the cart (sum of all line quantities).
+     *
+     * Named `itemCount()` rather than `count()` because Eloquent models
+     * forward unknown instance calls to the underlying query builder, so
+     * defining `count()` on the model would mean `$cart->count()` returned
+     * a line-quantity sum while `Cart::count()` (static) returned a SQL
+     * row count. Avoiding the overload keeps semantics obvious.
+     */
+    public function itemCount(): int
     {
         return (int) $this->items->sum('quantity');
     }
