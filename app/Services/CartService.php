@@ -9,6 +9,9 @@ use Illuminate\Support\Str;
 
 class CartService
 {
+    /** Hard cap on how many units of a single SKU a cart item may hold. */
+    public const MAX_ITEM_QUANTITY = 999;
+
     public function getCart(Request $request): Cart
     {
         $user = $request->user();
@@ -21,6 +24,9 @@ class CartService
                 if ($sessionCart && $sessionCart->id !== $cart->id) {
                     $this->mergeCarts($sessionCart, $cart);
                 }
+                // Forget the guest cart cookie so subsequent authenticated
+                // requests don't keep looking up an already-merged session cart.
+                cookie()->queue(cookie()->forget('cart_session'));
             }
             return $cart;
         }
@@ -38,13 +44,16 @@ class CartService
     {
         $existing = $cart->items()->where('product_id', $product->id)->first();
         if ($existing) {
-            $existing->quantity += $quantity;
+            $existing->quantity = min(
+                self::MAX_ITEM_QUANTITY,
+                $existing->quantity + max(1, $quantity)
+            );
             $existing->price = $product->price;
             $existing->save();
         } else {
             $cart->items()->create([
                 'product_id' => $product->id,
-                'quantity' => max(1, $quantity),
+                'quantity' => min(self::MAX_ITEM_QUANTITY, max(1, $quantity)),
                 'price' => $product->price,
             ]);
         }
@@ -57,7 +66,7 @@ class CartService
             $item->delete();
             return;
         }
-        $item->update(['quantity' => $quantity]);
+        $item->update(['quantity' => min(self::MAX_ITEM_QUANTITY, $quantity)]);
     }
 
     public function removeItem(Cart $cart, int $itemId): void
@@ -75,7 +84,10 @@ class CartService
         foreach ($from->items as $item) {
             $existing = $to->items()->where('product_id', $item->product_id)->first();
             if ($existing) {
-                $existing->quantity += $item->quantity;
+                $existing->quantity = min(
+                    self::MAX_ITEM_QUANTITY,
+                    $existing->quantity + $item->quantity
+                );
                 $existing->save();
             } else {
                 $to->items()->create([

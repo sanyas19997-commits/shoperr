@@ -71,9 +71,13 @@ class OrderController extends Controller
                     throw new \App\Exceptions\InsufficientStockException($outOfStock);
                 }
 
+                // Use the freshly locked product prices as the source of truth.
+                // The cart item's price column is a cache of the price at add-to-cart
+                // time and may be stale if the product was updated in the meantime.
                 $total = 0;
                 foreach ($cart->items as $item) {
-                    $total += (float) $item->price * $item->quantity;
+                    $product = $products->get($item->product_id);
+                    $total += (float) $product->price * $item->quantity;
                 }
 
                 $order = Order::create([
@@ -93,9 +97,9 @@ class OrderController extends Controller
                     $order->items()->create([
                         'product_id' => $item->product_id,
                         'product_name' => $product->name ?? 'Товар',
-                        'price' => $item->price,
+                        'price' => $product->price,
                         'quantity' => $item->quantity,
-                        'subtotal' => (float) $item->price * $item->quantity,
+                        'subtotal' => (float) $product->price * $item->quantity,
                     ]);
                     $product->decrement('stock', $item->quantity);
                 }
