@@ -68,14 +68,16 @@ class SupportController extends Controller
                 'is_admin' => true,
                 'body' => $data['body'],
             ]);
+            // Atomic increment: another admin reply or a user `show()` may be
+            // racing with us. Using the in-memory value would drop increments.
             $ticket->update([
                 'status' => SupportTicket::STATUS_ANSWERED,
                 'last_message_at' => now(),
-                'user_unread' => $ticket->user_unread + 1,
+                'user_unread' => DB::raw('user_unread + 1'),
             ]);
         });
 
-        $ticket->load(['user', 'messages.author']);
+        $ticket->refresh()->load(['user', 'messages.author']);
         return new SupportTicketResource($ticket);
     }
 

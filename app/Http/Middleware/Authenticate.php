@@ -12,6 +12,10 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        // We don't register a named `login` route (the SPA handles it via
+        // Vue Router), so fall back to the hard-coded path. Using `route('login')`
+        // would throw RouteNotFoundException on non-AJAX access to protected
+        // endpoints (e.g. direct browser hit on /api/orders).
+        return $request->expectsJson() ? null : '/login';
     }
 }

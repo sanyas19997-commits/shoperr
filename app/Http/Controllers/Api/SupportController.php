@@ -87,14 +87,17 @@ class SupportController extends Controller
                 'is_admin' => false,
                 'body' => $data['body'],
             ]);
+            // Atomic increment — `admin_unread` may be concurrently touched by
+            // another user message or an admin `show()` that resets the counter.
+            // Reading the current model value would lose increments under load.
             $ticket->update([
                 'status' => SupportTicket::STATUS_PENDING,
                 'last_message_at' => now(),
-                'admin_unread' => $ticket->admin_unread + 1,
+                'admin_unread' => DB::raw('admin_unread + 1'),
             ]);
         });
 
-        $ticket->load(['messages.author']);
+        $ticket->refresh()->load(['messages.author']);
         return new SupportTicketResource($ticket);
     }
 
