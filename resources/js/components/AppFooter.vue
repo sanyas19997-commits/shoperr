@@ -81,16 +81,8 @@
                 </div>
             </div>
 
-            <div class="copyright">
-                <div>© {{ year }} ShopHub. Все права защищены.</div>
-                <div class="payment-methods">
-                    <span class="pm">VISA</span>
-                    <span class="pm">MC</span>
-                    <span class="pm">МИР</span>
-                    <span class="pm">SBP</span>
-                    <span class="pm">APAY</span>
-                    <span class="pm">GPAY</span>
-                </div>
+            <div class="copyright copyright--center">
+                © {{ year }} ShopHub. Все права защищены.
             </div>
         </div>
     </footer>

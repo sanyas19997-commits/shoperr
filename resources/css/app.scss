@@ -903,6 +903,10 @@ a { transition: color 0.15s ease; }
     flex-wrap: wrap;
     gap: 1rem;
 }
+.footer .copyright.copyright--center {
+    justify-content: center;
+    text-align: center;
+}
 .payment-methods { display: inline-flex; gap: 0.5rem; flex-wrap: wrap; }
 .payment-methods .pm {
     display: inline-flex; align-items: center; justify-content: center;
