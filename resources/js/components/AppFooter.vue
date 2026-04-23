@@ -131,23 +131,4 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped>
-.footer-logo {
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #fff;
-}
-.hotline-num a {
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.15rem;
-    text-decoration: none;
-}
-.footer-cats .fc-label {
-    font-weight: 600;
-    color: #fff;
-    text-decoration: none;
-    margin-right: 0.5rem;
-}
-.footer-cats .fc-label:hover { color: var(--bs-warning, #fdb827); }
-</style>
+
