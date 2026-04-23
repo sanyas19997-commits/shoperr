@@ -1,5 +1,5 @@
 <template>
-    <div class="card border-0 shadow-sm sticky-top" style="top: 80px;">
+    <div class="card border-0 shadow-sm info-sidebar">
         <div class="list-group list-group-flush small">
             <router-link v-for="l in links" :key="l.name" :to="{ name: l.name }" class="list-group-item list-group-item-action" active-class="active">
                 <i :class="`bi ${l.icon} me-2`"></i>{{ l.label }}
@@ -7,6 +7,16 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+/* position: sticky alone (without Bootstrap .sticky-top) so our z-index stays
+   below the navbar dropdowns (Bootstrap dropdown-menu sits at z-index: 1000). */
+.info-sidebar {
+    position: sticky;
+    top: 80px;
+    z-index: 1;
+}
+</style>
 
 <script setup>
 const links = [
