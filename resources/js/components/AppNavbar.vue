@@ -54,7 +54,7 @@
                                 </span>
                                 <span class="nav-action-label">
                                     <span class="t">Корзина</span>
-                                    <span class="s">{{ formatPrice(cart.total || 0) }} ₽</span>
+                                    <span class="s">{{ formatPrice(cart.totalAmount) }} ₽</span>
                                 </span>
                             </router-link>
                             <div v-if="auth.isAuthenticated" class="dropdown">
