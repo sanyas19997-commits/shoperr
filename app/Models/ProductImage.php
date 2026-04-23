@@ -30,7 +30,7 @@ class ProductImage extends Model
         if (!$this->path) {
             return '';
         }
-        if (str_starts_with($this->path, 'http://') || str_starts_with($this->path, 'https://')) {
+        if (str_starts_with($this->path, 'http://') || str_starts_with($this->path, 'https://') || str_starts_with($this->path, 'data:')) {
             return $this->path;
         }
         return asset('storage/' . $this->path);
