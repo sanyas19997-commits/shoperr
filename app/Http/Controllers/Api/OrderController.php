@@ -61,9 +61,9 @@ class OrderController extends Controller
                     if (!$product || $product->stock < $item->quantity) {
                         $outOfStock[] = [
                             'product_id' => $item->product_id,
-                            'name' => $product->name ?? ($item->product?->name ?? 'Товар'),
+                            'name' => $product?->name ?? ($item->product?->name ?? 'Товар'),
                             'requested' => $item->quantity,
-                            'available' => $product->stock ?? 0,
+                            'available' => $product?->stock ?? 0,
                         ];
                     }
                 }
