@@ -43,7 +43,11 @@ import { onMounted, reactive, ref } from 'vue';
 import api from '../../api';
 import Pagination from '../../components/Pagination.vue';
 import { formatDate } from '../../utils/format';
+import { useConfirmStore } from '../../stores/confirm';
+import { useToastStore } from '../../stores/toast';
 
+const confirmStore = useConfirmStore();
+const toasts = useToastStore();
 const users = ref([]);
 const meta = reactive({ current_page: 1, last_page: 1 });
 const q = ref(''); const role = ref('');
@@ -54,12 +58,23 @@ async function load(page = 1) {
     Object.assign(meta, data.meta);
 }
 async function changeRole(u, newRole) {
-    await api.put(`/admin/users/${u.id}`, { role: newRole });
-    u.role = newRole;
+    try {
+        await api.put(`/admin/users/${u.id}`, { role: newRole }, { silenceErrors: true });
+        u.role = newRole;
+        toasts.success(`Роль для «${u.name}» обновлена`);
+    } catch (e) {
+        toasts.error(e.response?.data?.message || 'Не удалось изменить роль');
+    }
 }
 async function remove(u) {
-    if (!confirm(`Удалить пользователя «${u.name}»?`)) return;
+    const ok = await confirmStore.ask({
+        title: 'Удалить пользователя',
+        message: `Удалить пользователя «${u.name}»?\nВсе его заказы сохранятся, а профиль будет удалён.`,
+        confirmLabel: 'Удалить',
+    });
+    if (!ok) return;
     await api.delete(`/admin/users/${u.id}`);
+    toasts.success(`«${u.name}» удалён`);
     await load(meta.current_page);
 }
 onMounted(() => load(1));

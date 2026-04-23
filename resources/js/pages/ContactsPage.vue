@@ -82,8 +82,10 @@ import { reactive, ref } from 'vue';
 import api from '../api';
 import InfoSidebar from '../components/InfoSidebar.vue';
 import { useAuthStore } from '../stores/auth';
+import { useToastStore } from '../stores/toast';
 
 const auth = useAuthStore();
+const toasts = useToastStore();
 
 const contacts = [
     { icon: 'bi-telephone', label: 'Телефон', value: '+7 (800) 000-00-00', hint: 'Ежедневно 8:00 – 22:00' },
@@ -106,12 +108,17 @@ async function submit() {
     submitting.value = true;
     errors.value = {};
     try {
-        const { data } = await api.post('/feedback', form);
+        const { data } = await api.post('/feedback', form, { silenceErrors: true });
         sentMessage.value = data.message || 'Спасибо, мы получили ваше сообщение.';
+        toasts.success('Сообщение отправлено. Мы ответим вам в течение рабочего дня.', 'Готово');
     } catch (e) {
         errors.value = e.response?.data?.errors || {};
         if (!Object.keys(errors.value).length) {
-            errors.value = { message: [e.response?.data?.message || 'Не удалось отправить сообщение'] };
+            const msg = e.response?.data?.message || 'Не удалось отправить сообщение';
+            errors.value = { message: [msg] };
+            toasts.error(msg);
+        } else {
+            toasts.error('Проверьте правильность заполнения формы');
         }
     } finally {
         submitting.value = false;

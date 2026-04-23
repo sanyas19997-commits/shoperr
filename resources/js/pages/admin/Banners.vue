@@ -58,7 +58,11 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 import api from '../../api';
+import { useConfirmStore } from '../../stores/confirm';
+import { useToastStore } from '../../stores/toast';
 
+const confirmStore = useConfirmStore();
+const toasts = useToastStore();
 const banners = ref([]);
 const showForm = ref(false);
 const saving = ref(false);
@@ -86,8 +90,15 @@ async function save() {
     } finally { saving.value = false; }
 }
 async function remove(b) {
-    if (!confirm('Удалить?')) return;
-    await api.delete(`/admin/banners/${b.id}`); await load();
+    const ok = await confirmStore.ask({
+        title: 'Удалить баннер',
+        message: `Удалить «${b.title || 'баннер'}»?`,
+        confirmLabel: 'Удалить',
+    });
+    if (!ok) return;
+    await api.delete(`/admin/banners/${b.id}`);
+    toasts.success('Баннер удалён');
+    await load();
 }
 onMounted(load);
 </script>

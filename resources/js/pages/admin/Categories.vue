@@ -76,7 +76,11 @@
 <script setup>
 import { computed, onMounted, reactive, ref } from 'vue';
 import api from '../../api';
+import { useConfirmStore } from '../../stores/confirm';
+import { useToastStore } from '../../stores/toast';
 
+const confirmStore = useConfirmStore();
+const toasts = useToastStore();
 const categories = ref([]);
 const showForm = ref(false);
 const saving = ref(false);
@@ -118,8 +122,14 @@ async function save() {
     }
 }
 async function remove(c) {
-    if (!confirm(`Удалить «${c.name}»?`)) return;
+    const ok = await confirmStore.ask({
+        title: 'Удалить категорию',
+        message: `Удалить «${c.name}»? Все подкатегории и связи с товарами будут удалены.`,
+        confirmLabel: 'Удалить',
+    });
+    if (!ok) return;
     await api.delete(`/admin/categories/${c.id}`);
+    toasts.success(`«${c.name}» удалена`);
     await load();
 }
 

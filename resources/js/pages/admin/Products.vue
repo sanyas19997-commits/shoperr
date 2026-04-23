@@ -46,7 +46,11 @@ import { onMounted, reactive, ref } from 'vue';
 import api from '../../api';
 import Pagination from '../../components/Pagination.vue';
 import { formatPrice } from '../../utils/format';
+import { useConfirmStore } from '../../stores/confirm';
+import { useToastStore } from '../../stores/toast';
 
+const confirmStore = useConfirmStore();
+const toasts = useToastStore();
 const products = ref([]);
 const meta = reactive({ current_page: 1, last_page: 1 });
 const q = ref('');
@@ -58,8 +62,14 @@ async function load(page = 1) {
     Object.assign(meta, data.meta);
 }
 async function remove(p) {
-    if (!confirm(`Удалить «${p.name}»?`)) return;
+    const ok = await confirmStore.ask({
+        title: 'Удалить товар',
+        message: `Удалить «${p.name}»? Это действие нельзя отменить.`,
+        confirmLabel: 'Удалить',
+    });
+    if (!ok) return;
     await api.delete(`/admin/products/${p.id}`);
+    toasts.success(`«${p.name}» удалён`);
     await load(meta.current_page);
 }
 onMounted(() => load(1));

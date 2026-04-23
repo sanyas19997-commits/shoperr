@@ -67,10 +67,14 @@
 import { computed } from 'vue';
 import { useCartStore } from '../stores/cart';
 import { useAuthStore } from '../stores/auth';
+import { useConfirmStore } from '../stores/confirm';
+import { useToastStore } from '../stores/toast';
 import { formatPrice } from '../utils/format';
 
 const cart = useCartStore();
 const auth = useAuthStore();
+const confirmStore = useConfirmStore();
+const toasts = useToastStore();
 const placeholder = 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><rect fill=%22%23eef0f5%22 width=%22200%22 height=%22200%22/></svg>';
 
 const checkoutTarget = computed(() => auth.isAuthenticated
@@ -88,7 +92,14 @@ function setQty(item, val) {
     else cart.updateItem(item.id, q);
 }
 function remove(item) { cart.removeItem(item.id); }
-function clear() {
-    if (confirm('Очистить корзину?')) cart.clear();
+async function clear() {
+    const ok = await confirmStore.ask({
+        title: 'Очистить корзину',
+        message: 'Убрать все товары из корзины?',
+        confirmLabel: 'Очистить',
+    });
+    if (!ok) return;
+    await cart.clear();
+    toasts.success('Корзина очищена');
 }
 </script>
