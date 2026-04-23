@@ -4,7 +4,32 @@
             <aside class="col-lg-3">
                 <div class="card border-0 shadow-sm mb-3">
                     <div class="card-body text-center">
-                        <div class="profile-avatar mb-2">{{ initial }}</div>
+                        <div class="profile-avatar-wrap mb-2">
+                            <img v-if="auth.user?.avatar_url"
+                                 :src="auth.user.avatar_url"
+                                 class="profile-avatar-img"
+                                 alt="Аватар" />
+                            <div v-else class="profile-avatar">{{ initial }}</div>
+                            <button type="button"
+                                    class="avatar-edit-btn"
+                                    :disabled="avatarUploading"
+                                    :title="auth.user?.avatar_url ? 'Сменить фото' : 'Загрузить фото'"
+                                    @click="pickAvatar">
+                                <span v-if="avatarUploading" class="spinner-border spinner-border-sm"></span>
+                                <i v-else class="bi bi-camera-fill"></i>
+                            </button>
+                        </div>
+                        <input ref="avatarInput"
+                               type="file"
+                               accept="image/jpeg,image/png,image/webp,image/gif"
+                               class="d-none"
+                               @change="onAvatarChange" />
+                        <div v-if="avatarError" class="small text-danger mb-2">{{ avatarError }}</div>
+                        <div v-if="auth.user?.avatar_url" class="small mb-2">
+                            <a href="#" class="text-muted text-decoration-none" @click.prevent="removeAvatar">
+                                <i class="bi bi-trash me-1"></i>Удалить фото
+                            </a>
+                        </div>
                         <div class="fw-semibold">{{ auth.user?.name }}</div>
                         <div class="small text-muted">{{ auth.user?.email }}</div>
                         <div v-if="auth.isAdmin" class="badge bg-primary mt-2">Администратор</div>
@@ -218,6 +243,9 @@ const profile = reactive({ name: '', email: '', phone: '', address: '' });
 const pass = reactive({ current_password: '', password: '', password_confirmation: '' });
 const profileMessage = ref(null);
 const passMessage = ref(null);
+const avatarInput = ref(null);
+const avatarUploading = ref(false);
+const avatarError = ref(null);
 
 const orders = ref([]);
 const ordersLoading = ref(true);
@@ -306,20 +334,92 @@ async function logout() {
     await auth.logout();
     router.push({ name: 'home' });
 }
+
+function pickAvatar() {
+    avatarError.value = null;
+    avatarInput.value?.click();
+}
+
+async function onAvatarChange(event) {
+    const file = event.target.files?.[0];
+    // Reset the input so the same file can be re-selected after a failed
+    // attempt without a confusing no-op.
+    if (event.target) event.target.value = '';
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+        avatarError.value = 'Выберите изображение.';
+        return;
+    }
+    if (file.size > 4 * 1024 * 1024) {
+        avatarError.value = 'Файл слишком большой (макс. 4 МБ).';
+        return;
+    }
+    avatarUploading.value = true;
+    avatarError.value = null;
+    try {
+        await auth.uploadAvatar(file);
+    } catch (e) {
+        avatarError.value = e.response?.data?.message || 'Не удалось загрузить фото';
+    } finally {
+        avatarUploading.value = false;
+    }
+}
+
+async function removeAvatar() {
+    avatarUploading.value = true;
+    avatarError.value = null;
+    try {
+        await auth.deleteAvatar();
+    } catch (e) {
+        avatarError.value = e.response?.data?.message || 'Не удалось удалить фото';
+    } finally {
+        avatarUploading.value = false;
+    }
+}
 </script>
 
 <style scoped>
-.profile-avatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
+.profile-avatar-wrap {
+    position: relative;
+    width: 96px;
+    height: 96px;
     margin: 0 auto;
+}
+.profile-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 700;
     color: #fff;
     background: linear-gradient(135deg, #0d6efd, #6610f2);
 }
+.profile-avatar-img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+.avatar-edit-btn {
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bs-warning, #fdb827);
+    color: #222;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform .15s;
+}
+.avatar-edit-btn:hover:not(:disabled) { transform: scale(1.08); }
+.avatar-edit-btn:disabled { opacity: 0.7; cursor: wait; }
 </style>

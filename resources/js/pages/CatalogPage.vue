@@ -13,7 +13,7 @@
 
         <div class="row g-4">
             <aside class="col-lg-3">
-                <Filters v-model="filters" :categories="categories" @change="applyFilters" />
+                <Filters v-model="filters" :categories="categories" :facets="facets" @change="applyFilters" />
             </aside>
             <div class="col-lg-9">
                 <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
@@ -60,13 +60,31 @@ const router = useRouter();
 const products = ref([]);
 const meta = reactive({ current_page: 1, last_page: 1, total: 0 });
 const categories = ref([]);
+const facets = ref([]);
 const loading = ref(false);
 const sort = ref(route.query.sort || 'newest');
+
+// Decode `?attrs[color]=red,blue` from the URL into {color: ['red','blue']}.
+function decodeAttrsFromQuery(q) {
+    const out = {};
+    for (const key of Object.keys(q || {})) {
+        const m = key.match(/^attrs\[([A-Za-z0-9_\-]+)\]$/);
+        if (!m) continue;
+        const raw = q[key];
+        const values = (Array.isArray(raw) ? raw : String(raw).split(','))
+            .map((v) => String(v).trim())
+            .filter(Boolean);
+        if (values.length) out[m[1]] = values;
+    }
+    return out;
+}
+
 const filters = ref({
     category: route.params.slug || route.query.category || '',
     price_min: route.query.price_min || null,
     price_max: route.query.price_max || null,
     in_stock: route.query.in_stock === '1',
+    attrs: decodeAttrsFromQuery(route.query),
 });
 
 const currentCategory = computed(() => categories.value.find((c) => c.slug === filters.value.category));
@@ -89,8 +107,17 @@ async function loadProducts(page = 1) {
             price_max: filters.value.price_max || undefined,
             in_stock: filters.value.in_stock ? 1 : undefined,
         };
+        // Flatten attrs into `attrs[code]=a,b` query params so `params:` serialization
+        // matches the shape the API `normalizeAttrsInput` expects.
+        for (const code of Object.keys(filters.value.attrs || {})) {
+            const vals = filters.value.attrs[code];
+            if (Array.isArray(vals) && vals.length) {
+                params[`attrs[${code}]`] = vals.join(',');
+            }
+        }
         const { data } = await api.get('/products', { params });
         products.value = data.data;
+        facets.value = data.facets || [];
         Object.assign(meta, data.meta || {});
     } finally {
         loading.value = false;
@@ -105,6 +132,12 @@ function applyFilters() {
         in_stock: filters.value.in_stock ? '1' : undefined,
         sort: sort.value !== 'newest' ? sort.value : undefined,
     };
+    for (const code of Object.keys(filters.value.attrs || {})) {
+        const vals = filters.value.attrs[code];
+        if (Array.isArray(vals) && vals.length) {
+            query[`attrs[${code}]`] = vals.join(',');
+        }
+    }
     if (filters.value.category && filters.value.category !== route.params.slug) {
         router.push({ name: 'category', params: { slug: filters.value.category }, query });
     } else if (!filters.value.category && route.name === 'category') {

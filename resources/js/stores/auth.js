@@ -40,5 +40,17 @@ export const useAuthStore = defineStore('auth', {
         async updatePassword(payload) {
             await api.put('/profile/password', payload);
         },
+        async uploadAvatar(file) {
+            const form = new FormData();
+            form.append('avatar', file);
+            const { data } = await api.post('/profile/avatar', form, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            this.user = data.data || data;
+        },
+        async deleteAvatar() {
+            const { data } = await api.delete('/profile/avatar');
+            this.user = data.data || data;
+        },
     },
 });

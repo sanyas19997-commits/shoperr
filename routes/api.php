@@ -33,6 +33,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{slug}', [CategoryController::class, 'show']);
 Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/search', [ProductController::class, 'search']);
 Route::get('/products/{slug}', [ProductController::class, 'show']);
 Route::get('/products/{product}/reviews', [ProductController::class, 'reviews']);
 Route::get('/banners', [BannerController::class, 'index']);
@@ -52,6 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
     Route::put('/profile/password', [ProfileController::class, 'updatePassword']);
+    Route::post('/profile/avatar', [ProfileController::class, 'uploadAvatar']);
+    Route::delete('/profile/avatar', [ProfileController::class, 'deleteAvatar']);
 
     Route::get('/orders', [OrderController::class, 'index']);
     Route::get('/orders/{id}', [OrderController::class, 'show']);

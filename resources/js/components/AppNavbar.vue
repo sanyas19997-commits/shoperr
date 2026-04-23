@@ -31,16 +31,10 @@
                         </router-link>
                     </div>
                     <div class="col d-none d-lg-block">
-                        <form class="search-megabar" @submit.prevent="submitSearch">
-                            <div class="input-group">
-                                <select v-model="searchCat" class="form-select" aria-label="Категория">
-                                    <option value="">Все категории</option>
-                                    <option v-for="c in categories.slice(0, 20)" :key="c.id" :value="c.slug">{{ c.name }}</option>
-                                </select>
-                                <input v-model="searchQuery" type="search" class="form-control" placeholder="Искать товар..." />
-                                <button class="btn" type="submit"><i class="bi bi-search"></i></button>
-                            </div>
-                        </form>
+                        <SearchAutocomplete :categories="categories"
+                                            :with-category="true"
+                                            :initial-query="searchQuery"
+                                            :initial-category="searchCat" />
                     </div>
                     <div class="col-auto ms-auto">
                         <div class="nav-actions">
@@ -59,7 +53,13 @@
                             </router-link>
                             <div v-if="auth.isAuthenticated" class="dropdown">
                                 <a class="nav-action dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="icon-wrap"><i class="bi bi-person"></i></span>
+                                    <span class="icon-wrap">
+                                        <img v-if="auth.user?.avatar_url"
+                                             :src="auth.user.avatar_url"
+                                             alt="Аватар"
+                                             class="nav-avatar" />
+                                        <i v-else class="bi bi-person"></i>
+                                    </span>
                                     <span class="nav-action-label">
                                         <span class="t">Привет,</span>
                                         <span class="s text-truncate" :title="firstName">{{ firstName }}</span>
@@ -88,12 +88,7 @@
                 <!-- Mobile / tablet search -->
                 <div class="row d-lg-none mt-2">
                     <div class="col-12">
-                        <form class="search-megabar" @submit.prevent="submitSearch">
-                            <div class="input-group">
-                                <input v-model="searchQuery" type="search" class="form-control" placeholder="Искать товар..." />
-                                <button class="btn" type="submit"><i class="bi bi-search"></i></button>
-                            </div>
-                        </form>
+                        <SearchAutocomplete :initial-query="searchQuery" />
                     </div>
                 </div>
             </div>
@@ -152,6 +147,7 @@ import api from '../api';
 import { useAuthStore } from '../stores/auth';
 import { useCartStore } from '../stores/cart';
 import { formatPrice } from '../utils/format';
+import SearchAutocomplete from './SearchAutocomplete.vue';
 
 const auth = useAuthStore();
 const cart = useCartStore();
@@ -184,13 +180,6 @@ onMounted(async () => {
     } catch (_) {}
 });
 
-function submitSearch() {
-    const query = {};
-    if (searchQuery.value) query.q = searchQuery.value;
-    if (searchCat.value) query.category = searchCat.value;
-    router.push({ name: 'catalog', query });
-}
-
 async function logout() {
     await auth.logout();
     await cart.fetchCart();
@@ -200,4 +189,11 @@ async function logout() {
 
 <style scoped>
 .app-header { background: #fff; }
+.nav-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
 </style>

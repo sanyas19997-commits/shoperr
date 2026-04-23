@@ -13,19 +13,46 @@
 
         <div class="row g-4">
             <div class="col-md-6">
-                <div class="card overflow-hidden">
-                    <img :src="currentImage" class="w-100" style="aspect-ratio: 1/1; object-fit: cover" />
-                </div>
-                <div v-if="product.images && product.images.length > 1" class="d-flex gap-2 mt-3 flex-wrap">
-                    <img
-                        v-for="img in product.images"
-                        :key="img.id"
-                        :src="img.url"
-                        @click="selectedImage = img.url"
-                        class="border rounded"
-                        :class="{ 'border-primary border-2': selectedImage === img.url }"
-                        style="width: 72px; height: 72px; object-fit: cover; cursor: pointer"
-                    />
+                <div class="gallery">
+                    <div class="gallery-thumbs">
+                        <button v-for="(img, i) in galleryImages"
+                                :key="img.id || i"
+                                type="button"
+                                class="thumb"
+                                :class="{ active: activeIndex === i }"
+                                @click="activeIndex = i"
+                                @mouseenter="activeIndex = i">
+                            <img :src="img.url" :alt="`${product.name} — фото ${i + 1}`" />
+                        </button>
+                    </div>
+                    <div class="gallery-main">
+                        <button v-if="galleryImages.length > 1"
+                                type="button"
+                                class="gallery-arrow left"
+                                aria-label="Предыдущее фото"
+                                @click="prev">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <div class="gallery-stage"
+                             @click="openLightbox(activeIndex)"
+                             @touchstart.passive="onTouchStart"
+                             @touchend="onTouchEnd">
+                            <img :src="galleryImages[activeIndex]?.url"
+                                 :alt="product.name"
+                                 class="gallery-image" />
+                            <span class="zoom-hint"><i class="bi bi-zoom-in"></i></span>
+                        </div>
+                        <button v-if="galleryImages.length > 1"
+                                type="button"
+                                class="gallery-arrow right"
+                                aria-label="Следующее фото"
+                                @click="next">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div v-if="galleryImages.length > 1" class="gallery-counter small text-muted text-center mt-2">
+                        {{ activeIndex + 1 }} / {{ galleryImages.length }}
+                    </div>
                 </div>
             </div>
             <div class="col-md-6">
@@ -158,6 +185,44 @@
             <h3 class="h5 fw-bold mb-3">Похожие товары</h3>
             <ProductList :products="similar" />
         </section>
+
+        <!-- Lightbox — pinch/double-tap zoom via CSS scale. Click outside the
+             image or press Esc to close. -->
+        <transition name="lb-fade">
+            <div v-if="lightboxOpen" class="lightbox" @click.self="closeLightbox">
+                <button type="button" class="lb-btn lb-close" aria-label="Закрыть" @click="closeLightbox">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <button v-if="galleryImages.length > 1"
+                        type="button"
+                        class="lb-btn lb-nav lb-prev"
+                        aria-label="Предыдущее фото"
+                        @click.stop="prev">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <div class="lb-stage"
+                     @click.self="closeLightbox"
+                     @touchstart.passive="onTouchStart"
+                     @touchend="onTouchEnd">
+                    <img :src="galleryImages[activeIndex]?.url"
+                         :alt="product.name"
+                         class="lb-image"
+                         :class="{ zoomed }"
+                         :style="zoomed ? zoomStyle : ''"
+                         @click.stop="toggleZoom"
+                         @mousemove="onZoomMove"
+                         @wheel.prevent="onWheel" />
+                </div>
+                <button v-if="galleryImages.length > 1"
+                        type="button"
+                        class="lb-btn lb-nav lb-next"
+                        aria-label="Следующее фото"
+                        @click.stop="next">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+                <div class="lb-counter">{{ activeIndex + 1 }} / {{ galleryImages.length }}</div>
+            </div>
+        </transition>
     </div>
     <div v-else class="container py-5 text-center">
         <div class="spinner-border text-primary"></div>
@@ -165,7 +230,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import api from '../api';
 import { useAuthStore } from '../stores/auth';
@@ -191,8 +256,29 @@ const submittingReview = ref(false);
 const deletingReview = ref(false);
 const qty = ref(1);
 const adding = ref(false);
-const selectedImage = ref(null);
+const activeIndex = ref(0);
+const lightboxOpen = ref(false);
+const zoomed = ref(false);
+const zoomOrigin = reactive({ x: 50, y: 50 });
+const zoomScale = ref(2);
 const reviewForm = reactive({ rating: 0, body: '' });
+
+// Gallery always has at least one image — synthesize a placeholder if the
+// product has none so the layout doesn't collapse.
+const galleryImages = computed(() => {
+    const imgs = Array.isArray(product.value?.images) ? product.value.images : [];
+    if (imgs.length) return imgs;
+    const fallback = product.value?.primary_image_url;
+    return [{
+        id: 'placeholder',
+        url: fallback || 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect fill=%22%23eef0f5%22 width=%22600%22 height=%22600%22/></svg>',
+    }];
+});
+
+const zoomStyle = computed(() => ({
+    transform: `scale(${zoomScale.value})`,
+    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+}));
 
 const myReview = computed(() => {
     const uid = auth.user?.id;
@@ -207,12 +293,70 @@ function formatRating(v) {
     return Number.isInteger(n) ? n.toFixed(0) : n.toFixed(1);
 }
 
-const currentImage = computed(() => {
-    if (selectedImage.value) return selectedImage.value;
-    return product.value?.primary_image_url
-        || product.value?.images?.[0]?.url
-        || 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect fill=%22%23eef0f5%22 width=%22600%22 height=%22600%22/></svg>';
-});
+function prev() {
+    if (!galleryImages.value.length) return;
+    activeIndex.value = (activeIndex.value - 1 + galleryImages.value.length) % galleryImages.value.length;
+    zoomed.value = false;
+}
+function next() {
+    if (!galleryImages.value.length) return;
+    activeIndex.value = (activeIndex.value + 1) % galleryImages.value.length;
+    zoomed.value = false;
+}
+function openLightbox(i) {
+    activeIndex.value = i;
+    zoomed.value = false;
+    zoomScale.value = 2;
+    lightboxOpen.value = true;
+}
+function closeLightbox() {
+    lightboxOpen.value = false;
+    zoomed.value = false;
+}
+function toggleZoom() {
+    zoomed.value = !zoomed.value;
+    if (!zoomed.value) zoomScale.value = 2;
+}
+function onZoomMove(event) {
+    if (!zoomed.value) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    zoomOrigin.x = ((event.clientX - rect.left) / rect.width) * 100;
+    zoomOrigin.y = ((event.clientY - rect.top) / rect.height) * 100;
+}
+function onWheel(event) {
+    if (!zoomed.value) {
+        zoomed.value = true;
+    }
+    const delta = event.deltaY > 0 ? -0.2 : 0.2;
+    zoomScale.value = Math.min(5, Math.max(1.5, zoomScale.value + delta));
+}
+
+let touchStartX = 0;
+let touchStartY = 0;
+function onTouchStart(event) {
+    const t = event.touches?.[0];
+    if (!t) return;
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+}
+function onTouchEnd(event) {
+    const t = event.changedTouches?.[0];
+    if (!t) return;
+    const dx = t.clientX - touchStartX;
+    const dy = t.clientY - touchStartY;
+    // Require a decisively horizontal swipe so vertical scroll still works.
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) next();
+        else prev();
+    }
+}
+
+function onKey(event) {
+    if (!lightboxOpen.value) return;
+    if (event.key === 'Escape') closeLightbox();
+    else if (event.key === 'ArrowLeft') prev();
+    else if (event.key === 'ArrowRight') next();
+}
 
 const attributesList = computed(() => {
     const a = product.value?.attributes;
@@ -228,7 +372,8 @@ async function load() {
     // ProductController::show embeds `ProductResource::collection(...)` inline, which
     // serializes as a flat array (no outer `data` wrapper), so use `data.similar` directly.
     similar.value = Array.isArray(data.similar) ? data.similar : (data.similar?.data || []);
-    selectedImage.value = null;
+    activeIndex.value = 0;
+    zoomed.value = false;
     await loadReviews();
 }
 
@@ -299,6 +444,180 @@ async function deleteMyReview() {
     }
 }
 
-onMounted(load);
+onMounted(() => {
+    load();
+    window.addEventListener('keydown', onKey);
+});
+onBeforeUnmount(() => {
+    window.removeEventListener('keydown', onKey);
+});
 watch(() => route.params.slug, load);
 </script>
+
+<style scoped>
+.gallery {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 0.75rem;
+}
+.gallery-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 480px;
+    overflow-y: auto;
+}
+.gallery-thumbs::-webkit-scrollbar { width: 6px; }
+.gallery-thumbs::-webkit-scrollbar-thumb { background: rgba(0,0,0,.15); border-radius: 4px; }
+.thumb {
+    padding: 0;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color .15s;
+}
+.thumb img {
+    display: block;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.thumb:hover, .thumb.active { border-color: var(--bs-warning, #fdb827); }
+.gallery-main {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--mf-border, #e5e7eb);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.gallery-stage {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    cursor: zoom-in;
+    overflow: hidden;
+}
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .3s;
+}
+.gallery-stage:hover .gallery-image { transform: scale(1.03); }
+.zoom-hint {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,.45);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s;
+}
+.gallery-stage:hover .zoom-hint { opacity: 1; }
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.9);
+    border: 1px solid var(--mf-border, #e5e7eb);
+    box-shadow: 0 2px 6px rgba(0,0,0,.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .2s;
+}
+.gallery-main:hover .gallery-arrow { opacity: 1; }
+.gallery-arrow.left { left: 10px; }
+.gallery-arrow.right { right: 10px; }
+.gallery-arrow:hover { background: var(--bs-warning, #fdb827); }
+
+@media (max-width: 575.98px) {
+    .gallery { grid-template-columns: 1fr; }
+    .gallery-thumbs {
+        flex-direction: row;
+        max-height: none;
+        order: 2;
+        overflow-x: auto;
+    }
+    .gallery-main { order: 1; }
+}
+
+/* Lightbox */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lb-stage {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.lb-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: transform .25s ease-out;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+.lb-image.zoomed { cursor: zoom-out; }
+.lb-btn {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background .2s;
+}
+.lb-btn:hover { background: rgba(255, 255, 255, 0.25); }
+.lb-close { top: 18px; right: 18px; }
+.lb-nav { top: 50%; transform: translateY(-50%); }
+.lb-prev { left: 24px; }
+.lb-next { right: 24px; }
+.lb-counter {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+.lb-fade-enter-active, .lb-fade-leave-active { transition: opacity .2s; }
+.lb-fade-enter-from, .lb-fade-leave-to { opacity: 0; }
+</style>

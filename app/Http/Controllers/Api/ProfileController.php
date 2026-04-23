@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 
@@ -38,5 +39,34 @@ class ProfileController extends Controller
         $user->password = $data['password'];
         $user->save();
         return response()->json(['message' => 'Пароль обновлен']);
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        $request->validate([
+            'avatar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:4096'],
+        ]);
+        $user = $request->user();
+
+        // Drop the previous local avatar so we don't accumulate orphaned files
+        // in storage/app/public/avatars on every re-upload.
+        if ($user->avatar && !preg_match('~^https?://~i', $user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+
+        $path = $request->file('avatar')->store('avatars', 'public');
+        $user->update(['avatar' => $path]);
+
+        return new UserResource($user);
+    }
+
+    public function deleteAvatar(Request $request)
+    {
+        $user = $request->user();
+        if ($user->avatar && !preg_match('~^https?://~i', $user->avatar)) {
+            Storage::disk('public')->delete($user->avatar);
+        }
+        $user->update(['avatar' => null]);
+        return new UserResource($user);
     }
 }

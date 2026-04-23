@@ -18,10 +18,26 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
+        'avatar',
         'address',
         'password',
         'role',
     ];
+
+    protected $appends = ['avatar_url'];
+
+    public function getAvatarUrlAttribute(): ?string
+    {
+        if (!$this->avatar) {
+            return null;
+        }
+        // Absolute URL (e.g. imported from social login) — pass through.
+        if (preg_match('~^https?://~i', $this->avatar)) {
+            return $this->avatar;
+        }
+        // Stored under storage/app/public/avatars/*, served via `public/storage`.
+        return asset('storage/' . ltrim($this->avatar, '/'));
+    }
 
     protected $hidden = [
         'password',
