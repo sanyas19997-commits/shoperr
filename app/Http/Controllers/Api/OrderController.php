@@ -47,41 +47,69 @@ class OrderController extends Controller
             return response()->json(['message' => 'Корзина пуста'], 422);
         }
 
-        $order = DB::transaction(function () use ($cart, $data, $request) {
-            $total = 0;
-            foreach ($cart->items as $item) {
-                $total += (float) $item->price * $item->quantity;
-            }
+        try {
+            $order = DB::transaction(function () use ($cart, $data, $request) {
+                $productIds = $cart->items->pluck('product_id')->all();
+                $products = \App\Models\Product::whereIn('id', $productIds)
+                    ->lockForUpdate()
+                    ->get()
+                    ->keyBy('id');
 
-            $order = Order::create([
-                'number' => Order::generateNumber(),
-                'user_id' => $request->user()?->id,
-                'customer_name' => $data['customer_name'],
-                'customer_phone' => $data['customer_phone'],
-                'customer_email' => $data['customer_email'],
-                'shipping_address' => $data['shipping_address'],
-                'comment' => $data['comment'] ?? null,
-                'total' => $total,
-                'status' => 'new',
-            ]);
-
-            foreach ($cart->items as $item) {
-                $order->items()->create([
-                    'product_id' => $item->product_id,
-                    'product_name' => $item->product?->name ?? 'Товар',
-                    'price' => $item->price,
-                    'quantity' => $item->quantity,
-                    'subtotal' => (float) $item->price * $item->quantity,
-                ]);
-                if ($item->product && $item->product->stock >= $item->quantity) {
-                    $item->product->decrement('stock', $item->quantity);
+                $outOfStock = [];
+                foreach ($cart->items as $item) {
+                    $product = $products->get($item->product_id);
+                    if (!$product || $product->stock < $item->quantity) {
+                        $outOfStock[] = [
+                            'product_id' => $item->product_id,
+                            'name' => $product->name ?? ($item->product?->name ?? 'Товар'),
+                            'requested' => $item->quantity,
+                            'available' => $product->stock ?? 0,
+                        ];
+                    }
                 }
-            }
+                if ($outOfStock) {
+                    throw new \App\Exceptions\InsufficientStockException($outOfStock);
+                }
 
-            $cart->items()->delete();
+                $total = 0;
+                foreach ($cart->items as $item) {
+                    $total += (float) $item->price * $item->quantity;
+                }
 
-            return $order;
-        });
+                $order = Order::create([
+                    'number' => Order::generateNumber(),
+                    'user_id' => $request->user()?->id,
+                    'customer_name' => $data['customer_name'],
+                    'customer_phone' => $data['customer_phone'],
+                    'customer_email' => $data['customer_email'],
+                    'shipping_address' => $data['shipping_address'],
+                    'comment' => $data['comment'] ?? null,
+                    'total' => $total,
+                    'status' => 'new',
+                ]);
+
+                foreach ($cart->items as $item) {
+                    $product = $products->get($item->product_id);
+                    $order->items()->create([
+                        'product_id' => $item->product_id,
+                        'product_name' => $product->name ?? 'Товар',
+                        'price' => $item->price,
+                        'quantity' => $item->quantity,
+                        'subtotal' => (float) $item->price * $item->quantity,
+                    ]);
+                    $product->decrement('stock', $item->quantity);
+                }
+
+                $cart->items()->delete();
+
+                return $order;
+            });
+        } catch (\App\Exceptions\InsufficientStockException $e) {
+            return response()->json([
+                'message' => 'Недостаточно товара на складе',
+                'items' => $e->items,
+            ], 422);
+        }
 
         $order->load('items.product.images');
         return response()->json(['data' => new OrderResource($order)], 201);

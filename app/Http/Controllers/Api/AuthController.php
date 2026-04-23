@@ -83,22 +83,19 @@ class AuthController extends Controller
     {
         $request->validate(['email' => ['required', 'email']]);
 
-        // Simplified: generate a token and return it (in real app, email is sent)
         $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return response()->json(['message' => 'Если email зарегистрирован — инструкции отправлены']);
+        if ($user) {
+            $token = Str::random(40);
+            \DB::table('password_reset_tokens')->updateOrInsert(
+                ['email' => $user->email],
+                ['email' => $user->email, 'token' => Hash::make($token), 'created_at' => now()]
+            );
+            // TODO: dispatch a mailable with the reset link instead of relying on logs.
+            logger()->info('password.reset.token', ['email' => $user->email, 'token' => $token]);
         }
 
-        $token = Str::random(40);
-        \DB::table('password_reset_tokens')->updateOrInsert(
-            ['email' => $user->email],
-            ['email' => $user->email, 'token' => Hash::make($token), 'created_at' => now()]
-        );
-
-        // For demo purposes we include the token in the response.
         return response()->json([
-            'message' => 'Токен для сброса пароля создан',
-            'reset_token' => $token,
+            'message' => 'Если email зарегистрирован — инструкции отправлены',
         ]);
     }
 
@@ -113,6 +110,11 @@ class AuthController extends Controller
         $row = \DB::table('password_reset_tokens')->where('email', $data['email'])->first();
         if (!$row || !Hash::check($data['token'], $row->token)) {
             return response()->json(['message' => 'Неверный токен'], 422);
+        }
+        $expireMinutes = (int) config('auth.passwords.users.expire', 60);
+        if ($row->created_at && \Carbon\Carbon::parse($row->created_at)->addMinutes($expireMinutes)->isPast()) {
+            \DB::table('password_reset_tokens')->where('email', $data['email'])->delete();
+            return response()->json(['message' => 'Токен истёк'], 422);
         }
 
         $user = User::where('email', $data['email'])->firstOrFail();
