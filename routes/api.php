@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Api\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Api\Admin\DashboardController;
+use App\Http\Controllers\Api\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Api\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
@@ -32,6 +34,9 @@ Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{slug}', [ProductController::class, 'show']);
 Route::get('/products/{product}/reviews', [ProductController::class, 'reviews']);
 Route::get('/banners', [BannerController::class, 'index']);
+
+// Public feedback (works for guests and authed)
+Route::post('/feedback', [FeedbackController::class, 'store']);
 
 // Cart (works for guests and authed)
 Route::get('/cart', [CartController::class, 'show']);
@@ -71,4 +76,10 @@ Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function ()
 
     Route::apiResource('users', AdminUserController::class)->only(['index', 'show', 'update', 'destroy']);
     Route::apiResource('banners', AdminBannerController::class);
+
+    Route::get('/feedback/stats', [AdminFeedbackController::class, 'stats']);
+    Route::get('/feedback', [AdminFeedbackController::class, 'index']);
+    Route::get('/feedback/{feedback}', [AdminFeedbackController::class, 'show']);
+    Route::put('/feedback/{feedback}', [AdminFeedbackController::class, 'update']);
+    Route::delete('/feedback/{feedback}', [AdminFeedbackController::class, 'destroy']);
 });

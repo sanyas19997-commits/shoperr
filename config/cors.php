@@ -19,7 +19,17 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    // With supports_credentials=true browsers reject the "*" wildcard, so we
+    // allow common local dev origins by default and pull production origins
+    // from the APP_URL / FRONTEND_URL env vars.
+    'allowed_origins' => array_values(array_filter([
+        env('FRONTEND_URL'),
+        env('APP_URL'),
+        'http://localhost:5173',
+        'http://127.0.0.1:5173',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+    ])),
 
     'allowed_origins_patterns' => [],
 
@@ -29,6 +39,6 @@ return [
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,
 
 ];

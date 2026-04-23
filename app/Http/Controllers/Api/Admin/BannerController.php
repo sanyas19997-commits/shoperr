@@ -17,9 +17,10 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData($request);
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('banners', 'public');
+        if ($request->hasFile('image_file')) {
+            $data['image'] = $request->file('image_file')->store('banners', 'public');
         }
+        unset($data['image_file']);
         $banner = Banner::create($data);
         return new BannerResource($banner);
     }
@@ -27,8 +28,13 @@ class BannerController extends Controller
     public function update(Request $request, Banner $banner)
     {
         $data = $this->validateData($request);
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('banners', 'public');
+        if ($request->hasFile('image_file')) {
+            $data['image'] = $request->file('image_file')->store('banners', 'public');
+        }
+        unset($data['image_file']);
+        if (array_key_exists('image', $data) && ($data['image'] === null || $data['image'] === '')) {
+            // Don't null out the existing image on edits that omit the field.
+            unset($data['image']);
         }
         $banner->update($data);
         return new BannerResource($banner);
@@ -45,7 +51,8 @@ class BannerController extends Controller
         return $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:500'],
-            'image' => ['nullable'],
+            'image' => ['required_without:image_file', 'nullable', 'string', 'max:2000'],
+            'image_file' => ['nullable', 'file', 'image', 'max:5120'],
             'url' => ['nullable', 'string', 'max:500'],
             'sort_order' => ['nullable', 'integer'],
             'is_active' => ['nullable', 'boolean'],

@@ -25,6 +25,16 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Информация</a>
+                        <ul class="dropdown-menu">
+                            <li><router-link class="dropdown-item" :to="{ name: 'delivery' }"><i class="bi bi-truck me-2"></i>Доставка</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{ name: 'payment' }"><i class="bi bi-credit-card me-2"></i>Оплата</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{ name: 'returns' }"><i class="bi bi-arrow-counterclockwise me-2"></i>Возврат</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{ name: 'about' }"><i class="bi bi-info-circle me-2"></i>О нас</router-link></li>
+                            <li><router-link class="dropdown-item" :to="{ name: 'contacts' }"><i class="bi bi-chat-dots me-2"></i>Контакты</router-link></li>
+                        </ul>
+                    </li>
                 </ul>
                 <form class="search-form d-flex me-3" @submit.prevent="submitSearch">
                     <div class="input-group">

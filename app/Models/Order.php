@@ -41,6 +41,9 @@ class Order extends Model
 
     public static function generateNumber(): string
     {
-        return 'ORD-' . strtoupper(uniqid());
+        // UUID v4 avoids the microsecond-collision window that `uniqid()` has,
+        // which previously could surface the unique-index on `orders.number` as
+        // a 500 to concurrent customers.
+        return 'ORD-' . strtoupper(\Illuminate\Support\Str::uuid()->toString());
     }
 }

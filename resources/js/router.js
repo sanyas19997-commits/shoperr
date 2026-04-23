@@ -16,6 +16,13 @@ const routes = [
     { path: '/orders/:id', name: 'order', component: () => import('./pages/OrderPage.vue'), meta: { requiresAuth: true } },
     { path: '/favorites', name: 'favorites', component: () => import('./pages/FavoritesPage.vue'), meta: { requiresAuth: true } },
 
+    // Info pages
+    { path: '/delivery', name: 'delivery', component: () => import('./pages/DeliveryPage.vue') },
+    { path: '/payment', name: 'payment', component: () => import('./pages/PaymentPage.vue') },
+    { path: '/returns', name: 'returns', component: () => import('./pages/ReturnsPage.vue') },
+    { path: '/about', name: 'about', component: () => import('./pages/AboutPage.vue') },
+    { path: '/contacts', name: 'contacts', component: () => import('./pages/ContactsPage.vue') },
+
     // Admin
     {
         path: '/admin',
@@ -31,6 +38,8 @@ const routes = [
             { path: 'orders/:id', name: 'admin.orders.show', component: () => import('./pages/admin/OrderDetail.vue') },
             { path: 'users', name: 'admin.users', component: () => import('./pages/admin/Users.vue') },
             { path: 'banners', name: 'admin.banners', component: () => import('./pages/admin/Banners.vue') },
+            { path: 'feedback', name: 'admin.feedback', component: () => import('./pages/admin/Feedback.vue') },
+            { path: 'feedback/:id', name: 'admin.feedback.show', component: () => import('./pages/admin/FeedbackDetail.vue') },
         ],
     },
 
