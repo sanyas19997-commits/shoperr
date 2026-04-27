@@ -63,7 +63,8 @@ class DashboardController extends Controller
             ->where('created_at', '>=', $start)
             ->whereNotIn('status', ['canceled'])
             ->groupBy('day')
-            ->pluck(null, 'day');
+            ->get()
+            ->keyBy('day');
 
         $labels = [];
         $orders = [];
@@ -71,7 +72,7 @@ class DashboardController extends Controller
         for ($i = 13; $i >= 0; $i--) {
             $d = Carbon::now()->subDays($i)->toDateString();
             $labels[] = Carbon::parse($d)->format('d.m');
-            $row = $rows[$d] ?? null;
+            $row = $rows->get($d);
             $orders[] = $row ? (int) $row->orders_count : 0;
             $revenue[] = $row ? (float) $row->revenue : 0;
         }

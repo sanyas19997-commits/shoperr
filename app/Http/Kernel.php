@@ -39,7 +39,9 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            // Использовать ТОЛЬКО Bearer токены, без сессионной авторизации.
+            // EnsureFrontendRequestsAreStateful не нужен — это превратило бы
+            // SPA-запросы с того же домена в session-based и потребовало CSRF.
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
