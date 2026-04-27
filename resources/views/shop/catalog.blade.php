@@ -1,113 +1,155 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
-@section('title', ($category?->name ?? 'Каталог') . ' — ' . \App\Models\Setting::get('site_name', 'Billaro Store'))
+@section('title', ($category->name ?? 'Каталог').' — '.($siteSettings['site_name'] ?? 'Billaro Store'))
 
 @section('content')
-    <section class="section box-section-shop-page">
-        <div class="page-head">
-            <div class="container">
-                <h2 class="font-3xl-bold color-brand-3 mb-15">{{ $category->name ?? 'Каталог товаров' }}</h2>
-                <ul class="breadcrumb">
-                    <li><a class="font-sm" href="{{ route('home') }}">Главная</a></li>
-                    <li><a class="font-sm" href="{{ route('catalog.index') }}">Каталог</a></li>
-                    @if ($category)
-                        <li><a class="font-sm" href="#">{{ $category->name }}</a></li>
-                    @endif
-                </ul>
-            </div>
+<section class="section block-shop-head">
+    <div class="container">
+        <h1 class="font-4xl-bold neutral-900">{{ $category->name ?? 'Каталог товаров' }}</h1>
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="{{ route('home') }}">Главная</a></li>
+                <li><a href="{{ route('catalog.index') }}">Каталог</a></li>
+                @if($category)
+                    <li><a href="{{ route('catalog.category', $category->slug) }}">{{ $category->name }}</a></li>
+                @endif
+            </ul>
         </div>
+        <div class="box-tags-head">
+            @foreach($categories->take(8) as $cat)
+                <a class="btn btn-tag" href="{{ route('catalog.category', $cat->slug) }}">{{ $cat->name }}</a>
+            @endforeach
+        </div>
+    </div>
+</section>
 
-        <div class="container mt-30">
-            <div class="row">
-                {{-- Sidebar --}}
-                <div class="col-xl-3 col-lg-4 mb-30">
-                    <div class="sidebar-shop sticky-sidebar">
-                        <div class="block-filter mb-30">
-                            <h5 class="font-lg-bold neutral-900 mb-15">Категории</h5>
-                            <ul class="list-checkbox">
-                                <li class="mb-10">
-                                    <a href="{{ route('catalog.index') }}" class="font-sm {{ ! $category ? 'fw-bold' : '' }}" style="text-decoration:none;color:{{ ! $category ? '#FF6E30' : '#0E0E0E' }};">
-                                        Все товары
-                                    </a>
-                                </li>
-                                @foreach ($categories as $c)
-                                    <li class="mb-10">
-                                        <a href="{{ route('catalog.category', $c->slug) }}" class="font-sm {{ $category?->id === $c->id ? 'fw-bold' : '' }}" style="text-decoration:none;color:{{ $category?->id === $c->id ? '#FF6E30' : '#0E0E0E' }};">
-                                            {{ $c->name }}
-                                        </a>
-                                        @if ($c->children->count())
-                                            <ul style="padding-left:15px;margin-top:5px;">
-                                                @foreach ($c->children as $sub)
-                                                    <li class="mb-5">
-                                                        <a href="{{ route('catalog.category', $sub->slug) }}" class="font-sm {{ $category?->id === $sub->id ? 'fw-bold' : '' }}" style="text-decoration:none;color:{{ $category?->id === $sub->id ? '#FF6E30' : '#666' }};">
-                                                            — {{ $sub->name }}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-
-                        <form method="GET" class="block-filter mb-30">
-                            @if ($search)<input type="hidden" name="q" value="{{ $search }}">@endif
-                            <input type="hidden" name="sort" value="{{ $sort }}">
-                            <h5 class="font-lg-bold neutral-900 mb-15">Цена, ₽</h5>
-                            <div class="d-flex align-items-center mb-15" style="gap:8px;">
-                                <input type="number" min="0" class="form-control form-control-sm" name="price_min" placeholder="от" value="{{ request('price_min') }}">
-                                <span>—</span>
-                                <input type="number" min="0" class="form-control form-control-sm" name="price_max" placeholder="до" value="{{ request('price_max') }}">
+<section class="section content-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 order-lg-last">
+                <form id="catalog-sort-form" method="GET" class="box-filter-top">
+                    @foreach(request()->except(['sort','page']) as $k => $v)
+                        <input type="hidden" name="{{ $k }}" value="{{ $v }}">
+                    @endforeach
+                    <div class="number-product">
+                        <p class="body-p2 neutral-medium-dark">Найдено: {{ $products->total() }} товар(ов)</p>
+                    </div>
+                    <div class="box-sort">
+                        <div class="box-sortby d-flex align-items-center">
+                            <div class="dropdown dropdown-sort">
+                                <button class="btn dropdown-toggle" id="dropdownSort2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    @switch($sort ?? 'newest')
+                                        @case('price_asc') Сначала дешевле @break
+                                        @case('price_desc') Сначала дороже @break
+                                        @case('name') По названию @break
+                                        @default Сначала новые
+                                    @endswitch
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownSort2">
+                                    <li><a class="dropdown-item {{ ($sort ?? 'newest')==='newest' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['sort'=>'newest','page'=>1]) }}">Сначала новые</a></li>
+                                    <li><a class="dropdown-item {{ $sort==='price_asc' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['sort'=>'price_asc','page'=>1]) }}">Сначала дешевле</a></li>
+                                    <li><a class="dropdown-item {{ $sort==='price_desc' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['sort'=>'price_desc','page'=>1]) }}">Сначала дороже</a></li>
+                                    <li><a class="dropdown-item {{ $sort==='name' ? 'active' : '' }}" href="{{ request()->fullUrlWithQuery(['sort'=>'name','page'=>1]) }}">По названию</a></li>
+                                </ul>
                             </div>
-                            <button type="submit" class="btn btn-brand-3 w-100">Применить</button>
-                        </form>
-
-                        <div class="block-banner-shop wow animate__animated animate__fadeIn">
-                            <img src="{{ asset('kidify/assets/imgs/page/shop/banner_12.png') }}" alt="Banner" style="max-width:100%;border-radius:12px;">
                         </div>
                     </div>
+                </form>
+                <div class="box-product-lists">
+                    <div class="row">
+                        @forelse($products as $product)
+                            <div class="col-xl-4 col-sm-6 mb-30">
+                                @include('partials.product-card')
+                            </div>
+                        @empty
+                            <div class="col-12 text-center py-5">
+                                <p class="font-md-bold neutral-700">Товары не найдены</p>
+                                <a href="{{ route('catalog.index') }}" class="btn btn-arrow-right mt-15">Сбросить фильтры</a>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
-
-                {{-- Products --}}
-                <div class="col-xl-9 col-lg-8">
-                    <form method="GET" class="box-pagination-shop d-flex justify-content-between align-items-center mb-20 flex-wrap" style="gap:10px;background:#FAFAFA;padding:15px;border-radius:8px;">
-                        <div class="d-flex align-items-center" style="gap:10px;flex:1;">
-                            <input type="search" class="form-control" style="max-width:280px;" name="q" value="{{ $search }}" placeholder="Поиск товаров...">
-                            <button type="submit" class="btn btn-brand-3-sm">Найти</button>
-                        </div>
-                        <div class="d-flex align-items-center" style="gap:10px;">
-                            <span class="font-sm neutral-700">Найдено: <strong>{{ $products->total() }}</strong></span>
-                            <select name="sort" class="form-control select-active" onchange="this.form.submit()" style="width:auto;">
-                                <option value="newest" @selected($sort==='newest')>Сначала новые</option>
-                                <option value="price_asc" @selected($sort==='price_asc')>Дешевле</option>
-                                <option value="price_desc" @selected($sort==='price_desc')>Дороже</option>
-                                <option value="name" @selected($sort==='name')>По названию</option>
-                            </select>
-                        </div>
-                    </form>
-
-                    @if ($products->isEmpty())
-                        <div class="text-center py-50">
-                            <h4 class="neutral-700">Товары не найдены</h4>
-                            <p class="font-md neutral-500 mt-10">Попробуйте изменить параметры фильтра.</p>
-                            <a href="{{ route('catalog.index') }}" class="btn btn-brand-3 mt-15">Сбросить фильтры</a>
-                        </div>
-                    @else
-                        <div class="row">
-                            @foreach ($products as $product)
-                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-30 wow animate__animated animate__fadeIn">
-                                    @include('layouts.partials.product-card', ['product' => $product])
-                                </div>
+                @if($products->hasPages())
+                    <nav class="box-pagination">
+                        <ul class="pagination">
+                            @if($products->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link page-prev">←</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link page-prev" href="{{ $products->previousPageUrl() }}">←</a></li>
+                            @endif
+                            @foreach($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                                <li class="page-item"><a class="page-link {{ $page == $products->currentPage() ? 'active' : '' }}" href="{{ $url }}">{{ $page }}</a></li>
                             @endforeach
-                        </div>
-
-                        <div class="mt-20">
-                            {{ $products->onEachSide(1)->links() }}
-                        </div>
-                    @endif
+                            @if($products->hasMorePages())
+                                <li class="page-item"><a class="page-link page-next" href="{{ $products->nextPageUrl() }}">→</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link page-next">→</span></li>
+                            @endif
+                        </ul>
+                    </nav>
+                @endif
+            </div>
+            <div class="col-lg-3 order-lg-first">
+                <div class="sidebar-left">
+                    <div class="box-filters-sidebar">
+                        <form method="GET" action="{{ route('catalog.index') }}">
+                            <h5 class="font-3xl-bold mt-5">Фильтр</h5>
+                            <div class="block-filter">
+                                <h6 class="item-collapse">Категории</h6>
+                                <div class="box-collapse">
+                                    <ul class="list-filter-checkbox">
+                                        <li>
+                                            <a href="{{ route('catalog.index') }}" class="{{ ! $category ? 'active' : '' }}">
+                                                <span class="text-small">Все категории</span>
+                                            </a>
+                                        </li>
+                                        @foreach($categories as $cat)
+                                            <li>
+                                                <a href="{{ route('catalog.category', $cat->slug) }}" class="{{ $category && $category->id === $cat->id ? 'active' : '' }}">
+                                                    <span class="text-small">{{ $cat->name }}</span>
+                                                </a>
+                                                @if($cat->children->count())
+                                                    <ul class="list-filter-checkbox sub-filter">
+                                                        @foreach($cat->children as $sub)
+                                                            <li>
+                                                                <a href="{{ route('catalog.category', $sub->slug) }}" class="{{ $category && $category->id === $sub->id ? 'active' : '' }}">
+                                                                    <span class="text-small">— {{ $sub->name }}</span>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="block-filter mt-30">
+                                <h6 class="item-collapse">Цена</h6>
+                                <div class="box-collapse">
+                                    <div class="row mt-15">
+                                        <div class="col-6">
+                                            <input type="number" min="0" name="price_min" value="{{ $filters['price_min'] ?? '' }}" placeholder="от" class="form-control form-control-sm">
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="number" min="0" name="price_max" value="{{ $filters['price_max'] ?? '' }}" placeholder="до" class="form-control form-control-sm">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="block-filter mt-30">
+                                <h6 class="item-collapse">Поиск</h6>
+                                <div class="box-collapse">
+                                    <input type="text" name="q" value="{{ $search ?? '' }}" placeholder="Название товара" class="form-control form-control-sm mt-10">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-buy mt-20 w-100">Применить</button>
+                            <a href="{{ $category ? route('catalog.category', $category->slug) : route('catalog.index') }}" class="btn btn-arrow-right mt-10 d-block text-center">Сбросить</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\ContactMessage;
 use App\Models\Page;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class PageController extends Controller
 {
@@ -13,12 +12,12 @@ class PageController extends Controller
     {
         $page = Page::query()->where('slug', $slug)->where('is_active', true)->firstOrFail();
 
-        return Inertia::render('Shop/Page', compact('page'));
+        return view('shop.page', compact('page'));
     }
 
     public function contact()
     {
-        return Inertia::render('Shop/Contact');
+        return view('shop.contact');
     }
 
     public function contactSubmit(Request $request)
@@ -40,6 +39,6 @@ class PageController extends Controller
     {
         $page = Page::query()->where('slug', 'about')->where('is_active', true)->first();
 
-        return Inertia::render('Shop/About', compact('page'));
+        return view('shop.about', compact('page'));
     }
 }

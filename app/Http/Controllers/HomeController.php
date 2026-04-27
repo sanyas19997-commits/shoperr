@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Setting;
-use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -59,7 +58,7 @@ class HomeController extends Controller
             ->take(8)
             ->get(['id', 'name', 'slug', 'image']);
 
-        return Inertia::render('Shop/Home', [
+        return view('shop.home', [
             'featured' => $featured,
             'newest' => $newest,
             'onSale' => $onSale,

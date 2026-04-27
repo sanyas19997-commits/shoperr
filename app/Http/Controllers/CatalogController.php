@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class CatalogController extends Controller
 {
@@ -57,7 +56,7 @@ class CatalogController extends Controller
             ->orderBy('sort_order')
             ->get();
 
-        return Inertia::render('Shop/Catalog', [
+        return view('shop.catalog', [
             'products' => $products,
             'category' => $category,
             'categories' => $categories,
@@ -86,6 +85,6 @@ class CatalogController extends Controller
             ->take(4)
             ->get();
 
-        return Inertia::render('Shop/Product', compact('product', 'related'));
+        return view('shop.product', compact('product', 'related'));
     }
 }

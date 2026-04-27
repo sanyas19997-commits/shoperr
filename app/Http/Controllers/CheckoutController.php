@@ -8,7 +8,6 @@ use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Inertia\Inertia;
 
 class CheckoutController extends Controller
 {
@@ -22,7 +21,7 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Корзина пуста');
         }
 
-        return Inertia::render('Shop/Checkout', [
+        return view('shop.checkout', [
             'items' => array_values($this->cart->items()),
             'subtotal' => $this->cart->subtotal(),
             'paymentMethods' => Order::PAYMENT_METHODS,
@@ -91,7 +90,7 @@ class CheckoutController extends Controller
 
     public function success(Order $order)
     {
-        return Inertia::render('Shop/CheckoutSuccess', [
+        return view('shop.checkout-success', [
             'order' => $order,
         ]);
     }

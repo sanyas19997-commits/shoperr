@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
-use Inertia\Inertia;
 
 class AccountController extends Controller
 {
     public function showLogin()
     {
-        return Inertia::render('Auth/Login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -33,7 +32,7 @@ class AccountController extends Controller
 
     public function showRegister()
     {
-        return Inertia::render('Auth/Register');
+        return view('auth.register');
     }
 
     public function register(Request $request)
@@ -71,7 +70,7 @@ class AccountController extends Controller
         $user = Auth::user();
         $orders = $user->orders()->latest()->take(20)->get();
 
-        return Inertia::render('Shop/Account', [
+        return view('shop.account', [
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,

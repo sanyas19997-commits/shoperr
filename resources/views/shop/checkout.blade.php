@@ -1,107 +1,104 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
-@section('title', 'Оформление заказа — ' . \App\Models\Setting::get('site_name', 'Billaro Store'))
+@section('title', 'Оформление заказа — '.($siteSettings['site_name'] ?? 'Billaro Store'))
 
 @section('content')
-    <section class="section box-section-checkout">
-        <div class="page-head">
-            <div class="container">
-                <h2 class="font-3xl-bold color-brand-3 mb-15">Оформление заказа</h2>
-                <ul class="breadcrumb">
-                    <li><a class="font-sm" href="{{ route('home') }}">Главная</a></li>
-                    <li><a class="font-sm" href="{{ route('cart.index') }}">Корзина</a></li>
-                    <li><a class="font-sm" href="#">Оформление</a></li>
-                </ul>
+<section class="section block-blog-single block-checkout">
+    <div class="container">
+        <div class="top-head-blog">
+            <div class="text-center">
+                <h2 class="font-4xl-bold">Оформление заказа</h2>
+                <div class="breadcrumbs d-inline-block">
+                    <ul>
+                        <li><a href="{{ route('home') }}">Главная</a></li>
+                        <li><a href="{{ route('cart.index') }}">Корзина</a></li>
+                        <li>Оформление</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="container mt-30 mb-50">
-            <form action="{{ route('checkout.store') }}" method="POST" class="row">
-                @csrf
-                <div class="col-lg-8 col-md-12 mb-30">
-                    <div class="box-checkout-form" style="background:#fff;border:1px solid #eee;border-radius:14px;padding:30px;">
-                        <h4 class="font-xl-bold neutral-900 mb-20">Контактные данные</h4>
+        @if(session('error'))<div class="alert alert-danger">{{ session('error') }}</div>@endif
+
+        <form method="POST" action="{{ route('checkout.store') }}">
+            @csrf
+            <div class="row">
+                <div class="col-lg-7 mb-30">
+                    <div class="box-form-checkout">
+                        <h4 class="font-2xl-bold mb-20">Контактные данные</h4>
                         <div class="row">
                             <div class="col-md-6 mb-15">
-                                <label class="font-sm-bold mb-5">ФИО <span style="color:red;">*</span></label>
-                                <input type="text" name="customer_name" class="form-control" value="{{ old('customer_name', auth()->user()?->name) }}" required>
-                                @error('customer_name')<small class="text-danger">{{ $message }}</small>@enderror
+                                <label class="font-md-bold">Имя <span class="text-danger">*</span></label>
+                                <input type="text" name="customer_name" class="form-control @error('customer_name') is-invalid @enderror" value="{{ old('customer_name', auth()->user()->name ?? '') }}" required>
+                                @error('customer_name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                             <div class="col-md-6 mb-15">
-                                <label class="font-sm-bold mb-5">Телефон <span style="color:red;">*</span></label>
-                                <input type="text" name="customer_phone" class="form-control" value="{{ old('customer_phone', auth()->user()?->phone) }}" placeholder="+7 (___) ___-__-__" required>
-                                @error('customer_phone')<small class="text-danger">{{ $message }}</small>@enderror
+                                <label class="font-md-bold">Телефон <span class="text-danger">*</span></label>
+                                <input type="tel" name="customer_phone" class="form-control @error('customer_phone') is-invalid @enderror" value="{{ old('customer_phone', auth()->user()->phone ?? '') }}" required>
+                                @error('customer_phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
-                            <div class="col-12 mb-15">
-                                <label class="font-sm-bold mb-5">Email <span style="color:red;">*</span></label>
-                                <input type="email" name="customer_email" class="form-control" value="{{ old('customer_email', auth()->user()?->email) }}" required>
-                                @error('customer_email')<small class="text-danger">{{ $message }}</small>@enderror
+                            <div class="col-md-12 mb-15">
+                                <label class="font-md-bold">Email <span class="text-danger">*</span></label>
+                                <input type="email" name="customer_email" class="form-control @error('customer_email') is-invalid @enderror" value="{{ old('customer_email', auth()->user()->email ?? '') }}" required>
+                                @error('customer_email')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                         </div>
 
-                        <h4 class="font-xl-bold neutral-900 mb-20 mt-25">Способ доставки</h4>
-                        <div class="mb-15">
-                            @foreach ($deliveryMethods as $key => $label)
-                                <label class="d-flex align-items-center mb-10 p-15" style="border:1px solid #eee;border-radius:8px;cursor:pointer;">
-                                    <input type="radio" name="delivery_method" value="{{ $key }}" {{ old('delivery_method', array_key_first($deliveryMethods)) === $key ? 'checked' : '' }} required style="margin-right:10px;">
-                                    <span class="font-md neutral-900">{{ $label }}</span>
-                                </label>
-                            @endforeach
-                        </div>
+                        <h4 class="font-2xl-bold mb-20 mt-30">Доставка</h4>
                         <div class="row">
-                            <div class="col-md-4 mb-15">
-                                <label class="font-sm-bold mb-5">Город</label>
-                                <input type="text" name="city" class="form-control" value="{{ old('city') }}" placeholder="Москва">
+                            <div class="col-md-12 mb-15">
+                                <label class="font-md-bold">Способ доставки</label>
+                                <select name="delivery_method" class="form-control" required>
+                                    @foreach($deliveryMethods as $key => $label)
+                                        <option value="{{ $key }}" {{ old('delivery_method')===$key ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-md-8 mb-15">
-                                <label class="font-sm-bold mb-5">Адрес</label>
+                            <div class="col-md-6 mb-15">
+                                <label class="font-md-bold">Город</label>
+                                <input type="text" name="city" class="form-control" value="{{ old('city') }}">
+                            </div>
+                            <div class="col-md-6 mb-15">
+                                <label class="font-md-bold">Адрес</label>
                                 <input type="text" name="address" class="form-control" value="{{ old('address') }}" placeholder="Улица, дом, квартира">
                             </div>
+                            <div class="col-md-12 mb-15">
+                                <label class="font-md-bold">Комментарий к заказу</label>
+                                <textarea name="comment" class="form-control" rows="3">{{ old('comment') }}</textarea>
+                            </div>
                         </div>
 
-                        <h4 class="font-xl-bold neutral-900 mb-20 mt-25">Способ оплаты</h4>
-                        <div class="mb-15">
-                            @foreach ($paymentMethods as $key => $label)
-                                <label class="d-flex align-items-center mb-10 p-15" style="border:1px solid #eee;border-radius:8px;cursor:pointer;">
-                                    <input type="radio" name="payment_method" value="{{ $key }}" {{ old('payment_method', array_key_first($paymentMethods)) === $key ? 'checked' : '' }} required style="margin-right:10px;">
-                                    <span class="font-md neutral-900">{{ $label }}</span>
-                                </label>
+                        <h4 class="font-2xl-bold mb-20 mt-30">Способ оплаты</h4>
+                        <div class="row">
+                            @foreach($paymentMethods as $key => $label)
+                                <div class="col-md-12 mb-10">
+                                    <label class="cb-container">
+                                        <input type="radio" name="payment_method" value="{{ $key }}" {{ (old('payment_method', array_key_first($paymentMethods))===$key) ? 'checked' : '' }} required>
+                                        <span class="text-small ml-5">{{ $label }}</span>
+                                    </label>
+                                </div>
                             @endforeach
-                        </div>
-
-                        <div class="mb-15">
-                            <label class="font-sm-bold mb-5">Комментарий к заказу</label>
-                            <textarea name="comment" class="form-control" rows="3" placeholder="Например: позвонить за час до доставки">{{ old('comment') }}</textarea>
+                            @error('payment_method')<div class="text-danger">{{ $message }}</div>@enderror
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 col-md-12 mb-30">
-                    <div class="box-cart-summary p-25" style="background:#FFF6EC;border-radius:14px;position:sticky;top:20px;">
-                        <h4 class="font-xl-bold neutral-900 mb-20">Ваш заказ</h4>
-                        @foreach ($items as $row)
-                            <div class="d-flex justify-content-between mb-10">
-                                <span class="font-sm neutral-900">{{ $row['name'] }} × {{ $row['quantity'] }}</span>
-                                <strong class="font-sm-bold neutral-900">{{ number_format($row['price'] * $row['quantity'], 0, ',', ' ') }} ₽</strong>
+                <div class="col-lg-5 mb-30">
+                    <div class="box-cart-total">
+                        <h4 class="font-2xl-bold mb-20">Ваш заказ</h4>
+                        @foreach($items as $item)
+                            <div class="item-total">
+                                <span class="font-sm">{{ $item['name'] }} × {{ $item['quantity'] }}</span>
+                                <span class="font-md-bold">{{ number_format($item['price']*$item['quantity'], 0, ',', ' ') }} ₽</span>
                             </div>
                         @endforeach
-                        <div class="border-top pt-15 mt-15" style="border-color:#FFCBA4 !important;">
-                            <div class="d-flex justify-content-between mb-10">
-                                <span class="font-md neutral-700">Товары:</span>
-                                <strong class="font-md-bold neutral-900">{{ number_format($subtotal, 0, ',', ' ') }} ₽</strong>
-                            </div>
-                        </div>
-                        <div class="border-top pt-15 mt-15 mb-20" style="border-color:#FFCBA4 !important;">
-                            <div class="d-flex justify-content-between">
-                                <span class="font-lg-bold neutral-900">Итого:</span>
-                                <strong class="color-brand-3" style="font-size:24px;font-weight:700;">{{ number_format($subtotal, 0, ',', ' ') }} ₽</strong>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-brand-3 w-100">Подтвердить заказ</button>
-                        <p class="font-xs neutral-500 mt-15 mb-0 text-center">🔒 Нажимая «Подтвердить», вы соглашаетесь с условиями оферты</p>
+                        <div class="item-total"><span class="font-sm">Сумма</span><span class="font-md-bold">{{ number_format($subtotal, 0, ',', ' ') }} ₽</span></div>
+                        <div class="item-total"><span class="font-sm">Доставка</span><span class="font-md-bold">350 ₽ (или самовывоз)</span></div>
+                        <div class="item-total border-0"><span class="font-sm">Итого</span><span class="font-xl-bold">{{ number_format($subtotal + 350, 0, ',', ' ') }} ₽</span></div>
+                        <button type="submit" class="btn btn-brand-1-xl-bold w-100 font-sm-bold">Оформить заказ</button>
                     </div>
                 </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </form>
+    </div>
+</section>
 @endsection

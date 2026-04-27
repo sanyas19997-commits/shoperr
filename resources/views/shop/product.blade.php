@@ -1,180 +1,139 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
-@section('title', $product->name . ' — ' . \App\Models\Setting::get('site_name', 'Billaro Store'))
+@section('title', $product->name.' — '.($siteSettings['site_name'] ?? 'Billaro Store'))
+@section('meta_description', $product->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($product->description ?? $product->name), 160))
 
 @section('content')
-    @php
-        $imgIndex = ($product->id % 16) + 1;
-        $fallbackImg = asset('kidify/assets/imgs/page/homepage1/product' . $imgIndex . '.png');
-        $mainImg = $product->main_image
-            ? (\Illuminate\Support\Str::startsWith($product->main_image, ['http', '/']) ? $product->main_image : asset('storage/' . $product->main_image))
-            : $fallbackImg;
-        $allImages = $product->images->isNotEmpty()
-            ? $product->images->map(fn($img) => asset('storage/' . $img->path))->all()
-            : [$mainImg, asset('kidify/assets/imgs/page/homepage1/product' . ((($product->id+3) % 16) + 1) . '.png'), asset('kidify/assets/imgs/page/homepage1/product' . ((($product->id+7) % 16) + 1) . '.png')];
-    @endphp
-
-    <section class="section box-section-shop-page">
-        <div class="page-head">
-            <div class="container">
-                <h2 class="font-3xl-bold color-brand-3 mb-15">{{ $product->name }}</h2>
-                <ul class="breadcrumb">
-                    <li><a class="font-sm" href="{{ route('home') }}">Главная</a></li>
-                    <li><a class="font-sm" href="{{ route('catalog.index') }}">Каталог</a></li>
-                    @if ($product->category)
-                        <li><a class="font-sm" href="{{ route('catalog.category', $product->category->slug) }}">{{ $product->category->name }}</a></li>
-                    @endif
-                    <li><a class="font-sm" href="#">{{ $product->name }}</a></li>
-                </ul>
-            </div>
+@php
+    $images = $product->images->isNotEmpty() ? $product->images->pluck('path')->all() : [$product->main_image ?? '/kidify/assets/imgs/page/product/img-2.png'];
+    $hasSale = $product->sale_price && $product->sale_price > 0 && $product->sale_price < $product->price;
+    $price = $hasSale ? $product->sale_price : $product->price;
+@endphp
+<div class="section block-shop-head-2 block-breadcrumb-type-1">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="{{ route('home') }}">Главная</a></li>
+                <li><a href="{{ route('catalog.index') }}">Каталог</a></li>
+                @if($product->category)
+                    <li><a href="{{ route('catalog.category', $product->category->slug) }}">{{ $product->category->name }}</a></li>
+                @endif
+                <li>{{ $product->name }}</li>
+            </ul>
         </div>
+    </div>
+</div>
 
-        <div class="container mt-30">
-            <div class="box-product-detail">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-12">
-                        <div class="gallery-image">
-                            <div class="galleryProductSingle" style="background:#FFF6EC;border-radius:14px;padding:30px;text-align:center;">
-                                <img id="product-main-image" src="{{ $mainImg }}" alt="{{ $product->name }}" style="width:100%;max-width:480px;height:auto;border-radius:10px;">
-                            </div>
-                            <div class="d-flex flex-wrap mt-15" style="gap:10px;">
-                                @foreach ($allImages as $imgUrl)
-                                    <img class="thumb" src="{{ $imgUrl }}" alt="{{ $product->name }}"
-                                         style="width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid {{ $loop->first ? '#FF6E30' : '#eee' }};padding:5px;background:#fff;"
-                                         onclick="document.getElementById('product-main-image').src=this.src;document.querySelectorAll('.thumb').forEach(t=>t.style.borderColor='#eee');this.style.borderColor='#FF6E30';">
-                                @endforeach
-                            </div>
+<section class="section block-product-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 box-images-product-left">
+                <div class="detail-gallery">
+                    @if(count($images) > 1)
+                        <div class="slider-nav-thumbnails">
+                            @foreach($images as $img)
+                                <div><div class="item-thumb"><img src="{{ asset($img) }}" alt="{{ $product->name }}"></div></div>
+                            @endforeach
                         </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-12">
-                        <div class="info-product-detail pl-15">
-                            @if ($product->category)
-                                <p class="font-sm neutral-500 mb-5">
-                                    <a href="{{ route('catalog.category', $product->category->slug) }}" style="color:#FF6E30;">{{ $product->category->name }}</a>
-                                </p>
-                            @endif
-                            <h2 class="font-3xl-bold color-brand-3 mb-15">{{ $product->name }}</h2>
-
-                            @if ($product->sku)
-                                <p class="font-sm neutral-500 mb-10">Артикул: <strong>{{ $product->sku }}</strong></p>
-                            @endif
-
-                            <div class="rating mb-15">
-                                <span style="color:#FFC107;">★★★★★</span>
-                                <span class="font-sm neutral-500 ml-5">(Отзывы скоро)</span>
-                            </div>
-
-                            <div class="price-product mb-20">
-                                <h3 class="d-inline-block font-3xl-bold color-brand-3 mr-10" style="font-size:36px;">
-                                    {{ number_format($product->current_price, 0, ',', ' ') }} ₽
-                                </h3>
-                                @if ($product->on_sale)
-                                    <h5 class="d-inline-block neutral-500" style="text-decoration:line-through;font-size:20px;">
-                                        {{ number_format($product->price, 0, ',', ' ') }} ₽
-                                    </h5>
-                                    <span class="lbl-hot ml-10" style="background:#FF4D4F;color:#fff;padding:4px 12px;border-radius:6px;font-size:14px;">
-                                        -{{ $product->discount_percent }}%
-                                    </span>
-                                @endif
-                            </div>
-
-                            @if ($product->short_description)
-                                <p class="font-md neutral-700 mb-20">{{ $product->short_description }}</p>
-                            @endif
-
-                            <div class="mb-20">
-                                @if ($product->stock > 0)
-                                    <p class="font-sm" style="color:#4CAF50;">✓ В наличии: <strong>{{ $product->stock }} шт.</strong></p>
-                                @else
-                                    <p class="font-sm" style="color:#FF4D4F;">✗ Нет в наличии</p>
-                                @endif
-                            </div>
-
-                            <form action="{{ route('cart.add', $product) }}" method="POST" class="add-to-cart-form box-buy-product">
-                                @csrf
-                                <div class="d-flex align-items-center mb-15" style="gap:15px;flex-wrap:wrap;">
-                                    <div class="quantity-input d-flex align-items-center" style="border:1px solid #ddd;border-radius:6px;background:#fff;">
-                                        <button type="button" onclick="var i=document.getElementById('qty-input');i.value=Math.max(1,parseInt(i.value)-1);" style="border:0;background:transparent;width:40px;height:44px;font-size:18px;">−</button>
-                                        <input type="number" id="qty-input" name="quantity" value="1" min="1" max="{{ $product->stock ?: 99 }}" style="width:60px;border:0;text-align:center;font-weight:600;background:transparent;">
-                                        <button type="button" onclick="var i=document.getElementById('qty-input');i.value=Math.min({{ $product->stock ?: 99 }},parseInt(i.value)+1);" style="border:0;background:transparent;width:40px;height:44px;font-size:18px;">+</button>
-                                    </div>
-                                    <button type="submit" class="btn btn-brand-3" style="padding:12px 32px;" {{ $product->stock <= 0 ? 'disabled' : '' }}>
-                                        В корзину
-                                    </button>
-                                    <a href="#" class="btn btn-default" style="padding:12px 24px;">♡ В избранное</a>
-                                </div>
-                            </form>
-
-                            <div class="border-top pt-20 mt-15">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p class="font-sm neutral-700 mb-10">🚚 <strong>Быстрая доставка</strong> по всей России</p>
-                                        <p class="font-sm neutral-700 mb-0">↩️ <strong>Возврат</strong> в течение 14 дней</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p class="font-sm neutral-700 mb-10">🔒 <strong>Безопасная оплата</strong> онлайн</p>
-                                        <p class="font-sm neutral-700 mb-0">⭐ <strong>Гарантия</strong> качества</p>
-                                    </div>
-                                </div>
-                            </div>
+                    @endif
+                    <div class="box-main-gallery">
+                        <a class="zoom-image glightbox" href="{{ asset($images[0]) }}"></a>
+                        <div class="product-image-slider">
+                            @foreach($images as $img)
+                                <figure class="border-radius-10">
+                                    <a class="glightbox" href="{{ asset($img) }}"><img src="{{ asset($img) }}" alt="{{ $product->name }}"></a>
+                                </figure>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-
-            {{-- Tabs: Description / Specifications / Reviews --}}
-            <div class="box-product-tabs mt-50">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Описание</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#specifications" type="button" role="tab">Характеристики</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Отзывы</button>
-                    </li>
-                </ul>
-                <div class="tab-content mt-20">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel">
-                        @if ($product->description)
-                            <div class="font-md neutral-900">{!! nl2br(e($product->description)) !!}</div>
-                        @else
-                            <p class="font-md neutral-700">{{ $product->short_description ?? 'Описание появится в ближайшее время.' }}</p>
+            <div class="col-lg-7 box-images-product-middle">
+                <div class="box-product-info">
+                    @if($hasSale)
+                        @php $pct = round((1 - $product->sale_price / $product->price) * 100); @endphp
+                        <label class="flash-sale-red">−{{ $pct }}%</label>
+                    @endif
+                    <h2 class="font-2xl-bold">{{ $product->name }}</h2>
+                    <div class="block-rating">
+                        @for($i=0; $i<5; $i++)
+                            <img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="звезда">
+                        @endfor
+                        <span class="font-md neutral-500">@if($product->sku) Артикул: {{ $product->sku }} @endif</span>
+                    </div>
+                    <div class="block-price">
+                        <span class="price-main">{{ number_format($price, 0, ',', ' ') }} ₽</span>
+                        @if($hasSale)
+                            <span class="price-line">{{ number_format($product->price, 0, ',', ' ') }} ₽</span>
                         @endif
                     </div>
-                    <div class="tab-pane fade" id="specifications" role="tabpanel">
-                        <table class="table">
-                            <tbody>
-                                @if ($product->sku)<tr><th style="width:30%;">Артикул</th><td>{{ $product->sku }}</td></tr>@endif
-                                @if ($product->category)<tr><th>Категория</th><td>{{ $product->category->name }}</td></tr>@endif
-                                <tr><th>Наличие</th><td>{{ $product->stock > 0 ? 'В наличии' : 'Нет в наличии' }}</td></tr>
-                                <tr><th>Цена</th><td>{{ number_format($product->current_price, 0, ',', ' ') }} ₽</td></tr>
-                            </tbody>
-                        </table>
+                    <div class="block-view">
+                        <p class="font-md neutral-900">{!! nl2br(e(\Illuminate\Support\Str::limit(strip_tags($product->description ?? ''), 400))) !!}</p>
                     </div>
-                    <div class="tab-pane fade" id="reviews" role="tabpanel">
-                        <p class="font-md neutral-700">Отзывов пока нет. Станьте первым, кто оставит отзыв на этот товар.</p>
+                    <div class="block-quantity-cart mt-30">
+                        <form method="POST" action="{{ route('cart.add', $product->id) }}" class="add-to-cart-form d-flex align-items-center" style="gap:12px;">
+                            @csrf
+                            <div class="block-quantity">
+                                <span class="text-quantity">Кол-во</span>
+                                <input type="number" name="quantity" value="1" min="1" max="99" class="form-control" style="width:80px;">
+                            </div>
+                            <button type="submit" class="btn btn-buy">В корзину<img src="{{ asset('kidify/assets/imgs/template/icons/cart.svg') }}" alt=""></button>
+                        </form>
+                    </div>
+                    <div class="block-info-product mt-30">
+                        @if($product->stock_quantity > 0)
+                            <p class="text-success font-md-bold">В наличии ({{ $product->stock_quantity }} шт.)</p>
+                        @else
+                            <p class="text-warning font-md-bold">Уточняйте наличие</p>
+                        @endif
+                        @if($product->category)
+                            <p class="font-sm neutral-500 mt-10">Категория: <a href="{{ route('catalog.category', $product->category->slug) }}">{{ $product->category->name }}</a></p>
+                        @endif
                     </div>
                 </div>
             </div>
+        </div>
 
-            {{-- Related products --}}
-            @if ($related->isNotEmpty())
-                <section class="section block-section-5 mt-50">
-                    <div class="top-head">
-                        <h4 class="text-uppercase brand-1 wow animate__animated animate__fadeIn">Похожие товары</h4>
-                        <a class="btn btn-arrow-right wow animate__animated animate__fadeIn" href="{{ route('catalog.index') }}">Смотреть все<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt=""></a>
+        <div class="row mt-50">
+            <div class="col-lg-12">
+                <ul class="nav-tabs nav-tab-product" role="tablist">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-selected="true">Описание</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab" aria-selected="false">Доставка и оплата</button></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <div class="block-description-tab pt-30">
+                            {!! nl2br(e($product->description ?? '')) !!}
+                            @if(empty($product->description))
+                                <p class="font-md neutral-700">Подробное описание товара уточняйте у менеджера.</p>
+                            @endif
+                        </div>
                     </div>
-                    <div class="row">
-                        @foreach ($related as $r)
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-30">
-                                @include('layouts.partials.product-card', ['product' => $r])
-                            </div>
-                        @endforeach
+                    <div class="tab-pane fade" id="delivery" role="tabpanel" aria-labelledby="delivery-tab">
+                        <div class="pt-30">
+                            <p class="font-md neutral-700">Доставим заказ по всей России. Курьер по Москве — от 350 ₽, ПВЗ СДЭК — от 250 ₽. Возможен самовывоз. Оплата картой онлайн, СБП или при получении.</p>
+                        </div>
                     </div>
-                </section>
-            @endif
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if($related->isNotEmpty())
+    <section class="section block-section-5">
+        <div class="container">
+            <div class="head-tabs mb-30">
+                <h3 class="font-2xl-bold neutral-900">Похожие товары</h3>
+            </div>
+            <div class="row">
+                @foreach($related as $product)
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-30">
+                        @include('partials.product-card')
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
+@endif
 @endsection

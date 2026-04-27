@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
 
 class CartController extends Controller
 {
@@ -15,7 +14,7 @@ class CartController extends Controller
 
     public function index()
     {
-        return Inertia::render('Shop/Cart', [
+        return view('shop.cart', [
             'items' => array_values($this->cart->items()),
             'subtotal' => $this->cart->subtotal(),
         ]);
