@@ -71,7 +71,7 @@
                         <div class="box-form-cart">
                           <div class="form-cart"><span class="minus"></span>
                             <input class="form-control" type="text" value="1"><span class="plus"></span>
-                          </div><a class="btn btn-brand-1-xl" href="#">Add to Корзина</a>
+                          </div><a class="btn btn-brand-1-xl" href="#">В корзину</a>
                         </div>
                       </div>
                     </div>
@@ -301,7 +301,7 @@
                   <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                   <div class="product-price-bottom">
                     <p class="font-lg cardDesc">$185.00</p>
-                    <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                    <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                   </div>
                 </div>
               </div>
@@ -312,7 +312,7 @@
                   <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                   <div class="product-price-bottom">
                     <p class="font-lg cardDesc">$185.00</p>
-                    <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                    <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                   </div>
                 </div>
               </div>
@@ -323,7 +323,7 @@
                   <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                   <div class="product-price-bottom">
                     <p class="font-lg cardDesc">$185.00</p>
-                    <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                    <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                   </div>
                 </div>
               </div>

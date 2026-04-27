@@ -52,55 +52,55 @@
             <div class="swiper-container swiper-9-items pb-0">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Kids Игрушки</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat2.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Плюшевый мишка</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat3.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Мальчики</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat4.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Обувь</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat5.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Кроватки</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat6.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Wood Игрушки</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat7.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Мамам</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat8.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Малыши</a></div>
                   </div>
                 </div>
                 <div class="swiper-slide">
-                  <div class="cardКатегория">
+                  <div class="cardCategory">
                     <div class="cardImage"><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage3/cat9.png') }}" alt="Billaro Store"></a></div>
                     <div class="cardInfo"><a href="#">Милая коллекция</a></div>
                   </div>
@@ -138,9 +138,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product1.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -150,7 +150,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -164,9 +164,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product2.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product6.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -176,7 +176,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -190,9 +190,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -202,7 +202,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -216,9 +216,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -228,7 +228,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -241,10 +241,10 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 wow animate__animated animate__fadeIn" data-wow-delay=".0s">
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
-                            <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product5.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/pa(data-wow-delay=&quot;.1s&quot;)ge/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product5.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -254,7 +254,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -268,9 +268,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product6.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -280,7 +280,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -294,9 +294,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product2.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -306,7 +306,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -320,9 +320,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product8.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -332,7 +332,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -350,9 +350,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product1.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -362,7 +362,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -376,9 +376,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product2.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product6.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -388,7 +388,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -402,9 +402,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -414,7 +414,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -428,9 +428,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -440,7 +440,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -454,9 +454,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product5.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -466,7 +466,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -480,9 +480,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product6.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -492,7 +492,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -506,9 +506,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product2.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -518,7 +518,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -532,9 +532,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product8.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -544,7 +544,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -562,9 +562,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product1.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -574,7 +574,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -588,9 +588,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product2.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product6.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -600,7 +600,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -614,9 +614,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -626,7 +626,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -640,9 +640,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -652,7 +652,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -666,9 +666,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product5.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -678,7 +678,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -692,9 +692,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product6.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product4.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -704,7 +704,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -718,9 +718,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product2.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -730,7 +730,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -744,9 +744,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product8.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product3.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -756,7 +756,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -805,9 +805,9 @@
                     <div class="cardProduct wow fadeInUp">
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product9.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"></a>
-                        <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                        <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -817,7 +817,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -831,9 +831,9 @@
                     <div class="cardProduct wow fadeInUp">
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product10.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"></a>
-                        <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                        <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -843,7 +843,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -857,9 +857,9 @@
                     <div class="cardProduct wow fadeInUp">
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product11.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product7.png') }}" alt="Billaro Store"></a>
-                        <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                        <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -869,7 +869,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -898,9 +898,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product12.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product13.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -910,7 +910,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -924,9 +924,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product13.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product15.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -936,7 +936,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -950,9 +950,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product14.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product13.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -962,7 +962,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -976,9 +976,9 @@
                         <div class="cardProduct wow fadeInUp">
                           <div class="cardImage">
                             <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img class="imageMain" src="{{ asset('kidify/assets/imgs/page/homepage1/product15.png') }}" alt="Billaro Store"><img class="imageHover" src="{{ asset('kidify/assets/imgs/page/homepage1/product14.png') }}" alt="Billaro Store"></a>
-                            <div class="button-select"><a href="{{ route('catalog.index') }}">Add to Корзина</a></div>
+                            <div class="button-select"><a href="{{ route('catalog.index') }}">В корзину</a></div>
                             <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg></a><a class="btn" href="#">
@@ -988,7 +988,7 @@
                                   <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                   <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                                 </svg></a><a class="btn" href="#">
-                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                                 </svg></a></div>
                           </div>
@@ -1040,7 +1040,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product16.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1050,7 +1050,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1068,7 +1068,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product17.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1078,7 +1078,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1096,7 +1096,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product18.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1106,7 +1106,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1124,7 +1124,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product19.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1134,7 +1134,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1152,7 +1152,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product20.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1162,7 +1162,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1180,7 +1180,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product21.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1190,7 +1190,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1208,7 +1208,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product22.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1218,7 +1218,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1236,7 +1236,7 @@
                       <div class="cardImage">
                         <label class="lbl-hot">hot</label><a href="{{ route('catalog.index') }}"><img src="{{ asset('kidify/assets/imgs/page/homepage1/product23.png') }}" alt="Billaro Store"></a>
                         <div class="box-quick-button"><a class="btn" aria-label="Quick view" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
                               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg></a><a class="btn" href="#">
@@ -1246,7 +1246,7 @@
                               <path d="M2.25 8.25C2.25 6.59315 3.59315 5.25 5.25 5.25" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                               <path d="M15.75 9.75C15.75 11.4069 14.4069 12.75 12.75 12.75" stroke="#294646" stroke-width="1.5" stroke-linecap="round"></path>
                             </svg></a><a class="btn" href="#">
-                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentЦвет" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <svg class="d-inline-flex align-items-center justify-content-center" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"></path>
                             </svg></a></div>
                       </div>
@@ -1301,7 +1301,7 @@
                                 <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                                 <div class="product-price-bottom">
                                   <p class="font-lg cardDesc">$185.00</p>
-                                  <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                                  <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                                 </div>
                               </div>
                             </div>
@@ -1312,7 +1312,7 @@
                                 <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                                 <div class="product-price-bottom">
                                   <p class="font-lg cardDesc">$185.00</p>
-                                  <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                                  <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                                 </div>
                               </div>
                             </div>
@@ -1323,7 +1323,7 @@
                                 <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                                 <div class="product-price-bottom">
                                   <p class="font-lg cardDesc">$185.00</p>
-                                  <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                                  <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                                 </div>
                               </div>
                             </div>
@@ -1351,7 +1351,7 @@
                                 <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                                 <div class="product-price-bottom">
                                   <p class="font-lg cardDesc">$185.00</p>
-                                  <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                                  <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                                 </div>
                               </div>
                             </div>
@@ -1362,7 +1362,7 @@
                                 <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                                 <div class="product-price-bottom">
                                   <p class="font-lg cardDesc">$185.00</p>
-                                  <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                                  <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                                 </div>
                               </div>
                             </div>
@@ -1373,7 +1373,7 @@
                                 <div class="rating"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/star.svg') }}" alt="Billaro Store"></div>
                                 <div class="product-price-bottom">
                                   <p class="font-lg cardDesc">$185.00</p>
-                                  <p class="font-lg neutral-500 cardЦенаСкидка">$196.00</p>
+                                  <p class="font-lg neutral-500 cardPriceSale">$196.00</p>
                                 </div>
                               </div>
                             </div>
@@ -1419,7 +1419,7 @@
                         </div><a href="#"><img src="{{ asset('kidify/assets/imgs/page/homepage1/blog1.png') }}" alt="Billaro Store"></a>
                       </div>
                       <div class="cardInfo"><a class="cardTitle" href="#">
-                          <h5 class="font-xl-bold">Eco-Friendly Children's Clothing: 5 Sustainable Брендs</h5></a>
+                          <h5 class="font-xl-bold">Eco-Friendly Children's Clothing: 5 Sustainable Бренды</h5></a>
                         <p class="cardDesc font-lg neutral-500">Prioritize sustainability with 5 eco-friendly brands that offer organic cotton and recycled materials for children's clothing</p><a class="btn btn-arrow-right" href="#">Читать далее<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt="Billaro Store"><img class="hover-icon" src="{{ asset('kidify/assets/imgs/template/icons/arrow-hover.svg') }}" alt="Billaro Store"></a>
                       </div>
                     </div>
