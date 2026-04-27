@@ -14,6 +14,101 @@
     flex-shrink: 0;
 }
 
+/* Header layout: ставим поиск + иконки (аккаунт/корзина) в одну строку.
+   Без этого .header-shop был display:block — иконки уезжали под поиск,
+   и в авторизованном состоянии корзина «плыла». */
+.header .main-header .header-shop {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: auto;
+    min-width: 0;
+}
+.header .main-header .header-search {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 360px;
+}
+.header .main-header .header-search .form-search {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #E5E5E5;
+    border-radius: 999px;
+    padding: 4px 8px 4px 12px;
+    background: #fff;
+}
+.header .main-header .header-search .select-category select {
+    border: 0;
+    background: transparent;
+    outline: none;
+    padding: 6px 4px;
+    font-size: 14px;
+    color: #555;
+}
+.header .main-header .header-search .form-search > input[type="text"] {
+    flex: 1 1 auto;
+    border: 0;
+    outline: none;
+    padding: 6px 8px;
+    font-size: 14px;
+    background: transparent;
+    min-width: 0;
+}
+.header .main-header .header-search .form-search > button {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px 6px;
+}
+.header .main-header .header-list-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+.header .main-header .header-list-icons .account-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #1C1D1D;
+    position: relative;
+    white-space: nowrap;
+}
+.header .main-header .header-list-icons .account-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #1C1D1D;
+    flex-shrink: 0;
+}
+.header .main-header .header-list-icons .account-icon:hover svg {
+    fill: #9F86D9;
+}
+.header .main-header .header-list-icons .account-icon.cart {
+    font-weight: 600;
+    font-size: 14px;
+}
+.header .main-header .header-list-icons .number-tag {
+    background-color: #9F86D9;
+    position: absolute;
+    top: -8px;
+    right: -6px;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    line-height: 18px;
+    font-weight: 400;
+}
+@media (max-width: 991.98px) {
+    .header .main-header .header-search { display: none; }
+    .header .main-header .header-shop { gap: 12px; }
+}
+
 .add-to-cart-form button { width: 100%; }
 .btn { cursor: pointer; }
 .alert { padding: 12px 16px; border-radius: 8px; }

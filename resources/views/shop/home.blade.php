@@ -72,7 +72,7 @@
                                                 @if ($cat->image)
                                                     <img src="{{ asset('storage/' . $cat->image) }}" alt="{{ $cat->name }}">
                                                 @else
-                                                    <img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-' . $iconNum . '.svg') }}" alt="{{ $cat->name }}" style="width:80px;height:80px;">
+                                                    <img src="{{ asset('kidify/assets/imgs/page/homepage3/cat' . ($iconNum == 1 ? '' : $iconNum) . '.png') }}" alt="{{ $cat->name }}">
                                                 @endif
                                             </a>
                                         </div>
