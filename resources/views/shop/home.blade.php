@@ -790,14 +790,14 @@
             <div class="col-lg-3">
               <div class="box-category-list mb-30">
                 <ul class="menu-category">
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a class="active" href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-1.svg') }}" alt="Billaro Store">Детская мебель</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-2.svg') }}" alt="Billaro Store">Кормление</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-3.svg') }}" alt="Billaro Store">Спорт и активность</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-4.svg') }}" alt="Billaro Store">Безопасность</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-5.svg') }}" alt="Billaro Store">Уход за малышом</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-6.svg') }}" alt="Billaro Store">Для мальчиков</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-7.svg') }}" alt="Billaro Store">Для девочек</a></li>
-                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/КатегорияIcon24-8.svg') }}" alt="Billaro Store">Детское бельё</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a class="active" href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-1.svg') }}" alt="Billaro Store">Детская мебель</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-2.svg') }}" alt="Billaro Store">Кормление</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-3.svg') }}" alt="Billaro Store">Спорт и активность</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-4.svg') }}" alt="Billaro Store">Безопасность</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-5.svg') }}" alt="Billaro Store">Уход за малышом</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-6.svg') }}" alt="Billaro Store">Для мальчиков</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-7.svg') }}" alt="Billaro Store">Для девочек</a></li>
+                  <li class="wow animate__animated animate__fadeIn" data-wow-delay=".0s"><a href="#"><img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-8.svg') }}" alt="Billaro Store">Детское бельё</a></li>
                 </ul>
               </div>
             </div>

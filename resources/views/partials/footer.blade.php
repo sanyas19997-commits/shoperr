@@ -63,7 +63,7 @@
               <div class="col-lg-6 col-md-12 text-center mb-20 wow animate__animated animate__fadeIn" data-wow-delay=".0s"><span class="body-p1 neutral-900 mr-5">©2023</span><a href="#">Billaro Store</a>. Все права защищены</div>
               <div class="col-lg-3 col-md-12 text-center text-lg-end mb-20 wow animate__animated animate__fadeIn" data-wow-delay=".0s">
                 <div class="d-flex justify-content-center justify-content-lg-end align-items-center box-all-payments">
-                  <div class="d-inline-block box-payments"><img src="{{ asset('kidify/assets/imgs/template/icons/mastercard.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/googlepay.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/payoneer.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/applepay.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/paypal.svg') }}" alt="Billaro Store"></div>
+                  <div class="d-inline-block box-payments"><img src="{{ asset('kidify/assets/imgs/template/icons/mastercard.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/googlepay.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/payoneer.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/applePay.svg') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/template/icons/payPal.svg') }}" alt="Billaro Store"></div>
                 </div>
               </div>
             </div>
