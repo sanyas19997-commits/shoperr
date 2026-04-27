@@ -14,6 +14,7 @@ const items = [
     { name: 'products', label: 'Товары', icon: '📦' },
     { name: 'categories', label: 'Категории', icon: '📂' },
     { name: 'brands', label: 'Бренды', icon: '🏷️' },
+    { name: 'posts', label: 'Блог', icon: '📰' },
     { name: 'users', label: 'Пользователи', icon: '👥' },
     { name: 'logs', label: 'Логи действий', icon: '📝', adminOnly: true },
     { name: 'settings', label: 'Настройки', icon: '⚙️', adminOnly: true },
@@ -36,7 +37,7 @@ async function logout() {
 <template>
     <div class="admin-layout">
         <aside class="sidebar" :class="{ 'is-open': sidebarOpen }" @click="sidebarOpen = false">
-            <div class="brand">🛍️ Billaro</div>
+            <div class="brand"><span style="font-size:22px;">🛍️</span><span>Billaro</span></div>
             <div class="nav-section">Магазин</div>
             <nav class="nav">
                 <router-link

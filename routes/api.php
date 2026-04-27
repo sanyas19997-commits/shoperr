@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SettingController;
 use App\Http\Controllers\Api\UserController;
@@ -62,5 +63,11 @@ Route::prefix('admin')->group(function () {
 
         Route::post('media', [MediaController::class, 'upload']);
         Route::delete('media', [MediaController::class, 'destroy']);
+
+        Route::get('posts', [PostController::class, 'index']);
+        Route::get('posts/{post}', [PostController::class, 'show']);
+        Route::post('posts', [PostController::class, 'store']);
+        Route::post('posts/{post}', [PostController::class, 'update']);
+        Route::delete('posts/{post}', [PostController::class, 'destroy']);
     });
 });

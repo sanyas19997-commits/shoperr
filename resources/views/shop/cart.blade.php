@@ -45,7 +45,7 @@
                                     <td>
                                         <div class="box-product-cart">
                                             <a class="image-product-cart" href="{{ url('/product/'.$item['slug']) }}">
-                                                <img src="{{ asset($item['image'] ?? '/kidify/assets/imgs/page/product/img-detail2.png') }}" alt="{{ $item['name'] }}">
+                                                <img src="{{ media_url($item['image'] ?? null, '/kidify/assets/imgs/page/product/img-detail2.png') }}" alt="{{ $item['name'] }}">
                                             </a>
                                             <a class="title-product-cart" href="{{ url('/product/'.$item['slug']) }}">{{ $item['name'] }}</a>
                                         </div>

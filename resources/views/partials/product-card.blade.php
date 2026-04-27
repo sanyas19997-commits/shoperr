@@ -18,8 +18,8 @@
             <label class="lbl-hot" style="background:#FF782D;">скидка</label>
         @endif
         <a href="{{ $url }}">
-            <img class="imageMain" src="{{ asset($main) }}" alt="{{ $product->name }}">
-            <img class="imageHover" src="{{ asset($hover) }}" alt="{{ $product->name }}">
+            <img class="imageMain" src="{{ media_url($main) }}" alt="{{ $product->name }}">
+            <img class="imageHover" src="{{ media_url($hover) }}" alt="{{ $product->name }}">
         </a>
         <div class="button-select">
             <form method="POST" action="{{ route('cart.add', $product->id) }}" class="add-to-cart-form d-inline">

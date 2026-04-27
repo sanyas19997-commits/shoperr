@@ -82,14 +82,7 @@
                       <li><a href="#">Ошибка 404</a></li>
                     </ul>
                   </li>
-                  <li class="has-children"><a href="#">Блог</a>
-                    <ul class="sub-menu">
-                      <li><a href="#">Список постов</a></li>
-                      <li><a href="#">Список постов 2</a></li>
-                      <li><a href="#">Список постов 3</a></li>
-                      <li><a href="#">Пост</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="{{ route('blog.index') }}">Блог</a></li>
                   <li><a href="{{ route('contact') }}">Контакты</a></li>
                 </ul>
               </nav>
