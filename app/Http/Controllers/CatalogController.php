@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CatalogController extends Controller
 {
@@ -16,7 +17,7 @@ class CatalogController extends Controller
             $category = Category::query()->where('slug', $categorySlug)->firstOrFail();
         }
 
-        $query = Product::query()->with('category')->where('is_active', true);
+        $query = Product::query()->with('category:id,name,slug')->where('is_active', true);
 
         if ($category) {
             $childIds = $category->children()->pluck('id')->push($category->id);
@@ -52,23 +53,27 @@ class CatalogController extends Controller
         $categories = Category::query()
             ->whereNull('parent_id')
             ->where('is_active', true)
-            ->with(['children' => fn ($q) => $q->where('is_active', true)])
+            ->with(['children' => fn ($q) => $q->where('is_active', true)->orderBy('sort_order')])
             ->orderBy('sort_order')
             ->get();
 
-        return view('shop.catalog', [
+        return Inertia::render('Shop/Catalog', [
             'products' => $products,
             'category' => $category,
             'categories' => $categories,
             'search' => $search,
             'sort' => $sort,
+            'filters' => [
+                'price_min' => $request->query('price_min'),
+                'price_max' => $request->query('price_max'),
+            ],
         ]);
     }
 
     public function show(string $slug)
     {
         $product = Product::query()
-            ->with(['category', 'images'])
+            ->with(['category:id,name,slug', 'images'])
             ->where('slug', $slug)
             ->where('is_active', true)
             ->firstOrFail();
@@ -77,9 +82,10 @@ class CatalogController extends Controller
             ->where('is_active', true)
             ->where('id', '!=', $product->id)
             ->when($product->category_id, fn ($q) => $q->where('category_id', $product->category_id))
+            ->with('category:id,name,slug')
             ->take(4)
             ->get();
 
-        return view('shop.product', compact('product', 'related'));
+        return Inertia::render('Shop/Product', compact('product', 'related'));
     }
 }

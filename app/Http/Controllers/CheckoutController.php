@@ -8,6 +8,7 @@ use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class CheckoutController extends Controller
 {
@@ -21,8 +22,8 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error', 'Корзина пуста');
         }
 
-        return view('shop.checkout', [
-            'items' => $this->cart->items(),
+        return Inertia::render('Shop/Checkout', [
+            'items' => array_values($this->cart->items()),
             'subtotal' => $this->cart->subtotal(),
             'paymentMethods' => Order::PAYMENT_METHODS,
             'deliveryMethods' => Order::DELIVERY_METHODS,
@@ -39,8 +40,8 @@ class CheckoutController extends Controller
             'customer_name' => 'required|string|max:255',
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'required|string|max:50',
-            'delivery_method' => 'required|in:' . implode(',', array_keys(Order::DELIVERY_METHODS)),
-            'payment_method' => 'required|in:' . implode(',', array_keys(Order::PAYMENT_METHODS)),
+            'delivery_method' => 'required|in:'.implode(',', array_keys(Order::DELIVERY_METHODS)),
+            'payment_method' => 'required|in:'.implode(',', array_keys(Order::PAYMENT_METHODS)),
             'city' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:500',
             'comment' => 'nullable|string|max:1000',
@@ -51,7 +52,7 @@ class CheckoutController extends Controller
             $shipping = $data['delivery_method'] === 'pickup' ? 0 : 350;
 
             $order = Order::create([
-                'number' => 'BS-' . now()->format('ymd') . '-' . strtoupper(Str::random(5)),
+                'number' => 'BS-'.now()->format('ymd').'-'.strtoupper(Str::random(5)),
                 'user_id' => auth()->id(),
                 'status' => 'new',
                 'customer_name' => $data['customer_name'],
@@ -90,6 +91,8 @@ class CheckoutController extends Controller
 
     public function success(Order $order)
     {
-        return view('shop.checkout-success', compact('order'));
+        return Inertia::render('Shop/CheckoutSuccess', [
+            'order' => $order,
+        ]);
     }
 }

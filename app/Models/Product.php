@@ -40,6 +40,8 @@ class Product extends Model
         'is_featured' => 'boolean',
     ];
 
+    protected $appends = ['main_image'];
+
     protected static function booted(): void
     {
         static::saving(function (Product $product) {

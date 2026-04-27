@@ -60,6 +60,8 @@ class Order extends Model
         'total' => 'decimal:2',
     ];
 
+    protected $appends = ['status_label', 'payment_method_label', 'delivery_method_label'];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

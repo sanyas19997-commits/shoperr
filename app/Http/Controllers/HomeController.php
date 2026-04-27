@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Setting;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -12,7 +14,7 @@ class HomeController extends Controller
         $featured = Product::query()
             ->where('is_active', true)
             ->where('is_featured', true)
-            ->with('category')
+            ->with('category:id,name,slug')
             ->latest()
             ->take(8)
             ->get();
@@ -20,7 +22,7 @@ class HomeController extends Controller
         if ($featured->isEmpty()) {
             $featured = Product::query()
                 ->where('is_active', true)
-                ->with('category')
+                ->with('category:id,name,slug')
                 ->latest()
                 ->take(8)
                 ->get();
@@ -28,7 +30,7 @@ class HomeController extends Controller
 
         $newest = Product::query()
             ->where('is_active', true)
-            ->with('category')
+            ->with('category:id,name,slug')
             ->latest()
             ->take(8)
             ->get();
@@ -38,14 +40,14 @@ class HomeController extends Controller
             ->whereNotNull('sale_price')
             ->where('sale_price', '>', 0)
             ->whereColumn('sale_price', '<', 'price')
-            ->with('category')
+            ->with('category:id,name,slug')
             ->latest()
             ->take(8)
             ->get();
 
         $popular = Product::query()
             ->where('is_active', true)
-            ->with('category')
+            ->with('category:id,name,slug')
             ->inRandomOrder()
             ->take(8)
             ->get();
@@ -55,8 +57,18 @@ class HomeController extends Controller
             ->where('is_active', true)
             ->orderBy('sort_order')
             ->take(8)
-            ->get();
+            ->get(['id', 'name', 'slug', 'image']);
 
-        return view('shop.home', compact('featured', 'newest', 'onSale', 'popular', 'categories'));
+        return Inertia::render('Shop/Home', [
+            'featured' => $featured,
+            'newest' => $newest,
+            'onSale' => $onSale,
+            'popular' => $popular,
+            'categories' => $categories,
+            'promo' => [
+                'title' => Setting::get('promo_title', 'Спецпредложение'),
+                'text' => Setting::get('promo_text', 'Скидки на популярные категории. Успей купить по выгодной цене!'),
+            ],
+        ]);
     }
 }
