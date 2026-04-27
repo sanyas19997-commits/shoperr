@@ -3,7 +3,7 @@ import { createApp } from 'vue';
 import MiniCart from './components/MiniCart.vue';
 import HeaderSearch from './components/HeaderSearch.vue';
 
-// AJAX add-to-cart на формах с классом .add-to-cart-form
+// AJAX add-to-cart for forms with class .add-to-cart-form
 document.addEventListener('DOMContentLoaded', () => {
     const csrf = document.querySelector('meta[name="csrf-token"]')?.content;
 
@@ -34,6 +34,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Init WOW.js animations
+    if (typeof window.WOW !== 'undefined') {
+        try { new window.WOW({ live: false }).init(); } catch(e) {}
+    }
+
+    // Init swipers for hero banner and category slider once DOM ready
+    if (typeof window.Swiper !== 'undefined') {
+        try {
+            new window.Swiper('.swiper-banner', {
+                loop: true,
+                speed: 800,
+                autoplay: { delay: 5000 },
+                pagination: { el: '.swiper-pagination-banner', clickable: true },
+                slidesPerView: 1,
+            });
+        } catch(e) {}
+        try {
+            new window.Swiper('.swiper-9-items', {
+                loop: false,
+                spaceBetween: 20,
+                breakpoints: {
+                    0: { slidesPerView: 2 },
+                    576: { slidesPerView: 3 },
+                    768: { slidesPerView: 4 },
+                    992: { slidesPerView: 6 },
+                    1200: { slidesPerView: 8 },
+                },
+            });
+        } catch(e) {}
+    }
+
+    // Mobile menu toggle
+    document.querySelectorAll('.burger-icon').forEach(b => {
+        b.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.classList.toggle('mobile-menu-active');
+        });
+    });
+    document.querySelectorAll('.close-mobile').forEach(b => {
+        b.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.classList.remove('mobile-menu-active');
+        });
+    });
+
     // Mount Vue components if elements exist
     const miniCart = document.getElementById('mini-cart-app');
     if (miniCart) createApp(MiniCart).mount(miniCart);
@@ -47,11 +92,8 @@ function updateCartCounter(count, subtotal) {
         counter.textContent = count;
         counter.style.display = count > 0 ? 'inline-block' : 'none';
     }
-    const link = document.getElementById('cart-link');
-    if (link) {
-        const span = link.querySelector('.ml-1');
-        if (span) span.textContent = formatPrice(subtotal) + ' ₽';
-    }
+    const sub = document.getElementById('cart-subtotal');
+    if (sub) sub.textContent = formatPrice(subtotal) + ' ₽';
 }
 
 function formatPrice(n) {

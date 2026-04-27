@@ -1,59 +1,197 @@
 @extends('layouts.shop')
 
-@section('title', 'Главная')
+@section('title', \App\Models\Setting::get('site_name', 'Billaro Store') . ' — Интернет-магазин')
 
 @section('content')
-    <section class="section-box box-banner-home2 mt-30">
+    {{-- Hero banner slider --}}
+    <section class="section banner-homepage1">
         <div class="container">
-            <div class="banner-hero hero-2">
-                <div class="banner-big bg-9 d-flex align-items-center" style="min-height:380px;background:linear-gradient(135deg,#FFF5E1,#FCE3D2) center/cover no-repeat;border-radius:20px;padding:40px;">
-                    <div class="banner-big-inner">
-                        <h6 class="color-brand-2 mb-10">Добро пожаловать!</h6>
-                        <h1 class="color-brand-3 mb-15">{{ \App\Models\Setting::get('hero_title', 'Качественные товары для всей семьи') }}</h1>
-                        <p class="font-md color-gray-700 mb-25">{{ \App\Models\Setting::get('hero_subtitle', 'Большой выбор, выгодные цены и быстрая доставка по всей России.') }}</p>
-                        <div class="d-flex">
-                            <a class="btn btn-buy mr-15" href="{{ route('catalog.index') }}">Перейти в каталог →</a>
-                            <a class="btn btn-default" href="{{ route('about') }}">О магазине</a>
+            <div class="box-swiper">
+                <div class="swiper-container swiper-banner pb-0">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="box-banner-home1">
+                                <div class="box-cover-image wow animate__animated animate__fadeInLeft" style="background-image:url({{ asset('kidify/assets/imgs/page/homepage1/banner.png') }});background-size:cover;background-position:center;"></div>
+                                <div class="box-banner-info">
+                                    <div class="block-info-banner">
+                                        <p class="font-3xl-bold neutral-900 title-line mb-10 wow animate__animated animate__zoomIn">Сезонные</p>
+                                        <h2 class="heading-banner mb-10 wow animate__animated animate__zoomIn">
+                                            <span class="text-up">скидки</span>
+                                            <span class="text-under">скидки</span>
+                                        </h2>
+                                        <h4 class="heading-4 title-line-2 mb-30 wow animate__animated animate__zoomIn">{{ \App\Models\Setting::get('hero_title', 'Качественные товары для всей семьи') }}</h4>
+                                        <div class="text-center mt-10">
+                                            <a class="btn btn-double-border wow animate__animated animate__zoomIn" href="{{ route('catalog.index') }}"><span>Все предложения</span></a>
+                                            <a class="btn btn-arrow-right wow animate__animated animate__zoomIn" href="{{ route('about') }}">О нас<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="swiper-slide">
+                            <div class="box-banner-home1">
+                                <div class="box-cover-image wow animate__animated animate__fadeInLeft" style="background-image:url({{ asset('kidify/assets/imgs/page/homepage1/banner2.png') }});background-size:cover;background-position:center;"></div>
+                                <div class="box-banner-info wow animate__animated animate__zoomIn">
+                                    <div class="block-info-banner">
+                                        <p class="font-3xl-bold neutral-900 title-line mb-10 wow animate__animated animate__zoomIn">Новая</p>
+                                        <h2 class="heading-banner mb-10 wow animate__animated animate__zoomIn">
+                                            <span class="text-up">коллекция</span>
+                                            <span class="text-under">коллекция</span>
+                                        </h2>
+                                        <h4 class="heading-4 title-line-2 mb-30 wow animate__animated animate__zoomIn">{{ \App\Models\Setting::get('hero_subtitle', 'Большой выбор, выгодные цены и быстрая доставка по всей России.') }}</h4>
+                                        <div class="text-center mt-10">
+                                            <a class="btn btn-double-border wow animate__animated animate__zoomIn" href="{{ route('catalog.index') }}"><span>В каталог</span></a>
+                                            <a class="btn btn-arrow-right wow animate__animated animate__zoomIn" href="{{ route('contact') }}">Контакты<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-pagination-button">
+                        <div class="swiper-pagination swiper-pagination-banner"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    {{-- Categories slider --}}
     @if ($categories->isNotEmpty())
-        <section class="section-box mt-50">
+        <div class="section block-section block-section-categories-slider wow animate__animated animate__fadeIn">
             <div class="container">
-                <h2 class="font-xxl-bold color-brand-3 text-center mb-15">Популярные категории</h2>
-                <p class="text-center font-md color-gray-700 mb-30">Выберите интересующий вас раздел</p>
-                <div class="row">
-                    @foreach ($categories as $cat)
-                        <div class="col-lg-3 col-md-6 col-sm-6 mb-20">
-                            <a href="{{ route('catalog.category', $cat->slug) }}" class="card-grid-category text-center d-block p-20" style="background:#fff;border:1px solid #eee;border-radius:14px;text-decoration:none;color:#0E0E0E;transition:.2s;">
-                                @if ($cat->image)
-                                    <img src="{{ asset('storage/' . $cat->image) }}" alt="{{ $cat->name }}" style="max-height:120px;width:auto;">
-                                @else
-                                    <div style="font-size:48px;">🛍️</div>
-                                @endif
-                                <h6 class="mt-10 mb-0">{{ $cat->name }}</h6>
-                            </a>
+                <div class="box-swiper">
+                    <div class="swiper-container swiper-9-items pb-0">
+                        <div class="swiper-wrapper">
+                            @foreach ($categories as $i => $cat)
+                                @php $iconNum = ($i % 8) + 1; @endphp
+                                <div class="swiper-slide">
+                                    <div class="cardCategory">
+                                        <div class="cardImage">
+                                            <a href="{{ route('catalog.category', $cat->slug) }}">
+                                                @if ($cat->image)
+                                                    <img src="{{ asset('storage/' . $cat->image) }}" alt="{{ $cat->name }}">
+                                                @else
+                                                    <img src="{{ asset('kidify/assets/imgs/template/icons/CategoryIcon24-' . $iconNum . '.svg') }}" alt="{{ $cat->name }}" style="width:80px;height:80px;">
+                                                @endif
+                                            </a>
+                                        </div>
+                                        <div class="cardInfo"><a href="{{ route('catalog.category', $cat->slug) }}">{{ $cat->name }}</a></div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- New in store - product tabs --}}
+    @if ($featured->isNotEmpty() || $newest->isNotEmpty())
+        <section class="section block-section-1">
+            <div class="container">
+                <div class="text-center">
+                    <p class="font-xl brand-2 wow animate__animated animate__fadeIn"><span class="rounded-text">НОВОЕ В МАГАЗИНЕ</span></p>
+                    <div class="box-tabs wow animate__animated animate__fadeIn">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="featured-tab" data-bs-toggle="tab" data-bs-target="#featured" type="button" role="tab" aria-selected="true">Хиты продаж</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="newest-tab" data-bs-toggle="tab" data-bs-target="#newest" type="button" role="tab" aria-selected="false">Новинки</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="sale-tab" data-bs-toggle="tab" data-bs-target="#sale" type="button" role="tab" aria-selected="false">Со скидкой</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="featured" role="tabpanel">
+                        <div class="row">
+                            @foreach ($featured as $product)
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                                    @include('layouts.partials.product-card', ['product' => $product])
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="newest" role="tabpanel">
+                        <div class="row">
+                            @foreach ($newest as $product)
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                                    @include('layouts.partials.product-card', ['product' => $product])
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="sale" role="tabpanel">
+                        <div class="row">
+                            @foreach ($onSale as $product)
+                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
+                                    @include('layouts.partials.product-card', ['product' => $product])
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-30">
+                    <a class="btn btn-brand-3" href="{{ route('catalog.index') }}">Смотреть все товары</a>
                 </div>
             </div>
         </section>
     @endif
 
-    @if ($featured->isNotEmpty())
-        <section class="section-box mt-50">
+    {{-- Promo banner --}}
+    <section class="section block-section-2">
+        <div class="container">
+            <div class="box-info-section2">
+                <h2 class="heading-banner mb-25 wow animate__animated animate__bounceIn">
+                    <span class="text-up">{{ \App\Models\Setting::get('promo_title', 'Спецпредложение') }}</span>
+                    <span class="text-under">{{ \App\Models\Setting::get('promo_title', 'Спецпредложение') }}</span>
+                </h2>
+                <p class="font-3xl-bold neutral-900 mb-35 wow animate__animated animate__fadeIn">{{ \App\Models\Setting::get('promo_text', 'Скидки на популярные категории. Успей купить по выгодной цене!') }}</p>
+                <a class="btn btn-brand-3" href="{{ route('catalog.index') }}">В магазин</a>
+            </div>
+            <div class="block-section-img wow animate__animated animate__fadeIn"><img src="{{ asset('kidify/assets/imgs/page/homepage1/bg-section2.png') }}" alt="{{ \App\Models\Setting::get('site_name', 'Billaro Store') }}"></div>
+        </div>
+    </section>
+
+    {{-- Two collections banner --}}
+    @if ($categories->count() >= 2)
+        <section class="section block-section-4">
             <div class="container">
-                <div class="d-flex justify-content-between align-items-center mb-20">
-                    <h2 class="font-xxl-bold color-brand-3 mb-0">Хиты продаж</h2>
-                    <a class="btn btn-default" href="{{ route('catalog.index') }}">Все товары →</a>
+                <div class="box-section-4">
+                    <div class="row">
+                        @foreach ($categories->take(2) as $idx => $promoCat)
+                            <div class="col-lg-6">
+                                <div class="box-collection {{ $idx === 1 ? 'box-collection-2' : '' }} wow animate__animated animate__fadeIn">
+                                    <div class="box-collection-info">
+                                        <h4 class="heading-4 mb-15">{{ $promoCat->name }}</h4>
+                                        <p class="font-md neutral-900 mb-35">{{ $promoCat->description ? \Illuminate\Support\Str::limit(strip_tags($promoCat->description), 100) : 'Скидки до 35% на товары этой категории. Успей купить!' }}</p>
+                                        <a class="btn btn-brand-1 text-uppercase" href="{{ route('catalog.category', $promoCat->slug) }}">Перейти</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    {{-- Popular products --}}
+    @if ($popular->isNotEmpty())
+        <section class="section block-section-5">
+            <div class="container">
+                <div class="top-head">
+                    <h4 class="text-uppercase brand-1 wow animate__animated animate__fadeIn">Популярные товары</h4>
+                    <a class="btn btn-arrow-right wow animate__animated animate__fadeIn" href="{{ route('catalog.index') }}">Смотреть все<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt=""></a>
                 </div>
                 <div class="row">
-                    @foreach ($featured as $product)
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
+                    @foreach ($popular as $product)
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-30 wow animate__animated animate__fadeIn">
                             @include('layouts.partials.product-card', ['product' => $product])
                         </div>
                     @endforeach
@@ -62,31 +200,48 @@
         </section>
     @endif
 
-    @if ($newest->isNotEmpty())
-        <section class="section-box mt-30">
-            <div class="container">
-                <div class="d-flex justify-content-between align-items-center mb-20">
-                    <h2 class="font-xxl-bold color-brand-3 mb-0">Новинки</h2>
-                    <a class="btn btn-default" href="{{ route('catalog.index') }}">Все новинки →</a>
-                </div>
-                <div class="row">
-                    @foreach ($newest as $product)
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                            @include('layouts.partials.product-card', ['product' => $product])
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
-
-    <section class="section-box mt-60 mb-50">
+    {{-- Why choose us / features --}}
+    <section class="section block-section-6">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6 mb-20 text-center"><div style="font-size:40px;">🚚</div><h6 class="mt-10">Быстрая доставка</h6><p class="font-sm color-gray-700">По всей России от 1 дня</p></div>
-                <div class="col-lg-3 col-md-6 col-sm-6 mb-20 text-center"><div style="font-size:40px;">🔒</div><h6 class="mt-10">Безопасная оплата</h6><p class="font-sm color-gray-700">Картой онлайн или при получении</p></div>
-                <div class="col-lg-3 col-md-6 col-sm-6 mb-20 text-center"><div style="font-size:40px;">↩️</div><h6 class="mt-10">Возврат 14 дней</h6><p class="font-sm color-gray-700">Без лишних вопросов</p></div>
-                <div class="col-lg-3 col-md-6 col-sm-6 mb-20 text-center"><div style="font-size:40px;">💬</div><h6 class="mt-10">Поддержка 24/7</h6><p class="font-sm color-gray-700">Всегда на связи</p></div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-30 text-center wow animate__animated animate__fadeIn">
+                    <div style="font-size:48px;">🚚</div>
+                    <h5 class="mt-15 mb-10">Быстрая доставка</h5>
+                    <p class="font-sm neutral-700">Доставим заказ по всей России курьером или в ПВЗ от 1 дня</p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-30 text-center wow animate__animated animate__fadeIn">
+                    <div style="font-size:48px;">🔒</div>
+                    <h5 class="mt-15 mb-10">Безопасная оплата</h5>
+                    <p class="font-sm neutral-700">Картой онлайн, СБП или при получении — выбирайте удобный способ</p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-30 text-center wow animate__animated animate__fadeIn">
+                    <div style="font-size:48px;">↩️</div>
+                    <h5 class="mt-15 mb-10">Возврат 14 дней</h5>
+                    <p class="font-sm neutral-700">Без лишних вопросов в течение 14 дней с момента получения</p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-30 text-center wow animate__animated animate__fadeIn">
+                    <div style="font-size:48px;">⭐</div>
+                    <h5 class="mt-15 mb-10">Гарантия качества</h5>
+                    <p class="font-sm neutral-700">Только проверенные бренды и сертифицированные товары</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Newsletter --}}
+    <section class="section block-section-10 mb-50">
+        <div class="container">
+            <div class="box-newsletter" style="background:#FFF5E1;border-radius:20px;padding:40px;text-align:center;">
+                <h3 class="font-xxl-bold neutral-900 mb-10">Подпишитесь на рассылку</h3>
+                <p class="font-md neutral-700 mb-25">Узнавайте первыми о скидках, новинках и спецпредложениях</p>
+                <form action="{{ route('contact.submit') }}" method="POST" class="d-flex justify-content-center" style="max-width:500px;margin:0 auto;gap:10px;">
+                    @csrf
+                    <input type="hidden" name="subject" value="Подписка на рассылку">
+                    <input type="hidden" name="message" value="Подписка на рассылку с главной страницы">
+                    <input type="hidden" name="name" value="Подписчик">
+                    <input type="email" name="email" class="form-control" placeholder="Введите ваш email" required style="flex:1;padding:12px;border-radius:8px;border:1px solid #ddd;">
+                    <button type="submit" class="btn btn-brand-3">Подписаться</button>
+                </form>
             </div>
         </div>
     </section>

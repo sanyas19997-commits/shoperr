@@ -27,3 +27,4 @@ yarn-error.log
 /storage/app/public/products/*
 !/storage/app/public/categories/.gitkeep
 !/storage/app/public/products/.gitkeep
+public/kidify/assets/js/vendors/leaflet.js
