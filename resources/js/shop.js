@@ -34,38 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Init WOW.js animations
-    if (typeof window.WOW !== 'undefined') {
-        try { new window.WOW({ live: false }).init(); } catch(e) {}
-    }
+    // Note: Swiper / WOW.js / mobile menu are initialized by Kidify's main.js
+    // We do NOT re-init them here to avoid double-init conflicts that collapse slides to width 0.
 
-    // Init swipers for hero banner and category slider once DOM ready
-    if (typeof window.Swiper !== 'undefined') {
-        try {
-            new window.Swiper('.swiper-banner', {
-                loop: true,
-                speed: 800,
-                autoplay: { delay: 5000 },
-                pagination: { el: '.swiper-pagination-banner', clickable: true },
-                slidesPerView: 1,
-            });
-        } catch(e) {}
-        try {
-            new window.Swiper('.swiper-9-items', {
-                loop: false,
-                spaceBetween: 20,
-                breakpoints: {
-                    0: { slidesPerView: 2 },
-                    576: { slidesPerView: 3 },
-                    768: { slidesPerView: 4 },
-                    992: { slidesPerView: 6 },
-                    1200: { slidesPerView: 8 },
-                },
-            });
-        } catch(e) {}
-    }
-
-    // Mobile menu toggle
+    // Mobile menu toggle (kept as a fallback in case main.js handler missed it)
     document.querySelectorAll('.burger-icon').forEach(b => {
         b.addEventListener('click', (e) => {
             e.preventDefault();
