@@ -22,17 +22,22 @@ function onEsc(e) {
     if (e.key === 'Escape' && showNewsletter.value) dismissNewsletter();
 }
 
+// Sticky header — собственная реализация, переживающая Inertia-навигацию.
+// (main.js Kidify захватывает $(".sticky-bar") один раз при загрузке;
+//  после смены страницы Inertia этот jQuery-объект указывает на удалённый элемент.)
+function applyStickyState() {
+    const els = document.querySelectorAll('.sticky-bar');
+    if (!els.length) return;
+    const stuck = (window.scrollY || window.pageYOffset || 0) > 200;
+    els.forEach((el) => el.classList.toggle('stick', stuck));
+}
+
 // Re-init Kidify-зависимые виджеты после Inertia-навигации
 function reinitKidify() {
     nextTick(() => {
         if (typeof window === 'undefined') return;
-        // Swiper re-init обычно не нужен, потому что Vue-карусели у нас в шаблоне
-        // через статические классы; но триггерим WOW.js для появления элементов.
         try { if (window.WOW) new window.WOW().init(); } catch (e) {}
-        // Подсветить активный пункт меню после клика без полной перезагрузки
-        document.querySelectorAll('.sticky-bar').forEach((el) => {
-            el.classList.remove('stick');
-        });
+        applyStickyState();
     });
 }
 
@@ -53,6 +58,7 @@ onMounted(() => {
     }
 
     document.addEventListener('keydown', onEsc);
+    window.addEventListener('scroll', applyStickyState, { passive: true });
 
     // Flash-сообщения через тост
     router.on('finish', () => {
