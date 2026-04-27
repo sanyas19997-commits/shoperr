@@ -21,7 +21,7 @@ if (! function_exists('media_url')) {
             return $value;
         }
 
-        if (str_starts_with($value, '/')) {
+        if (str_starts_with($value, '/') || str_starts_with($value, 'kidify/')) {
             return asset(ltrim($value, '/'));
         }
 

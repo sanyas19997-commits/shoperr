@@ -14,30 +14,36 @@
                 <div class="col-lg-3 col-md-6 mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                   <h5 class="neutral-900 text-uppercase mb-30">Магазин</h5>
                   <ul class="menu-footer">
-                    <li><a href="{{ route('about') }}">О магазине</a></li>
-                    <li><a href="{{ route('blog.index') }}">Блог</a></li>
-                    <li><a href="{{ route('catalog.index') }}">Каталог</a></li>
-                    <li><a href="{{ route('contact') }}">Контакты</a></li>
+                    @forelse($footerShopMenu ?? [] as $m)
+                      <li><a href="{{ $m->url }}"@if($m->open_new_tab) target="_blank" rel="noopener"@endif>{{ $m->title }}</a></li>
+                    @empty
+                      <li><a href="{{ route('catalog.index') }}">Каталог</a></li>
+                      <li><a href="{{ route('about') }}">О магазине</a></li>
+                      <li><a href="{{ route('blog.index') }}">Блог</a></li>
+                    @endforelse
                   </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".2s">
                   <h5 class="neutral-900 text-uppercase mb-30">Покупателям</h5>
                   <ul class="menu-footer">
-                    <li><a href="{{ route('contact') }}">Связаться с нами</a></li>
-                    <li><a href="#">Оплата</a></li>
-                    <li><a href="#">Бонусы</a></li>
-                    <li><a href="#">Доставка</a></li>
-                    <li><a href="#">Скидки студентам</a></li>
+                    @forelse($footerCustomersMenu ?? [] as $m)
+                      <li><a href="{{ $m->url }}"@if($m->open_new_tab) target="_blank" rel="noopener"@endif>{{ $m->title }}</a></li>
+                    @empty
+                      <li><a href="{{ route('account.index') }}">Мой аккаунт</a></li>
+                      <li><a href="{{ route('cart.index') }}">Корзина</a></li>
+                      <li><a href="{{ route('checkout.index') }}">Оформление</a></li>
+                    @endforelse
                   </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".3s">
                   <h5 class="neutral-900 text-uppercase mb-30">ПОМОЩЬ</h5>
                   <ul class="menu-footer">
-                    <li><a href="#">О доставке</a></li>
-                    <li><a href="#">Возврат</a></li>
-                    <li><a href="#">Возврат денег</a></li>
-                    <li><a href="#">Как заказать</a></li>
-                    <li><a href="#">Отслеживание</a></li>
+                    @forelse($footerHelpMenu ?? [] as $m)
+                      <li><a href="{{ $m->url }}"@if($m->open_new_tab) target="_blank" rel="noopener"@endif>{{ $m->title }}</a></li>
+                    @empty
+                      <li><a href="{{ route('about') }}">О магазине</a></li>
+                      <li><a href="{{ route('contact') }}">Контакты</a></li>
+                    @endforelse
                   </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".4s">

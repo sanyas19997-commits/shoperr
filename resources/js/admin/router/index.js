@@ -8,6 +8,10 @@ import ProductForm from '../pages/products/Form.vue';
 import CategoriesPage from '../pages/categories/Index.vue';
 import BrandsPage from '../pages/brands/Index.vue';
 import PostsPage from '../pages/posts/Index.vue';
+import BannersPage from '../pages/banners/Index.vue';
+import TestimonialsPage from '../pages/testimonials/Index.vue';
+import InstagramPage from '../pages/instagram/Index.vue';
+import MenuPage from '../pages/menu/Index.vue';
 import OrdersList from '../pages/orders/List.vue';
 import OrderDetail from '../pages/orders/Detail.vue';
 import UsersList from '../pages/users/List.vue';
@@ -25,6 +29,10 @@ const routes = [
     { path: '/admin/categories', name: 'categories', component: CategoriesPage, meta: { auth: true, title: 'Категории' } },
     { path: '/admin/brands', name: 'brands', component: BrandsPage, meta: { auth: true, title: 'Бренды' } },
     { path: '/admin/posts', name: 'posts', component: PostsPage, meta: { auth: true, title: 'Блог' } },
+    { path: '/admin/banners', name: 'banners', component: BannersPage, meta: { auth: true, title: 'Баннеры главной' } },
+    { path: '/admin/testimonials', name: 'testimonials', component: TestimonialsPage, meta: { auth: true, title: 'Отзывы' } },
+    { path: '/admin/instagram', name: 'instagram', component: InstagramPage, meta: { auth: true, title: 'Instagram' } },
+    { path: '/admin/menu', name: 'menu', component: MenuPage, meta: { auth: true, title: 'Меню сайта' } },
     { path: '/admin/orders', name: 'orders', component: OrdersList, meta: { auth: true, title: 'Заказы' } },
     { path: '/admin/orders/:id', name: 'order-detail', component: OrderDetail, meta: { auth: true, title: 'Заказ' }, props: true },
     { path: '/admin/users', name: 'users', component: UsersList, meta: { auth: true, title: 'Пользователи' } },

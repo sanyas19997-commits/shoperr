@@ -8,36 +8,24 @@
           <div class="box-swiper">
             <div class="swiper-container swiper-banner pb-0">
               <div class="swiper-wrapper">
+                @forelse($banners['hero_slide'] ?? [] as $slide)
                 <div class="swiper-slide">
                   <div class="box-banner-home1">
-                    <div class="box-cover-image wow animate__animated animate__fadeInLeft" style="background-image:url({{ asset('kidify/assets/imgs/page/homepage1/banner.png') }})"></div>
+                    <div class="box-cover-image wow animate__animated animate__fadeInLeft" style="background-image:url({{ media_url($slide->image) }})"></div>
                     <div class="box-banner-info">
                       <div class="block-sale wow animate__animated animate__fadeInTop"><img src="{{ asset('kidify/assets/imgs/page/homepage1/sale.png') }}" alt="Billaro Store"></div>
                       <div class="blockleaf rotateme"><img src="{{ asset('kidify/assets/imgs/page/homepage1/leaf.png') }}" alt="Billaro Store"></div>
                       <div class="block-info-banner">
-                        <p class="font-3xl-bold neutral-900 title-line mb-10 wow animate__animated animate__zoomIn">Зима</p>
-                        <h2 class="heading-banner mb-10 wow animate__animated animate__zoomIn"><span class="text-up">распродажа</span><span class="text-under">распродажа</span></h2>
-                        <h4 class="heading-4 title-line-2 mb-30 wow animate__animated animate__zoomIn">Всё для вашего малыша</h4>
-                        <div class="text-center mt-10"><a class="btn btn-double-border wow animate__animated animate__zoomIn" href="#"><span>Смотреть скидки</span></a><a class="btn btn-arrow-right wow animate__animated animate__zoomIn" href="#">Подробнее<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt="Billaro Store"></a></div>
+                        <p class="font-3xl-bold neutral-900 title-line mb-10 wow animate__animated animate__zoomIn">{{ $slide->title }}</p>
+                        <h2 class="heading-banner mb-10 wow animate__animated animate__zoomIn"><span class="text-up">{{ $slide->subtitle }}</span><span class="text-under">{{ $slide->subtitle }}</span></h2>
+                        <h4 class="heading-4 title-line-2 mb-30 wow animate__animated animate__zoomIn">{{ $slide->label }}</h4>
+                        <div class="text-center mt-10"><a class="btn btn-double-border wow animate__animated animate__zoomIn" href="{{ $slide->link ?? '#' }}"><span>{{ $slide->button_text ?? 'Подробнее' }}</span></a><a class="btn btn-arrow-right wow animate__animated animate__zoomIn" href="{{ $slide->link ?? '#' }}">Подробнее<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt="Billaro Store"></a></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="swiper-slide">
-                  <div class="box-banner-home1">
-                    <div class="box-cover-image wow animate__animated animate__fadeInLeft" style="background-image:url({{ asset('kidify/assets/imgs/page/homepage1/banner2.png') }})"></div>
-                    <div class="box-banner-info wow animate__animated animate__zoomIn">
-                      <div class="block-sale wow animate__animated animate__fadeInTop"><img src="{{ asset('kidify/assets/imgs/page/homepage1/sale.png') }}" alt="Billaro Store"></div>
-                      <div class="blockleaf rotateme"><img src="{{ asset('kidify/assets/imgs/page/homepage1/star.png') }}" alt="Billaro Store"></div>
-                      <div class="block-info-banner">
-                        <p class="font-3xl-bold neutral-900 title-line mb-10 wow animate__animated animate__zoomIn">Зима</p>
-                        <h2 class="heading-banner mb-10 wow animate__animated animate__zoomIn"><span class="text-up">распродажа</span><span class="text-under">распродажа</span></h2>
-                        <h4 class="heading-4 title-line-2 mb-30 wow animate__animated animate__zoomIn">Всё для вашего малыша</h4>
-                        <div class="text-center mt-10"><a class="btn btn-double-border wow animate__animated animate__zoomIn" href="#"><span>Смотреть скидки</span></a><a class="btn btn-arrow-right wow animate__animated animate__zoomIn" href="#">Подробнее<img src="{{ asset('kidify/assets/imgs/template/icons/arrow.svg') }}" alt="Billaro Store"></a></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                @empty
+                @endforelse
               </div>
               <div class="box-pagination-button">
                 <div class="swiper-pagination swiper-pagination-banner"></div>
@@ -1007,24 +995,29 @@
         <div class="container">
           <div class="box-section-4">
             <div class="row">
+              @php $dealLeft = ($banners['deal_left'] ?? collect())->first(); $dealRight = ($banners['deal_right'] ?? collect())->first(); @endphp
+              @if($dealLeft)
               <div class="col-lg-6">
                 <div class="box-collection wow animate__animated animate__fadeIn">
                   <div class="box-collection-info">
-                    <h4 class="heading-4 mb-15">Для девочек</h4>
-                    <p class="font-md neutral-900 mb-35">Скидка до 50% на премиальную<br class="d-none d-lg-block">детскую одежду. Спешите!</p><a class="btn btn-brand-1 text-uppercase" href="#">В магазин</a>
+                    <h4 class="heading-4 mb-15">{{ $dealLeft->title }}</h4>
+                    <p class="font-md neutral-900 mb-35">{!! nl2br(e($dealLeft->subtitle)) !!}</p><a class="btn btn-brand-1 text-uppercase" href="{{ $dealLeft->link ?? '#' }}">{{ $dealLeft->button_text ?? 'В магазин' }}</a>
                   </div>
-                  <div class="star-bg-2"><img src="{{ asset('kidify/assets/imgs/page/homepage1/star2.png') }}" alt="Billaro Store"></div>
+                  <div class="star-bg-2"><img src="{{ media_url($dealLeft->image, '/kidify/assets/imgs/page/homepage1/star2.png') }}" alt="Billaro Store"></div>
                 </div>
               </div>
+              @endif
+              @if($dealRight)
               <div class="col-lg-6">
                 <div class="box-collection box-collection-2 wow animate__animated animate__fadeIn">
                   <div class="box-collection-info">
-                    <h4 class="heading-4 mb-15">Топ бренды</h4>
-                    <p class="font-md neutral-900 mb-35">Новые бренды этого сезона.<br class="d-none d-lg-block">Скидки до 35%</p><a class="btn btn-brand-1 text-uppercase" href="#">В магазин</a>
+                    <h4 class="heading-4 mb-15">{{ $dealRight->title }}</h4>
+                    <p class="font-md neutral-900 mb-35">{!! nl2br(e($dealRight->subtitle)) !!}</p><a class="btn btn-brand-1 text-uppercase" href="{{ $dealRight->link ?? '#' }}">{{ $dealRight->button_text ?? 'В магазин' }}</a>
                   </div>
-                  <div class="star-bg-1"><img src="{{ asset('kidify/assets/imgs/page/homepage1/star.png') }}" alt="Billaro Store"></div>
+                  <div class="star-bg-1"><img src="{{ media_url($dealRight->image, '/kidify/assets/imgs/page/homepage1/star.png') }}" alt="Billaro Store"></div>
                 </div>
               </div>
+              @endif
             </div>
           </div>
         </div>
@@ -1262,18 +1255,19 @@
           </div>
         </div>
       </section>
+      @php $ak = ($banners['animal_kids'] ?? collect())->first(); @endphp
       <section class="section block-section-6">
         <div class="container">
           <div class="box-animal-kid">
             <div class="box-section-animal">
-              <h4 class="heading-4 brand-3 mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".0s">Cute Animals Игрушки</h4>
-              <p class="font-md mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".1s">Коллекция мягких игрушек<br>и деревянных игрушек ручной работы</p><a class="btn btn-brand-1" href="#">В магазин</a>
+              <h4 class="heading-4 brand-3 mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".0s">{{ $ak->title ?? 'Cute Animals Игрушки' }}</h4>
+              <p class="font-md mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".1s">{!! nl2br(e($ak->subtitle ?? 'Коллекция мягких игрушек и деревянных игрушек ручной работы')) !!}</p><a class="btn btn-brand-1" href="{{ $ak->link ?? '#' }}">{{ $ak->button_text ?? 'В магазин' }}</a>
             </div>
             <div class="box-section-kid">
               <div class="d-inline-block text-center">
                 <h4 class="heading-4 brand-3 mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".0s">Детские игры</h4>
-                <p class="font-md mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".2s">Развитие воображения</p>
-                <div class="wow animate__animated animate__fadeIn" data-wow-delay=".4s"><a class="btn btn-brand-3-sm wow slideInUp" href="#">В магазин</a></div>
+                <p class="font-md mb-5 wow slideInUp wow animate__animated animate__fadeIn" data-wow-delay=".2s">{{ $ak->price_label ?? 'Развитие воображения' }}</p>
+                <div class="wow animate__animated animate__fadeIn" data-wow-delay=".4s"><a class="btn btn-brand-3-sm wow slideInUp" href="{{ $ak->link ?? '#' }}">В магазин</a></div>
               </div>
             </div>
           </div>
@@ -1469,20 +1463,47 @@
           <div class="text-center box-logos wow animate__animated animate__fadeIn" data-wow-delay=".0s"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-1.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-2.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-3.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-4.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-5.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-6.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-7.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-8.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-9.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-10.png') }}" alt="Billaro Store"><img src="{{ asset('kidify/assets/imgs/slider/logo/logo-11.png') }}" alt="Billaro Store"></div>
         </div>
       </section>
+      @if($testimonials->isNotEmpty())
+      <section class="section block-section-testimonials">
+        <div class="container">
+          <div class="text-center mb-30">
+            <h4 class="text-uppercase brand-1 mb-15 brush-bg wow animate__fadeIn animated">{{ $homeTexts['testimonials'] ?? 'Отзывы наших клиентов' }}</h4>
+          </div>
+          <div class="row">
+            @foreach($testimonials as $t)
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-20 wow animate__animated animate__fadeIn" data-wow-delay="{{ $loop->index * 0.1 }}s">
+              <div class="cardBlog" style="padding:24px;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.05);height:100%;">
+                <div class="mb-15" style="color:#EDA62A;">
+                  @for($i = 0; $i < ($t->rating ?? 5); $i++)★@endfor
+                </div>
+                <p class="font-md neutral-700 mb-20">«{{ $t->text }}»</p>
+                <div class="d-flex align-items-center">
+                  @if($t->avatar)
+                  <img src="{{ media_url($t->avatar) }}" alt="{{ $t->name }}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;margin-right:12px;">
+                  @endif
+                  <div>
+                    <div class="font-md-bold neutral-900">{{ $t->name }}</div>
+                    @if($t->role)<div class="font-sm neutral-500">{{ $t->role }}</div>@endif
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+        </div>
+      </section>
+      @endif
       <section class="section block-section-10">
         <div class="container">
           <div class="top-head justify-content-center">
-            <h4 class="text-uppercase brand-1 wow fadeInDown">instagram feed</h4>
+            <h4 class="text-uppercase brand-1 wow fadeInDown">{{ $homeTexts['instagram'] ?? 'Мы в Instagram' }}</h4>
           </div>
         </div>
         <div class="box-gallery-instagram">
           <div class="box-gallery-instagram-inner">
-            <div class="gallery-item wow fadeInLeft"><img src="{{ asset('kidify/assets/imgs/page/homepage1/instagram6.png') }}" alt="Billaro Store"></div>
-            <div class="gallery-item wow fadeInUp"><img src="{{ asset('kidify/assets/imgs/page/homepage1/instagram.png') }}" alt="Billaro Store"></div>
-            <div class="gallery-item wow fadeInUp"><img src="{{ asset('kidify/assets/imgs/page/homepage1/instagram2.png') }}" alt="Billaro Store"></div>
-            <div class="gallery-item wow fadeInUp"><img src="{{ asset('kidify/assets/imgs/page/homepage1/instagram3.png') }}" alt="Billaro Store"></div>
-            <div class="gallery-item wow fadeInRight"><img src="{{ asset('kidify/assets/imgs/page/homepage1/instagram4.png') }}" alt="Billaro Store"></div>
-            <div class="gallery-item wow fadeInRight"><img src="{{ asset('kidify/assets/imgs/page/homepage1/instagram5.png') }}" alt="Billaro Store"></div>
+            @foreach($instagram as $i => $post)
+            <div class="gallery-item wow {{ $i === 0 ? 'fadeInLeft' : ($i >= 4 ? 'fadeInRight' : 'fadeInUp') }}"><a href="{{ $post->link ?? '#' }}" @if($post->link) target="_blank" rel="noopener"@endif><img src="{{ media_url($post->image) }}" alt="Billaro Store"></a></div>
+            @endforeach
           </div>
         </div>
       </section>

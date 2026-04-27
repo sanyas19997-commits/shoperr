@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Category;
+use App\Models\MenuItem;
 use App\Models\Setting;
 use App\Services\CartService;
 use Closure;
@@ -23,6 +24,10 @@ class ShareShopData
             View::share('mainCategories', $this->mainCategories());
             View::share('cartCount', $this->cart->count());
             View::share('cartSubtotal', $this->cart->subtotal());
+            View::share('headerMenu', $this->menu('header'));
+            View::share('footerShopMenu', $this->menu('footer_shop'));
+            View::share('footerCustomersMenu', $this->menu('footer_customers'));
+            View::share('footerHelpMenu', $this->menu('footer_help'));
         }
 
         return $next($request);
@@ -34,6 +39,15 @@ class ShareShopData
             return Setting::all()->pluck('value', 'key')->toArray();
         } catch (\Throwable $e) {
             return [];
+        }
+    }
+
+    protected function menu(string $placement)
+    {
+        try {
+            return MenuItem::for($placement)->get();
+        } catch (\Throwable $e) {
+            return collect();
         }
     }
 

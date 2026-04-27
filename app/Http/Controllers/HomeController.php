@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Category;
+use App\Models\InstagramPost;
 use App\Models\Product;
 use App\Models\Setting;
+use App\Models\Testimonial;
 
 class HomeController extends Controller
 {
@@ -58,12 +61,43 @@ class HomeController extends Controller
             ->take(8)
             ->get(['id', 'name', 'slug', 'image']);
 
+        $banners = Banner::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('place');
+
+        $testimonials = Testimonial::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->get();
+
+        $instagram = InstagramPost::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->take(6)
+            ->get();
+
         return view('shop.home', [
             'featured' => $featured,
             'newest' => $newest,
             'onSale' => $onSale,
             'popular' => $popular,
             'categories' => $categories,
+            'banners' => $banners,
+            'testimonials' => $testimonials,
+            'instagram' => $instagram,
+            'homeTexts' => [
+                'featured' => Setting::get('home_featured_title', 'Рекомендуемые товары'),
+                'newest' => Setting::get('home_newest_title', 'Новинки'),
+                'popular' => Setting::get('home_popular_title', 'Популярные товары'),
+                'deal' => Setting::get('home_deal_title', 'Горячие предложения'),
+                'testimonials' => Setting::get('home_testimonials_title', 'Отзывы наших клиентов'),
+                'instagram' => Setting::get('home_instagram_title', 'Мы в Instagram'),
+                'categories' => Setting::get('home_categories_title', 'Категории'),
+                'brands' => Setting::get('home_brands_title', 'Наши бренды'),
+                'best_sellers' => Setting::get('home_best_sellers_title', 'Хиты продаж'),
+            ],
             'promo' => [
                 'title' => Setting::get('promo_title', 'Спецпредложение'),
                 'text' => Setting::get('promo_text', 'Скидки на популярные категории. Успей купить по выгодной цене!'),

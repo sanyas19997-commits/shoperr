@@ -4,9 +4,12 @@
           <div class="top-header">
             <div class="top-menu">
               <ul class="menu-top">
-                <li><a href="{{ route('about') }}">О магазине</a></li>
-                <li><a href="{{ route('contact') }}">Контакты</a></li>
-                <li><a href="{{ route('contact') }}">Открыть магазин</a></li>
+                @forelse($headerMenu ?? [] as $item)
+                  <li><a href="{{ $item->url }}"@if($item->open_new_tab) target="_blank" rel="noopener"@endif>{{ $item->title }}</a></li>
+                @empty
+                  <li><a href="{{ route('about') }}">О магазине</a></li>
+                  <li><a href="{{ route('contact') }}">Контакты</a></li>
+                @endforelse
               </ul>
             </div>
             <div class="header-top-info"><span class="mr-10">Бесплатная доставка при заказе от 5 000 ₽</span><a class="btn btn-brand-3-sm" href="#">Подробнее</a></div>
