@@ -38,8 +38,8 @@
 
     @include('layouts.partials.footer')
 
-    {{-- Newsletter popup из шаблона Kidify --}}
-    <div class="box-popup-newsletter">
+    {{-- Newsletter popup из шаблона Kidify (показывается один раз, флаг в localStorage) --}}
+    <div class="box-popup-newsletter" id="newsletter-popup" style="display:none;">
         <div class="box-newsletter-overlay"></div>
         <div class="box-newsletter-wrapper">
             <div class="box-newsletter-inner">
@@ -96,6 +96,51 @@
 <script src="{{ asset('kidify/assets/js/vendors/jquery-ui.js') }}"></script>
 <script src="{{ asset('kidify/assets/js/vendors/glightbox.min.js') }}"></script>
 <script src="{{ asset('kidify/assets/js/main.js') }}?v=1.0.0"></script>
+<script>
+    // Newsletter popup: показать один раз новым пользователям, после закрытия — больше не показывать.
+    (function () {
+        var KEY = 'billaro_newsletter_seen';
+        var popup = document.getElementById('newsletter-popup');
+        if (!popup) return;
+
+        // Если пользователь уже видел и закрыл — не показывать
+        try {
+            if (localStorage.getItem(KEY) === '1') {
+                popup.style.display = 'none';
+                popup.remove();
+                return;
+            }
+        } catch (e) { /* localStorage может быть недоступен в приватном режиме */ }
+
+        // Показать с небольшой задержкой (после исчезновения прелоадера)
+        setTimeout(function () { popup.style.display = 'block'; }, 800);
+
+        function dismiss(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            popup.style.display = 'none';
+            try { localStorage.setItem(KEY, '1'); } catch (err) {}
+            setTimeout(function () { popup.remove(); }, 50);
+        }
+
+        // Крестик и оверлей закрывают попап (используем event delegation, чтобы клик
+        // по SVG/path внутри кнопки тоже срабатывал)
+        popup.addEventListener('click', function (e) {
+            var t = e.target;
+            // Закрываем при клике по затемнённой подложке
+            if (t.classList && t.classList.contains('box-newsletter-overlay')) {
+                return dismiss(e);
+            }
+            // Закрываем при клике в любом месте внутри крестика (anchor / svg / path)
+            var closeBtn = t.closest && t.closest('.btn-close-popup-newsletter');
+            if (closeBtn) return dismiss(e);
+        });
+
+        // ESC тоже закрывает
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && popup.style.display !== 'none') dismiss();
+        });
+    })();
+</script>
 @stack('scripts')
 </body>
 </html>
