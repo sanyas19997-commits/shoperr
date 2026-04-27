@@ -45,3 +45,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [AccountController::class, 'index'])->name('account.index');
     Route::post('/logout', [AccountController::class, 'logout'])->name('logout');
 });
+
+// Vue 3 SPA админка — все маршруты /admin/* отдают один HTML-shell, роутинг на стороне Vue.
+Route::view('/admin/{any?}', 'admin')->where('any', '.*')->name('admin.spa');

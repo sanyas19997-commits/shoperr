@@ -1,19 +1,66 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ActionLogController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\MediaController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\SettingController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+Route::prefix('admin')->group(function () {
+    Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::middleware(['auth:sanctum', 'role:staff'])->group(function () {
+        Route::post('logout', [AuthController::class, 'logout']);
+        Route::get('me', [AuthController::class, 'me']);
+        Route::post('change-password', [AuthController::class, 'changePassword']);
+
+        Route::get('dashboard', [DashboardController::class, 'index']);
+
+        Route::get('products', [ProductController::class, 'index']);
+        Route::get('products/{product}', [ProductController::class, 'show']);
+        Route::post('products', [ProductController::class, 'store']);
+        Route::post('products/{product}', [ProductController::class, 'update']);
+        Route::delete('products/{product}', [ProductController::class, 'destroy']);
+        Route::delete('product-images/{image}', [ProductController::class, 'deleteImage']);
+
+        Route::get('categories', [CategoryController::class, 'index']);
+        Route::get('categories/{category}', [CategoryController::class, 'show']);
+        Route::post('categories', [CategoryController::class, 'store']);
+        Route::post('categories/{category}', [CategoryController::class, 'update']);
+        Route::delete('categories/{category}', [CategoryController::class, 'destroy']);
+
+        Route::get('brands/all', [BrandController::class, 'all']);
+        Route::get('brands', [BrandController::class, 'index']);
+        Route::get('brands/{brand}', [BrandController::class, 'show']);
+        Route::post('brands', [BrandController::class, 'store']);
+        Route::post('brands/{brand}', [BrandController::class, 'update']);
+        Route::delete('brands/{brand}', [BrandController::class, 'destroy']);
+
+        Route::get('orders/options', [OrderController::class, 'options']);
+        Route::get('orders/export', [OrderController::class, 'exportCsv']);
+        Route::get('orders', [OrderController::class, 'index']);
+        Route::get('orders/{order}', [OrderController::class, 'show']);
+        Route::patch('orders/{order}', [OrderController::class, 'update']);
+        Route::delete('orders/{order}', [OrderController::class, 'destroy']);
+
+        Route::get('users', [UserController::class, 'index']);
+        Route::get('users/{user}', [UserController::class, 'show']);
+        Route::post('users', [UserController::class, 'store']);
+        Route::patch('users/{user}', [UserController::class, 'update']);
+        Route::delete('users/{user}', [UserController::class, 'destroy']);
+
+        Route::get('settings', [SettingController::class, 'index']);
+        Route::post('settings', [SettingController::class, 'update']);
+
+        Route::get('action-logs', [ActionLogController::class, 'index']);
+
+        Route::post('media', [MediaController::class, 'upload']);
+        Route::delete('media', [MediaController::class, 'destroy']);
+    });
 });

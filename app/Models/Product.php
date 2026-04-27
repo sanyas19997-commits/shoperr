@@ -14,11 +14,14 @@ class Product extends Model
 
     protected $fillable = [
         'category_id',
+        'brand_id',
         'name',
         'slug',
         'sku',
         'short_description',
         'description',
+        'meta_title',
+        'meta_description',
         'price',
         'sale_price',
         'stock',
@@ -49,6 +52,11 @@ class Product extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function brand(): BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
     }
 
     public function images(): HasMany

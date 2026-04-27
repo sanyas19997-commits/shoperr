@@ -8,6 +8,8 @@ export default defineConfig({
             input: [
                 'resources/css/shop.css',
                 'resources/js/shop.js',
+                'resources/js/admin/main.js',
+                'resources/css/admin.css',
             ],
             refresh: true,
         }),

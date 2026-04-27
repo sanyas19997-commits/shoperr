@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Product;
@@ -22,8 +23,29 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Администратор',
                 'password' => Hash::make('admin123'),
                 'is_admin' => true,
+                'role' => User::ROLE_ADMIN,
             ]
         );
+
+        // Demo manager
+        User::updateOrCreate(
+            ['email' => 'manager@billaro.ru'],
+            [
+                'name' => 'Менеджер',
+                'password' => Hash::make('manager123'),
+                'is_admin' => false,
+                'role' => User::ROLE_MANAGER,
+            ]
+        );
+
+        // Brands
+        $brandNames = ['Billaro', 'KidStar', 'PlayMore', 'Sportina', 'EcoToys'];
+        foreach ($brandNames as $name) {
+            Brand::updateOrCreate(['name' => $name], [
+                'slug' => Str::slug($name),
+                'is_active' => true,
+            ]);
+        }
 
         // Demo customer
         User::updateOrCreate(
