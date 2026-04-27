@@ -1,0 +1,71 @@
+/* Дополнительные стили магазина (поверх Kidify style.css) */
+.add-to-cart-form button { width: 100%; }
+.btn { cursor: pointer; }
+.alert { padding: 12px 16px; border-radius: 8px; }
+.alert-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+.alert-danger { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+.alert-info { background: #dbeafe; color: #1e40af; border: 1px solid #bfdbfe; }
+
+.breadcrumb { background: transparent; padding: 0; margin-bottom: 0; font-size: 14px; }
+.breadcrumb-item + .breadcrumb-item::before { content: "›"; padding: 0 6px; }
+
+.text-success { color: #16a34a; }
+.text-danger { color: #dc2626; }
+.text-muted { color: #6b7280; }
+.fw-bold { font-weight: 700; }
+
+.card-grid-style-3 { background: #fff; border: 1px solid #eee; border-radius: 14px; padding: 14px; transition: box-shadow .2s; height: 100%; display: flex; }
+.card-grid-style-3:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.card-grid-style-3 .image-box { text-align: center; margin-bottom: 12px; min-height: 180px; display: flex; align-items: center; justify-content: center; }
+.card-grid-style-3 .image-box img { max-width: 100%; max-height: 180px; object-fit: contain; }
+.card-grid-style-3 .image-box .label { position: absolute; top: 18px; left: 22px; padding: 4px 10px; border-radius: 6px; color: #fff; font-size: 12px; }
+.card-grid-style-3 .info-right { display: flex; flex-direction: column; gap: 4px; }
+.card-grid-style-3 a { text-decoration: none; }
+.card-grid-style-3 .price-line { text-decoration: line-through; }
+
+.btn-cart { background: #0E0E0E; color: #fff; padding: 8px 16px; border-radius: 8px; border: 0; }
+.btn-cart:hover { background: #FFB23F; color: #0E0E0E; }
+.btn-buy { background: #FFB23F; color: #0E0E0E; padding: 12px 24px; border-radius: 10px; border: 0; font-weight: 600; }
+.btn-buy:hover { background: #FF9C20; color: #fff; }
+.btn-default { background: #fff; color: #0E0E0E; padding: 10px 18px; border-radius: 8px; border: 1px solid #ddd; }
+.btn-default:hover { background: #f5f5f5; }
+
+.form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; background: #fff; font-family: inherit; }
+.form-control:focus { outline: 2px solid #FFB23F; border-color: #FFB23F; }
+.form-label { font-size: 14px; font-weight: 500; margin-bottom: 5px; display: block; }
+
+.badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
+.bg-warning { background: #FFB23F; }
+.bg-danger { background: #dc2626; color: #fff; }
+.bg-secondary { background: #6b7280; color: #fff; }
+.bg-success { background: #16a34a; color: #fff; }
+.bg-brand-2 { background: #FF6B6B; color: #fff; }
+
+.page-link { padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; margin: 0 2px; color: #0E0E0E; text-decoration: none; display: inline-block; }
+.page-item.active .page-link { background: #FFB23F; border-color: #FFB23F; }
+.pagination { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #eee; }
+.table thead th { background: #fafafa; font-weight: 600; }
+.table-responsive { overflow-x: auto; }
+
+.gap-2 { gap: 8px; }
+.mt-30 { margin-top: 30px; }
+.mt-50 { margin-top: 50px; }
+.mt-60 { margin-top: 60px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-50 { margin-bottom: 50px; }
+.p-20 { padding: 20px; }
+.p-30 { padding: 30px; }
+
+.btn-link { background: transparent; border: 0; color: #FFB23F; cursor: pointer; padding: 0; }
+.btn-link:hover { text-decoration: underline; }
+
+.menu-footer { list-style: none; padding: 0; }
+.menu-footer li { margin-bottom: 8px; }
+.menu-footer a { color: #555; text-decoration: none; font-size: 14px; }
+.menu-footer a:hover { color: #FFB23F; }
+
+.footer { background: #f8f9fa; padding: 50px 0 20px; }
+.border-top { border-top: 1px solid #e5e5e5; }
