@@ -1,4 +1,19 @@
 /* Дополнительные стили магазина (поверх Kidify style.css) */
+/* Fix: swiper-container collapses to width:0 when initialized inside our layout because
+   Kidify's style.css doesn't include the default "swiper-container { width: 100% }"
+   rule from swiper-bundle.css. Restore expected sizing. */
+.swiper-container, .swiper {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.swiper-wrapper {
+    width: 100%;
+}
+.swiper-slide {
+    flex-shrink: 0;
+}
+
 .add-to-cart-form button { width: 100%; }
 .btn { cursor: pointer; }
 .alert { padding: 12px 16px; border-radius: 8px; }
